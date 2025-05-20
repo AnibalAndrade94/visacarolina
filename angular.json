@@ -28,8 +28,7 @@
                         "assets": [
                             "src/favicon.ico",
                             "src/assets",
-                            "src/_redirects",
-                            "src/static.json"
+                            "src/_redirects"
                         ],
                         "styles": [
                             "src/styles.scss",
@@ -94,9 +93,7 @@
                         "inlineStyleLanguage": "scss",
                         "assets": [
                             "src/favicon.ico",
-                            "src/assets",
-                            "src/_redirects",
-                            "static.json"
+                            "src/assets"
                         ],
                         "styles": [
                             "src/styles.scss"
