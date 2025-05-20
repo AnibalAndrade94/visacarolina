@@ -1,0 +1,33 @@
+.contacto-page {
+    font-family: 'Playfair Display', serif;
+    padding: 2rem 1rem;
+    h1 {
+        font-family: 'Pacifico', cursive;
+        color: #5e6150;
+        margin-bottom: 1rem;
+    }
+    .lead {
+        color: #444;
+        font-size: 1.1rem;
+    }
+    .link-button {
+        display: inline-block;
+        width: 80%;
+        max-width: 400px;
+        padding: 1rem 2rem;
+        border-radius: 2rem;
+        font-size: 1.1rem;
+        font-weight: 600;
+        text-decoration: none;
+        color: white;
+        transition: all 0.2s ease;
+        text-align: center;
+        background-color: #6D5352;
+        &.email {
+            background-color: #5e6150;
+            &:hover {
+                background-color: #3c5a6e;
+            }
+        }
+    }
+}

@@ -1,0 +1,278 @@
+<div class="formulario-page row">
+
+    <!-- Columna del formulario -->
+    <div class="col-md-10 formulario-container">
+        <h1 class="tcolor text-center">Llenar Formulario de Visado</h1>
+
+        <form [formGroup]="visaForm" (ngSubmit)="onSubmit()">
+
+            <!-- Información Personal -->
+            <fieldset class="section">
+                <legend>Información Personal</legend>
+                <label>los campos con un * son obligatorios</label>
+
+                <div class="form-group">
+                    <label>Nombre *</label>
+                    <input type="text" formControlName="nombre" class="form-control" placeholder="Ingrese su nombre" />
+
+                    <span *ngIf="visaForm.get('nombre')?.invalid && visaForm.get('nombre')?.touched" class="error-span">
+                      ⚠️ Este campo es obligatorio
+                    </span>
+                </div>
+                <div class="form-group">
+                    <label>Estado Civil *</label>
+                    <input type="text" formControlName="estadoCivil" class="form-control" placeholder="Ingrese su estado civil" />
+
+                    <span *ngIf="visaForm.get('estadoCivil')?.invalid && visaForm.get('estadoCivil')?.touched" class="error-span">
+                      ⚠️ Este campo es obligatorio
+                    </span>
+                </div>
+                <div class="form-group">
+                    <label>Lugar de Nacimiento *</label>
+                    <input type="text" formControlName="lugarNacimiento" class="form-control" placeholder="Ingrese su lugar de nacimiento" />
+
+                    <span *ngIf="visaForm.get('lugarNacimiento')?.invalid && visaForm.get('lugarNacimiento')?.touched" class="error-span">
+                      ⚠️ Este campo es obligatorio
+                    </span>
+                </div>
+
+                <div class="form-group">
+                    <label>Fecha de Nacimiento *</label>
+                    <input type="date" formControlName="fechaNacimiento" class="form-control" />
+                    <span *ngIf="visaForm.get('fechaNacimiento')?.invalid && visaForm.get('fechaNacimiento')?.touched" class="error-span">
+                        ⚠️ Este campo es obligatorio
+                      </span>
+                </div>
+
+                <div class="form-group">
+                    <label>Sexo *</label>
+                    <select formControlName="sexo" class="form-control">
+                      <option value="">Seleccione</option>
+                      <option value="Masculino">Masculino</option>
+                      <option value="Femenino">Femenino</option>
+                    </select>
+
+                    <!-- Span de error para select -->
+                    <span *ngIf="visaForm.get('sexo')?.invalid && visaForm.get('sexo')?.touched" class="error-span">
+                      ⚠️ Seleccione su sexo
+                    </span>
+                </div>
+
+                <div class="form-group">
+                    <label>CURP *</label>
+                    <input type="text" formControlName="curp" class="form-control" placeholder="Ingrese su CURP" />
+                    <span *ngIf="visaForm.get('curp')?.invalid && visaForm.get('curp')?.touched" class="error-span">
+                        ⚠️ Este campo es obligatorio
+                      </span>
+                </div>
+
+                <div class="form-group">
+                    <label>Correo Electrónico *</label>
+                    <input type="email" formControlName="email" class="form-control" placeholder="Ingrese su correo electrónico" />
+                    <span *ngIf="visaForm.get('email')?.invalid && visaForm.get('email')?.touched" class="error-span">
+                        ⚠️ Este campo es obligatorio
+                      </span>
+                </div>
+
+                <div class="form-group">
+                    <label>Dirección de Casa *</label>
+                    <input type="text" formControlName="direccionCasa" class="form-control" placeholder="Ingrese su dirección" />
+                    <span *ngIf="visaForm.get('direccionCasa')?.invalid && visaForm.get('direccionCasa')?.touched" class="error-span">
+                        ⚠️ Este campo es obligatorio
+                      </span>
+                </div>
+
+                <div class="form-group">
+                    <label>Teléfono de Casa *</label>
+                    <input type="tel" formControlName="telefonoCasa" class="form-control" placeholder="Ingrese su teléfono de casa" />
+                    <span *ngIf="visaForm.get('telefonoCasa')?.invalid && visaForm.get('telefonoCasa')?.touched" class="error-span">
+                        ⚠️ Este campo es obligatorio
+                      </span>
+                </div>
+
+                <div class="form-group">
+                    <label>Teléfono Celular *</label>
+                    <input type="tel" formControlName="telefonoCelular" class="form-control" placeholder="Ingrese su teléfono celular" />
+                    <span *ngIf="visaForm.get('telefonoCelular')?.invalid && visaForm.get('telefonoCelular')?.touched" class="error-span">
+                        ⚠️ Este campo es obligatorio
+                      </span>
+                </div>
+            </fieldset>
+
+            <!-- Información de Viaje -->
+            <fieldset class="section">
+                <legend>Información de Viaje</legend>
+
+                <div class="form-group">
+                    <label>Número de Pasaporte</label>
+                    <input type="text" formControlName="numeroPasaporte" class="form-control" placeholder="Ingrese su número de pasaporte" />
+                </div>
+
+                <div class="form-group">
+                    <label>Número de Visa (si aplica)</label>
+                    <input type="text" formControlName="numeroVisa" class="form-control" placeholder="Ingrese su número de visa" />
+                </div>
+
+                <div class="form-group">
+                    <label>¿Le Han Tomado las Diez Huellas?</label>
+                    <input type="text" formControlName="huellasTomadas" class="form-control" placeholder="Sí / No" />
+                </div>
+
+                <div class="form-group">
+                    <label>Fecha del Último Viaje a EUA</label>
+                    <input type="date" formControlName="fechaUltimoViaje" class="form-control" />
+                </div>
+
+                <div class="form-group">
+                    <label>Personas que Viajan con Usted</label>
+                    <input type="text" formControlName="personasViajan" class="form-control" placeholder="Ingrese los nombres" />
+                </div>
+            </fieldset>
+
+            <!-- Información Familiar -->
+            <fieldset class="section">
+                <legend>Información Familiar</legend>
+
+                <div class="form-group">
+                    <label>Nombre del Padre</label>
+                    <input type="text" formControlName="nombrePadre" class="form-control" placeholder="Ingrese el nombre del padre" />
+                </div>
+
+                <div class="form-group">
+                    <label>Fecha de Nacimiento del Padre</label>
+                    <input type="date" formControlName="fechaNacimientoPadre" class="form-control" />
+                </div>
+
+                <div class="form-group">
+                    <label>Nombre de la Madre</label>
+                    <input type="text" formControlName="nombreMadre" class="form-control" placeholder="Ingrese el nombre de la madre" />
+                </div>
+
+                <div class="form-group">
+                    <label>Fecha de Nacimiento de la Madre</label>
+                    <input type="date" formControlName="fechaNacimientoMadre" class="form-control" />
+                </div>
+
+                <div class="form-group">
+                    <label>Nombre del Cónyuge</label>
+                    <input type="text" formControlName="nombreConyuge" class="form-control" placeholder="Ingrese el nombre del cónyuge" />
+                </div>
+
+                <div class="form-group">
+                    <label>Lugar de Nacimiento del Cónyuge</label>
+                    <input type="text" formControlName="lugarNacimientoConyuge" class="form-control" placeholder="Lugar de nacimiento" />
+                </div>
+
+                <div class="form-group">
+                    <label>Fecha de Nacimiento del Cónyuge</label>
+                    <input type="date" formControlName="fechaNacimientoConyuge" class="form-control" />
+                </div>
+            </fieldset>
+
+            <!-- Información Profesional -->
+            <fieldset class="section">
+                <legend>Información Profesional</legend>
+
+                <div class="form-group form-check">
+                    <input type="checkbox" id="estudia" formControlName="estudia" class="form-check-input" (change)="onCheckChange('estudia')" />
+                    <label for="estudia" class="form-check-label">¿Estudia?</label>
+                </div>
+
+                <div class="form-group form-check">
+                    <input type="checkbox" id="trabaja" formControlName="trabaja" class="form-check-input" (change)="onCheckChange('trabaja')" />
+                    <label for="trabaja" class="form-check-label">¿Trabaja?</label>
+                </div>
+
+                <!-- Campos que se habilitan si estudia -->
+                <div *ngIf="visaForm.get('estudia')?.value" class="fade-in">
+                    <div class="form-group">
+                        <label>Nombre de la Escuela</label>
+                        <input type="text" formControlName="nombreEscuela" class="form-control" placeholder="Ingrese nombre de la escuela" />
+                    </div>
+
+                    <div class="form-group">
+                        <label>Dirección de la Escuela</label>
+                        <input type="text" formControlName="direccionEscuela" class="form-control" placeholder="Ingrese dirección de la escuela" />
+                    </div>
+                </div>
+
+                <!-- Campos que se habilitan si trabaja -->
+                <div *ngIf="visaForm.get('trabaja')?.value" class="fade-in">
+                    <div class="form-group">
+                        <label>Nombre de la Empresa</label>
+                        <input type="text" formControlName="nombreEmpresa" class="form-control" placeholder="Ingrese nombre de la empresa" />
+                    </div>
+
+                    <div class="form-group">
+                        <label>Puesto</label>
+                        <input type="text" formControlName="puesto" class="form-control" placeholder="Ingrese su puesto" />
+                    </div>
+
+                    <div class="form-group">
+                        <label>Sueldo</label>
+                        <input type="text" formControlName="sueldo" class="form-control" placeholder="Ingrese su sueldo" />
+                    </div>
+
+                    <div class="form-group">
+                        <label>Descripción del Puesto</label>
+                        <input type="text" formControlName="descripcionPuesto" class="form-control" placeholder="Describa su puesto" />
+                    </div>
+                </div>
+            </fieldset>
+
+            <!-- Información Adicional de Viaje -->
+            <fieldset class="section">
+                <legend>Información Adicional de Viaje</legend>
+
+                <div class="form-group">
+                    <label>Fecha Probable del Viaje</label>
+                    <input type="date" formControlName="fechaProbableViaje" class="form-control" />
+                </div>
+
+                <div class="form-group">
+                    <label>Lugar de Llegada a EUA</label>
+                    <input type="text" formControlName="lugarLlegadaEU" class="form-control" placeholder="Ingrese lugar de llegada" />
+                </div>
+
+                <div class="form-group">
+                    <label>Nombre del Hotel</label>
+                    <input type="text" formControlName="nombreHotel" class="form-control" placeholder="Nombre del hotel" />
+                </div>
+
+                <div class="form-group">
+                    <label>Dirección del Hotel</label>
+                    <input type="text" formControlName="direccionHotel" class="form-control" placeholder="Dirección del hotel" />
+                </div>
+
+                <div class="form-group">
+                    <label>Visita a Familia/Empresa</label>
+                    <input type="text" formControlName="visitaFamiliaEmpresa" class="form-control" placeholder="Nombre, contacto y dirección" />
+                </div>
+
+                <div class="form-group">
+                    <label>¿Tiene Familiares en EUA?</label>
+                    <input type="text" formControlName="tieneFamiliaEnEU" class="form-control" placeholder="Sí / No" />
+                </div>
+
+                <div class="form-group">
+                    <label>¿Ha Viajado a Otros Países?</label>
+                    <input type="text" formControlName="viajesOtrosPaises" class="form-control" placeholder="Sí / No" />
+                </div>
+            </fieldset>
+
+            <!-- Botón de enviar -->
+            <div class="text-center mt-4">
+                <button type="submit" class="btn btn-success btn-lg">Enviar Información</button>
+            </div>
+
+        </form>
+
+    </div>
+
+    <!-- Columna del aside con imágenes -->
+    <aside class="col-md-2 formulario-aside d-none d-md-block">
+        <img src="assets/hero.png" alt="Viaje a USA" class="img-fluid mb-3 rounded shadow" />
+        <img src="assets/testimonios.png" alt="Pasaporte y Visa" class="img-fluid mb-3 rounded shadow" />
+    </aside>
+
+</div>

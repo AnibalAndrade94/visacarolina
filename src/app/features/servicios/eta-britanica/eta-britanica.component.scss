@@ -1,0 +1,188 @@
+.visas-page {
+    font-family: 'Playfair Display', serif;
+    color: #333;
+    h1 {
+        font-family: 'Pacifico', cursive;
+        font-size: 2.5rem;
+        color: #5e6150;
+        margin-bottom: 1rem;
+        @media (max-width: 768px) {
+            font-size: 2rem;
+        }
+    }
+    h2 {
+        font-family: 'boho', serif;
+        font-size: 1.6rem;
+        color: #3c5a6e;
+        margin-top: 2rem;
+        margin-bottom: 1rem;
+    }
+    .descripcion {
+        font-size: 1.1rem;
+        color: #444;
+        margin-bottom: 1rem;
+    }
+    ul {
+        font-size: 1.1rem;
+        padding-left: 1.5rem;
+        li {
+            margin-bottom: 0.5rem;
+        }
+    }
+    .nota-importante {
+        font-size: 0.9rem;
+        font-style: italic;
+        color: #888;
+        margin-top: 1rem;
+    }
+    .btn {
+        margin-top: 2rem;
+        padding: 0.75rem 1.5rem;
+        font-size: 1rem;
+        font-weight: 600;
+        background-color: #5e6150;
+        border-color: #5e6150;
+        &:hover {
+            background-color: #3c5a6e;
+            border-color: #3c5a6e;
+        }
+    }
+}
+
+.precios-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin: 2rem 0;
+}
+
+.badge-precio {
+    display: inline-block;
+    font-size: 1.3rem;
+    margin-top: 1em;
+    margin-bottom: 1em;
+    padding: 0.75rem 1.5rem;
+    border-radius: 30px;
+    background-color: #d98e60;
+    color: white;
+    font-family: 'Playfair Display', serif;
+    font-weight: 600;
+    margin-top: 1rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.btn-success {
+    max-width: 300px;
+    width: 100%;
+    font-size: 1.1rem;
+    font-weight: bold;
+}
+
+.faq-section {
+    margin-top: 4rem;
+    h2 {
+        font-family: 'Pacifico', cursive;
+        color: #5e6150;
+        margin-bottom: 2rem;
+    }
+    .accordion-button {
+        font-size: 1rem;
+        font-family: 'Playfair Display', serif;
+        font-weight: 600;
+    }
+    .accordion-body {
+        font-size: 0.95rem;
+    }
+    .accordion-item {
+        border: 1px solid #ddd;
+        border-radius: 0.5rem;
+        margin-bottom: 1rem;
+        overflow: hidden;
+    }
+}
+
+.titlebox {
+    background-image: url('/assets/londres.png');
+    background-size: cover;
+    background-position: center 25%;
+    padding: 6rem 2rem;
+    text-align: center;
+    border-radius: 1rem;
+    margin-bottom: 2rem;
+    .card-blur {
+        background: rgba(255, 255, 255, 0.7);
+        padding: 2rem;
+        border-radius: 1rem;
+    }
+}
+
+.card-blur {
+    background-color: rgba(255, 255, 255, 0.30); // Blanco con 25% de opacidad
+    border-radius: 1rem;
+    padding: 2rem;
+    backdrop-filter: blur(6px);
+    /* Si quieres efecto glass / difuminado */
+    -webkit-backdrop-filter: blur(6px);
+    /* Para Safari */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    /* Sombra suave */
+    color: #6D5352;
+    /* Color de texto de tu paleta */
+    max-width: 800px;
+    margin: 1rem auto;
+    text-align: center;
+}
+
+.incluye-servicio {
+    text-align: center;
+    h2 {
+        font-size: 2rem;
+        margin-bottom: 2rem;
+    }
+    .list-incluye {
+        list-style: none;
+        /* Opcional: sin bolitas */
+        padding: 0;
+        margin: 0 auto;
+        max-width: 500px;
+        /* Para que la lista no se vea super ancha */
+        text-align: left;
+        /* OJO: Aquí centramos el bloque, pero alineamos texto a la izquierda */
+        li {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem;
+            margin-bottom: 0.75rem;
+            color: #6D5352;
+            /* Texto de tu paleta */
+            padding-left: 1.5rem;
+            position: relative;
+            &::before {
+                content: '✔️';
+                /* Ícono antes del texto (opcional) */
+                position: absolute;
+                left: 0;
+            }
+        }
+    }
+}
+
+.descripcion {
+    text-align: justify;
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    color: #6D5352;
+    margin-bottom: 1rem;
+}
+
+@media (max-width: 768px) {
+    .titlebox {
+        padding: 4rem 1rem;
+    }
+    .badge-precio {
+        font-size: 1rem;
+        padding: 0.5rem 1rem;
+    }
+    .btn-success {
+        font-size: 1rem;
+    }
+}

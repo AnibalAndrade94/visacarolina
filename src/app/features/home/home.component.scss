@@ -1,0 +1,72 @@
+.hero {
+    position: relative;
+    background-image: url('/assets/hero.png'); // Puedes poner una imagen bonita de viajes
+    background-size: cover;
+    background-position: center;
+    height: 80vh;
+    padding: 2rem;
+    color: white;
+    .overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        z-index: 0;
+    }
+    .z-1 {
+        position: relative;
+        z-index: 1;
+    }
+    p {
+        font-family: 'boho', serif;
+    }
+}
+
+.features {
+    h2 {
+        font-family: 'Pacifico', cursive;
+    }
+    p {
+        font-family: 'Playfair Display', serif;
+    }
+}
+
+.card-blur {
+    background-color: rgba(255, 255, 255, 0.30); // Blanco con 25% de opacidad
+    border-radius: 1rem;
+    padding: 2rem;
+    backdrop-filter: blur(6px);
+    /* Si quieres efecto glass / difuminado */
+    -webkit-backdrop-filter: blur(6px);
+    /* Para Safari */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    /* Sombra suave */
+    color: #6D5352;
+    /* Color de texto de tu paleta */
+    max-width: 800px;
+    margin: 1rem auto;
+    text-align: center;
+}
+
+.testimonios {
+    background-image: url('/assets/testimonios.png');
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    border-radius: 1rem;
+    blockquote {
+        font-family: 'Playfair Display', serif;
+        font-size: 1.1rem;
+        color: #efe8e7;
+    }
+    .blockquote-footer {
+        font-size: 0.9rem;
+        color: #efe8e7;
+    }
+}
+
+.hero-logo {
+    height: 300px;
+    filter: drop-shadow(0 0 5px rgba(0, 0, 0, 0.3));
+}

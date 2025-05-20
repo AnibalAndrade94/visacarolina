@@ -1,1 +1,127 @@
-/* You can add global styles to this file, and also import other style files */
+@font-face {
+    font-family: 'Boho';
+    /* El nombre que vas a usar */
+    src: url('assets/fonts/BohoStyle.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Brittany';
+    /* El nombre que vas a usar */
+    src: url('assets/fonts/BrittanySignature.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Jojoba';
+    /* El nombre que vas a usar */
+    src: url('assets/fonts/Jojoba.otf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Welcome';
+    /* El nombre que vas a usar */
+    src: url('assets/fonts/WelcomeSeptember.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+/* fonts */
+
+.brittany {
+    font-family: 'brittany', serif;
+}
+
+.jojoba {
+    font-family: 'jojoba', serif;
+}
+
+.welcome {
+    font-family: 'welcome', serif;
+}
+
+.boho {
+    font-family: 'boho', serif;
+}
+
+.bold600 {
+    font-weight: 600;
+}
+
+.bold500 {
+    font-weight: 500;
+}
+
+.bold700 {
+    font-weight: 700;
+}
+
+.spacing {
+    letter-spacing: 0.15rem;
+}
+
+.fontsize2 {
+    font-size: 3em;
+}
+
+
+/* colors */
+
+.tcolor {
+    color: #c18b89;
+}
+
+.subcolor {
+    color: #cda09b;
+}
+
+.pcolor {
+    color: #ddc5bb;
+}
+
+.txtcolor {
+    color: #6D5352;
+}
+
+.fcolor {
+    color: #efe8e7;
+}
+
+.f2color {
+    color: #C0C28A;
+}
+
+.badge-precio {
+    padding: 0.6rem 1.2rem;
+    border-radius: 2rem;
+    font-size: 1.5rem;
+    font-weight: 600;
+    letter-spacing: 0.1rem;
+    background-color: #f6f5ef;
+    border: 2px solid;
+    transition: transform 0.3s ease;
+    &.mayor {
+        background-color: #d98e60;
+        border-color: #d98e60;
+        color: #fff;
+    }
+    &.menor {
+        background-color: #3c5a6e;
+        border-color: #3c5a6e;
+        color: #fff;
+    }
+    &:hover {
+        transform: scale(1.05);
+    }
+}
+
+body,
+html {
+    background-color: #efe8e7!important;
+    min-height: 100vh;
+}

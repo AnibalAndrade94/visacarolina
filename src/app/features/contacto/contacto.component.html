@@ -1,0 +1,44 @@
+<div class="contacto-page text-center">
+    <h1 class="tcolor bold600 spacing">Contáctanos</h1>
+    <p class="lead mb-4">Conecta con <strong>VisaCarolina</strong> y haz realidad tu viaje o trámite de visa.</p>
+
+    <div class="contact-links d-flex flex-column align-items-center gap-3 mb-5">
+        <a class="link-button whatsapp" href="https://wa.me/5214441776693" target="_blank">
+            <img src="../../../assets/whats.png" style="width: 35px; margin-top: -3px;"> WhatsApp
+        </a>
+
+        <a class="link-button instagram" href="https://www.instagram.com/evergreen_travelmgmt?igsh=cjkzY3YzN2N6a2Zw" target="_blank">
+            <img src="../../../assets/insta.png" style="width: 35px; margin-top: -3px;"> Instagram
+        </a>
+
+        <a class="link-button facebook" href="https://www.facebook.com/profile.php?id=61571220375642" target="_blank">
+            <img src="../../../assets/facebook.png" style="width: 35px; margin-top: -3px;"> Facebook
+        </a>
+    </div>
+
+    <div class="contact-form-container mx-auto" style="max-width: 600px;">
+        <h2 class="tcolor boho bold600 spacing mb-4">O escríbenos directamente</h2>
+
+        <form [formGroup]="contactForm" (ngSubmit)="onSubmit()">
+            <div class="form-group mb-3 text-start">
+                <label class="txtcolor">Nombre</label>
+                <input formControlName="nombre" type="text" class="form-control" placeholder="Tu nombre" />
+                <small class="text-danger" *ngIf="contactForm.get('nombre')?.touched && contactForm.get('nombre')?.invalid">Este campo es obligatorio.</small>
+            </div>
+
+            <div class="form-group mb-3 text-start">
+                <label class="txtcolor">Correo electrónico</label>
+                <input formControlName="correo" type="email" class="form-control" placeholder="Tu correo" />
+                <small class="text-danger" *ngIf="contactForm.get('correo')?.touched && contactForm.get('correo')?.invalid">Correo inválido.</small>
+            </div>
+
+            <div class="form-group mb-3 text-start">
+                <label class="txtcolor">Mensaje</label>
+                <textarea formControlName="mensaje" rows="4" class="form-control" placeholder="Cuéntanos en qué podemos ayudarte"></textarea>
+                <small class="text-danger" *ngIf="contactForm.get('mensaje')?.touched && contactForm.get('mensaje')?.invalid">Este campo es obligatorio.</small>
+            </div>
+
+            <button type="submit" class="btn btn-success px-4">Enviar mensaje</button>
+        </form>
+    </div>
+</div>

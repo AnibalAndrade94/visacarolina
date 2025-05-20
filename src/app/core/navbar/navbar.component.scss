@@ -1,0 +1,29 @@
+.navbar {
+    font-family: 'Playfair Display', serif;
+    background-color: #8AC29D;
+    .nav-link {
+        color: #273642 !important;
+        font-weight: 500;
+        margin-left: 1rem;
+        &.active {
+            border-bottom: 2px solid #5e6150;
+        }
+        &:hover {
+            color: #3c5a6e !important;
+        }
+    }
+    .navbar-brand {
+        font-family: 'Pacifico', cursive;
+        font-size: 1.5rem;
+    }
+}
+
+.logo-navbar {
+    height: 60px;
+    max-height: 60px;
+    object-fit: contain;
+    filter: drop-shadow(0 0 3px rgba(0, 0, 0, 0.1));
+    @media (max-width: 768px) {
+        height: 48px;
+    }
+}

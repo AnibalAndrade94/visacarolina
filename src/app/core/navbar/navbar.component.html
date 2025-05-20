@@ -1,0 +1,34 @@
+<nav class="navbar navbar-expand-lg shadow-sm">
+    <div class="container">
+        <a class="navbar-brand d-flex align-items-center gap-2" routerLink="/">
+            <h1 class="brittany my-2">Carolina Muñoz</h1>
+        </a>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item" routerLinkActive="active">
+                    <a class="nav-link" routerLink="/home">Inicio</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      Servicios
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="/servicios/visas">Visa Americana</a></li>
+                        <li><a class="dropdown-item" href="/servicios/etacanada">eTA Canadiense</a></li>
+                        <li><a class="dropdown-item" href="/servicios/etabritanica">eTA Británica</a></li>
+                        <li><a class="dropdown-item" href="/servicios/etabritanica">Pasaporte mexicano</a></li>
+
+                    </ul>
+                </li>
+                <li class="nav-item" routerLinkActive="active">
+                    <a class="nav-link" routerLink="/contacto">Contacto</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
