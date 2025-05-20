@@ -93,7 +93,8 @@
                         "assets": [
                             "src/favicon.ico",
                             "src/assets",
-                            "src/_redirects"
+                            "src/_redirects",
+                            "static.json"
                         ],
                         "styles": [
                             "src/styles.scss"
