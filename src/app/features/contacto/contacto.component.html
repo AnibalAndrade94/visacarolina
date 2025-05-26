@@ -37,7 +37,7 @@
                 <textarea formControlName="mensaje" rows="4" class="form-control" placeholder="Cuéntanos en qué podemos ayudarte"></textarea>
                 <small class="text-danger" *ngIf="contactForm.get('mensaje')?.touched && contactForm.get('mensaje')?.invalid">Este campo es obligatorio.</small>
             </div>
-            <div class="g-recaptcha" [attr.data-sitekey]="siteKey" data-callback="onCaptchaResolved">
+            <div class="g-recaptcha" class="g-recaptcha" data-sitekey="6LcgLEorAAAAAGK31QR006veAiVuKq3O5wfyhp4W" data-callback="captchaResolved">
             </div>
             <button type="submit" class="btn btn-success px-4">Enviar mensaje</button>
         </form>
