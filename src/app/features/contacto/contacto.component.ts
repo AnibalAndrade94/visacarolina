@@ -32,6 +32,18 @@ ngOnInit() {
   // Por si el script no se ha cargado aún, lo insertamos manual
 
 }
+ngAfterViewInit(): void {
+  setTimeout(() => {
+    if (document.getElementById('captcha-container')) {
+      grecaptcha.render('captcha-container', {
+        sitekey: this.siteKey,
+        callback: (token: string) => {
+          this.captchaToken = token;
+        }
+      });
+    }
+  }, 500);
+}
 onCaptchaResolved(token: string) {
   this.captchaToken = token;
 }
