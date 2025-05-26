@@ -1,6 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
+declare var grecaptcha: any;
+declare global {
+  interface Window {
+    captchaResolved: (token: string) => void;
+  }
+}
 @Component({
   selector: 'app-formvisa',
   templateUrl: './formvisa.component.html',
@@ -9,6 +15,9 @@ import { HttpClient } from '@angular/common/http';
 export class FormvisaComponent implements OnInit {
   visaForm!: FormGroup;
   originalOrder = () => 0;
+  siteKey = '6LcgLEorAAAAAGK31QR006veAiVuKq3O5wfyhp4W'; // tu clave pública de reCAPTCHA v2
+captchaToken: string = '';
+
   campos: { campo: string; nombre: string }[] = [
     // Información Personal
     { campo: 'nombre', nombre: 'Nombre' },
@@ -61,6 +70,9 @@ export class FormvisaComponent implements OnInit {
   constructor(private fb: FormBuilder, private http: HttpClient) {}
 
   ngOnInit(): void {
+    window['captchaResolved'] = (token: string) => {
+  this.captchaToken = token;
+};
     this.visaForm = this.fb.group({
       // Información Personal
       nombre: ['', Validators.required],
@@ -112,16 +124,33 @@ export class FormvisaComponent implements OnInit {
     
   }
 
-  
+  onCaptchaResolved(token: string) {
+  this.captchaToken = token;
+}
+
 onSubmit() {
   console.log("se está enviando correo");
-  console.log("es valido?", this.visaForm.valid)
+  console.log("es valido?", this.visaForm.valid);
+
+  // 👀 Validar que el reCAPTCHA esté resuelto
+  if (!this.captchaToken) {
+    alert('Por favor, completa el reCAPTCHA.');
+    return;
+  }
+
   if (this.visaForm.valid) {
-    this.http.post('http://localhost:3000/send', this.visaForm.value).subscribe({
+    const payload = {
+      ...this.visaForm.value,
+      token: this.captchaToken // 👈 incluir el token para el backend
+    };
+
+    this.http.post('https://visaback-production.up.railway.app/send', payload).subscribe({
       next: (res) => {
         console.log('Formulario enviado exitosamente', res);
         alert('¡Información enviada!');
         this.visaForm.reset();
+        grecaptcha.reset();     // 👈 reinicia visualmente el captcha
+        this.captchaToken = ''; // 👈 limpia el token
       },
       error: (err) => {
         console.error('Error al enviar el formulario', err);

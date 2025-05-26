@@ -17,7 +17,7 @@
                 "build": {
                     "builder": "@angular-devkit/build-angular:browser",
                     "options": {
-                        "outputPath": "dist/mi-app-ng16/browser",
+                        "outputPath": "dist/mi-app-ng16",
                         "index": "src/index.html",
                         "main": "src/main.ts",
                         "polyfills": [
@@ -100,66 +100,11 @@
                         ],
                         "scripts": []
                     }
-                },
-                "server": {
-                  "builder": "@angular-devkit/build-angular:server",
-                  "options": {
-                    "outputPath": "dist/mi-app-ng16/server",
-                    "main": "server.ts",
-                    "tsConfig": "tsconfig.server.json",
-                    "inlineStyleLanguage": "scss"
-                  },
-                  "configurations": {
-                    "production": {
-                      "outputHashing": "media"
-                    },
-                    "development": {
-                      "buildOptimizer": false,
-                      "optimization": false,
-                      "sourceMap": true,
-                      "extractLicenses": false,
-                      "vendorChunk": true
-                    }
-                  },
-                  "defaultConfiguration": "production"
-                },
-                "serve-ssr": {
-                  "builder": "@nguniversal/builders:ssr-dev-server",
-                  "configurations": {
-                    "development": {
-                      "browserTarget": "mi-app-ng16:build:development",
-                      "serverTarget": "mi-app-ng16:server:development"
-                    },
-                    "production": {
-                      "browserTarget": "mi-app-ng16:build:production",
-                      "serverTarget": "mi-app-ng16:server:production"
-                    }
-                  },
-                  "defaultConfiguration": "development"
-                },
-                "prerender": {
-                  "builder": "@nguniversal/builders:prerender",
-                  "options": {
-                    "routes": [
-                      "/"
-                    ]
-                  },
-                  "configurations": {
-                    "production": {
-                      "browserTarget": "mi-app-ng16:build:production",
-                      "serverTarget": "mi-app-ng16:server:production"
-                    },
-                    "development": {
-                      "browserTarget": "mi-app-ng16:build:development",
-                      "serverTarget": "mi-app-ng16:server:development"
-                    }
-                  },
-                  "defaultConfiguration": "production"
                 }
             }
         }
     },
     "cli": {
-        "analytics": "012e0259-2e31-4a02-a0f0-260946562f63"
+        "analytics": false
     }
 }
