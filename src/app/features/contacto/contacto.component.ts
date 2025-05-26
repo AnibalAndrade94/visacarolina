@@ -29,6 +29,14 @@ ngOnInit() {
   window['captchaResolved'] = (token: string) => {
   this.captchaToken = token;
 };
+  // Por si el script no se ha cargado aún, lo insertamos manual
+  if (!document.querySelector('script[src*="recaptcha/api.js"]')) {
+    const script = document.createElement('script');
+    script.src = 'https://www.google.com/recaptcha/api.js';
+    script.async = true;
+    script.defer = true;
+    document.head.appendChild(script);
+  }
 }
 onCaptchaResolved(token: string) {
   this.captchaToken = token;
