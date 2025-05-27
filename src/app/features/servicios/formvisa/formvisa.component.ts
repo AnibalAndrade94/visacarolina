@@ -73,14 +73,8 @@ captchaToken: string = '';
     window['captchaResolved'] = (token: string) => {
   this.captchaToken = token;
 };
-  // Por si el script no se ha cargado aún, lo insertamos manual
-  if (!document.querySelector('script[src*="recaptcha/api.js"]')) {
-    const script = document.createElement('script');
-    script.src = 'https://www.google.com/recaptcha/api.js';
-    script.async = true;
-    script.defer = true;
-    document.head.appendChild(script);
-  }
+
+
     this.visaForm = this.fb.group({
       // Información Personal
       nombre: ['', Validators.required],
@@ -131,6 +125,18 @@ captchaToken: string = '';
     });
     
   }
+  ngAfterViewInit(): void {
+  setTimeout(() => {
+    if (document.getElementById('captcha-container')) {
+      grecaptcha.render('captcha-container', {
+        sitekey: this.siteKey,
+        callback: (token: string) => {
+          this.captchaToken = token;
+        }
+      });
+    }
+  }, 500);
+}
 
   onCaptchaResolved(token: string) {
   this.captchaToken = token;

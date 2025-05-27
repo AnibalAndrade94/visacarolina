@@ -259,12 +259,10 @@
                     <input type="text" formControlName="viajesOtrosPaises" class="form-control" placeholder="Sí / No" />
                 </div>
             </fieldset>
-
+            <div id="captcha-container"></div>
             <!-- Botón de enviar -->
             <div class="text-center mt-4">
                 <button type="submit" class="btn btn-success btn-lg">Enviar Información</button>
-            </div>
-            <div class="g-recaptcha" [attr.data-sitekey]="siteKey" data-callback="onCaptchaResolved">
             </div>
         </form>
 
