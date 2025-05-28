@@ -3,3 +3,21 @@
     font-size: 0.9rem;
     background-color: #8AC29D;
 }
+
+.link-button {
+    text-decoration: none; // Quita el subrayado
+    color: inherit; // Hereda el color del texto padre (o cámbialo a otro, como `#000` para negro)
+    font-weight: bold; // Opcional, si quieres que se vea más sólido
+    display: inline-flex;
+    align-items: center;
+    gap: 5px; // Espacio entre el ícono y el texto
+}
+
+.link-button:hover {
+    text-decoration: none; // También evita subrayado al pasar el mouse
+    color: inherit;
+}
+
+hr {
+    border-top: 4px solid black;
+}
