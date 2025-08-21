@@ -15,14 +15,12 @@ const routes: Routes = [
   { path: 'avisos', component: AvisosComponent },
   { path: 'contacto', component: ContactoComponent },
   { path: 'admincodes', component: AdminCodigosComponent },
-  { path: '**', redirectTo: 'home' }, // Ruta comodín (404)
-  // Lazy load para el módulo de servicios
   {
     path: 'servicios',
     loadChildren: () =>
       import('./features/servicios/servicios.module').then(m => m.ServiciosModule)
   },
-  
+  { path: '**', redirectTo: 'home' } // 👈 SIEMPRE AL FINAL
 ];
 
 @NgModule({
