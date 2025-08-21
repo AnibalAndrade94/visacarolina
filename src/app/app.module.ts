@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { FormsModule } from '@angular/forms'; // 👈 Importar esto
 
 // Componentes principales
 import { HomeComponent } from './features/home/home.component';
@@ -13,6 +14,11 @@ import { UxuiComponent } from './features/uxui/uxui.component';
 import { ReactiveFormsModule } from '@angular/forms'; // 👈 Importa esto
 import { HttpClientModule } from '@angular/common/http';
 import { PasapportComponent } from './features/pasapport/pasapport.component';
+import { AvisosComponent } from './features/avisos/avisos.component';
+import { ReferidosComponent } from './features/referidos/referidos.component';
+import { FormularioComponent } from './formulario/formulario.component';
+import { Formulario2Component } from './features/formulario2/formulario2.component';
+import { AdminCodigosComponent } from './features/admin-codigos/admin-codigos.component';
 
 @NgModule({
   declarations: [
@@ -22,13 +28,19 @@ import { PasapportComponent } from './features/pasapport/pasapport.component';
     NavbarComponent,
     FooterComponent,
     UxuiComponent,
-    PasapportComponent
+    PasapportComponent,
+    AvisosComponent,
+    ReferidosComponent,
+    FormularioComponent,
+    Formulario2Component,
+    AdminCodigosComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

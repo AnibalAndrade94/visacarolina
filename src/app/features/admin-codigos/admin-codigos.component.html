@@ -1,0 +1,62 @@
+<div class="container py-4">
+    <h2 class="boho tcolor text-center mb-4">Gestión de Códigos de Referido</h2>
+
+    <form [formGroup]="codigoForm" (ngSubmit)="agregarCodigo()" class="mb-4">
+        <div class="row g-3 align-items-end">
+            <div class="col-md-5">
+                <label class="form-label">Código *</label>
+                <input type="text" class="form-control" formControlName="codigo" placeholder="Ej: OMAR100">
+            </div>
+
+            <div class="col-md-3">
+                <label class="form-label">Descuento *</label>
+                <input type="number" class="form-control" formControlName="descuento" placeholder="Ej: 100">
+            </div>
+
+            <div class="col-md-2">
+                <label class="form-label">Activo</label>
+                <select class="form-select" formControlName="activo">
+          <option [value]="true">Sí</option>
+          <option [value]="false">No</option>
+        </select>
+            </div>
+
+            <div class="col-md-2 d-grid">
+                <button class="btn btn-success" type="submit">
+          {{ editando ? 'Actualizar' : 'Agregar' }}
+        </button>
+            </div>
+        </div>
+    </form>
+
+    <hr>
+
+    <table class="table table-bordered table-striped text-center">
+        <thead class="table-light">
+            <tr>
+                <th>Código</th>
+                <th>Descuento</th>
+                <th>Activo</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let c of codigos">
+                <td>{{ c.codigo }}</td>
+                <td>${{ c.descuento }}</td>
+                <td>
+                    <span class="badge" [class.bg-success]="c.activo" [class.bg-secondary]="!c.activo">
+            {{ c.activo ? 'Sí' : 'No' }}
+          </span>
+                </td>
+                <td>
+                    <button class="btn btn-sm btn-primary me-1" (click)="editarCodigo(c)">Editar</button>
+                    <button class="btn btn-sm btn-danger me-1" (click)="eliminarCodigo(c.id)">Eliminar</button>
+                    <button class="btn btn-sm btn-warning" (click)="toggleEstado(c)">
+            {{ c.activo ? 'Desactivar' : 'Activar' }}
+          </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,36 @@
+<div class="container py-5">
+    <h2 class="tcolor text-center bold600 mb-4">¡Bienvenido!</h2>
+    <p class="text-center">Ingresa tu código de referido para obtener tu descuento especial:</p>
+
+    <div class="mb-4 text-center">
+        <input type="text" class="form-control w-50 d-inline-block" placeholder="Código de referido" [(ngModel)]="codigo" name="codigo">
+        <button class="btn btn-success ms-2" (click)="verificarCodigo()">Validar</button>
+    </div>
+
+    <div *ngIf="errorCodigo" class="alert alert-danger text-center">{{ errorCodigo }}</div>
+    <div *ngIf="referidoValido" class="alert alert-success text-center">
+        ¡Código válido! Selecciona el trámite:
+    </div>
+
+    <div *ngIf="referidoValido" class="mb-4 text-center">
+        <label class="form-label">Tipo de trámite:</label>
+        <select [(ngModel)]="tipoTramite" class="form-select w-50 d-inline-block" (change)="mostrarFormulario()">
+      <option value="" disabled selected>Selecciona una opción</option>
+      <option value="visa">Visa Americana</option>
+      <option value="etaCanadiense">eTA Canadiense</option>
+      <option value="etaBritanica">eTA Británica</option>
+      <option value="pasaporte">Pasaporte Mexicano</option>
+    </select>
+    </div>
+
+    <div *ngIf="tipoTramite && referidoValido" class="text-center mb-4">
+        <label class="form-label">¿Para cuántas personas deseas este trámite?</label>
+        <input type="number" class="form-control w-25 d-inline-block" [(ngModel)]="cantidadPersonas" min="1" (change)="generarFormularios()">
+    </div>
+
+    <!-- Renderizar formularios individuales -->
+    <div *ngFor="let persona of formularios; let i = index" class="mb-5">
+        <app-formulario2 [index]="i + 1" [tipoTramite]="tipoTramite" [descuento]="descuento" [codigo]="codigo">
+        </app-formulario2>
+    </div>
+</div>

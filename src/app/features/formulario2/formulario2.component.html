@@ -1,0 +1,61 @@
+<div class="formulario-container" [formGroup]="visaForm">
+    <p class="text-muted mb-3" style="font-style: italic;">La información se usará únicamente para el trámite.</p>
+
+    <div class="form-group">
+        <label>Nombre *</label>
+        <input type="text" formControlName="nombre" class="form-control" placeholder="Ingrese su nombre" />
+        <span *ngIf="visaForm.get('nombre')?.invalid && visaForm.get('nombre')?.touched" class="error-span">⚠️ Este campo es obligatorio</span>
+    </div>
+
+    <div class="form-group">
+        <label>Estado Civil *</label>
+        <input type="text" formControlName="estadoCivil" class="form-control" placeholder="Ingrese su estado civil" />
+        <span *ngIf="visaForm.get('estadoCivil')?.invalid && visaForm.get('estadoCivil')?.touched" class="error-span">⚠️ Este campo es obligatorio</span>
+    </div>
+
+    <div class="form-group">
+        <label>Lugar de Nacimiento *</label>
+        <input type="text" formControlName="lugarNacimiento" class="form-control" placeholder="Ingrese su lugar de nacimiento" />
+        <span *ngIf="visaForm.get('lugarNacimiento')?.invalid && visaForm.get('lugarNacimiento')?.touched" class="error-span">⚠️ Este campo es obligatorio</span>
+    </div>
+
+    <div class="form-group">
+        <label>Fecha de Nacimiento *</label>
+        <input type="date" formControlName="fechaNacimiento" class="form-control" />
+        <span *ngIf="visaForm.get('fechaNacimiento')?.invalid && visaForm.get('fechaNacimiento')?.touched" class="error-span">⚠️ Este campo es obligatorio</span>
+    </div>
+
+    <div class="form-group">
+        <label>Sexo *</label>
+        <select formControlName="sexo" class="form-control">
+      <option value="">Seleccione</option>
+      <option value="Masculino">Masculino</option>
+      <option value="Femenino">Femenino</option>
+    </select>
+        <span *ngIf="visaForm.get('sexo')?.invalid && visaForm.get('sexo')?.touched" class="error-span">⚠️ Seleccione su sexo</span>
+    </div>
+
+    <div class="form-group">
+        <label>CURP *</label>
+        <input type="text" formControlName="curp" class="form-control" placeholder="Ingrese su CURP" />
+        <span *ngIf="visaForm.get('curp')?.invalid && visaForm.get('curp')?.touched" class="error-span">⚠️ Este campo es obligatorio</span>
+    </div>
+
+    <div class="form-group">
+        <label>Correo Electrónico *</label>
+        <input type="email" formControlName="email" class="form-control" placeholder="Ingrese su correo electrónico" />
+        <span *ngIf="visaForm.get('email')?.invalid && visaForm.get('email')?.touched" class="error-span">⚠️ Este campo es obligatorio</span>
+    </div>
+
+    <div class="form-group">
+        <label>Teléfono de Casa *</label>
+        <input type="tel" formControlName="telefonoCasa" class="form-control" placeholder="Ingrese su teléfono de casa" />
+        <span *ngIf="visaForm.get('telefonoCasa')?.invalid && visaForm.get('telefonoCasa')?.touched" class="error-span">⚠️ Este campo es obligatorio</span>
+    </div>
+
+    <div class="form-group">
+        <label>Teléfono Celular *</label>
+        <input type="tel" formControlName="telefonoCelular" class="form-control" placeholder="Ingrese su teléfono celular" />
+        <span *ngIf="visaForm.get('telefonoCelular')?.invalid && visaForm.get('telefonoCelular')?.touched" class="error-span">⚠️ Este campo es obligatorio</span>
+    </div>
+</div>

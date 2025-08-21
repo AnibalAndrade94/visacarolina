@@ -259,6 +259,127 @@
                     <input type="text" formControlName="viajesOtrosPaises" class="form-control" placeholder="Sí / No" />
                 </div>
             </fieldset>
+            <!-- Preguntas Extra -->
+            <fieldset class="section">
+                <legend>Preguntas Adicionales</legend>
+
+                <!-- Viaja acompañado -->
+                <div class="form-group">
+                    <label>¿Viaja alguien más con usted? *</label>
+                    <select formControlName="viajaAcompanado" class="form-control">
+      <option value="">Seleccione</option>
+      <option [ngValue]="true">Sí</option>
+      <option [ngValue]="false">No</option>
+    </select>
+                    <span *ngIf="visaForm.get('viajaAcompanado')?.invalid && visaForm.get('viajaAcompanado')?.touched" class="error-span">
+      ⚠️ Responda esta pregunta
+    </span>
+                </div>
+
+                <!-- Acompañantes dinámicos -->
+                <div formArrayName="acompanantes" *ngIf="visaForm.get('viajaAcompanado')?.value">
+                    <div *ngFor="let acomp of acompanantes.controls; let i=index" [formGroupName]="i" class="sub-form">
+                        <input type="text" formControlName="nombre" placeholder="Nombre del acompañante" class="form-control" />
+                        <input type="text" formControlName="parentesco" placeholder="Parentesco" class="form-control" />
+                        <button type="button" class="btn btn-danger btn-sm" (click)="eliminarAcompanante(i)">Eliminar</button>
+                    </div>
+                    <button type="button" class="btn btn-primary btn-sm" (click)="agregarAcompanante()">Agregar acompañante</button>
+                </div>
+
+                <!-- Redes sociales -->
+                <div formGroupName="redesSociales" class="mt-3">
+                    <label>¿Usa redes sociales? *</label>
+                    <select formControlName="usaRedes" class="form-control">
+      <option value="">Seleccione</option>
+      <option [ngValue]="true">Sí</option>
+      <option [ngValue]="false">No</option>
+    </select>
+
+                    <div *ngIf="visaForm.get('redesSociales.usaRedes')?.value">
+                        <input type="text" formControlName="plataforma" placeholder="¿Cuál?" class="form-control mt-2" />
+                        <input type="url" formControlName="link" placeholder="Link al perfil" class="form-control mt-2" />
+                        <span *ngIf="visaForm.get('redesSociales.link')?.invalid && visaForm.get('redesSociales.link')?.touched" class="error-span">
+        ⚠️ Ingrese un link válido
+      </span>
+                    </div>
+                </div>
+
+                <!-- Pasaporte -->
+                <div class="form-group">
+                    <label>Vigencia del Pasaporte *</label>
+                    <input type="date" formControlName="pasaporteVigencia" class="form-control" />
+                </div>
+
+                <!-- Dirección en USA -->
+                <div class="form-group">
+                    <label>Dirección de llegada en USA *</label>
+                    <input type="text" formControlName="direccionUSA" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label>Teléfono en USA *</label>
+                    <input type="tel" formControlName="telefonoUSA" class="form-control" placeholder="10 dígitos" />
+                </div>
+                <div class="form-group">
+                    <label>Código Postal en USA *</label>
+                    <input type="text" formControlName="cpUSA" class="form-control" placeholder="5 dígitos" />
+                </div>
+
+                <!-- Padres -->
+                <div class="form-group">
+                    <label>¿Se encuentran sus padres en USA? *</label>
+                    <select formControlName="padresEnUSA" class="form-control">
+      <option value="">Seleccione</option>
+      <option [ngValue]="true">Sí</option>
+      <option [ngValue]="false">No</option>
+    </select>
+                </div>
+
+                <!-- Viajes previos -->
+                <div class="form-group">
+                    <label>¿Ha viajado a los Estados Unidos? *</label>
+                    <select formControlName="haViajadoUSA" class="form-control">
+      <option value="">Seleccione</option>
+      <option [ngValue]="true">Sí</option>
+      <option [ngValue]="false">No</option>
+    </select>
+                    <input *ngIf="visaForm.get('haViajadoUSA')?.value" type="text" formControlName="fechasViaje" placeholder="Fechas de viaje" class="form-control mt-2" />
+                </div>
+
+                <!-- Visa previa -->
+                <div class="form-group">
+                    <label>¿Le han otorgado alguna visa? *</label>
+                    <select formControlName="tieneVisa" class="form-control">
+      <option value="">Seleccione</option>
+      <option [ngValue]="true">Sí</option>
+      <option [ngValue]="false">No</option>
+    </select>
+                    <div *ngIf="visaForm.get('tieneVisa')?.value" class="mt-2">
+                        <input type="text" formControlName="numeroVisaExtra" placeholder="Número de visa" class="form-control mb-2" />
+                        <input type="date" formControlName="fechaValidezVisa" class="form-control" />
+                    </div>
+                </div>
+
+                <!-- Visa revocada -->
+                <div class="form-group">
+                    <label>¿Le han revocado alguna vez la visa? *</label>
+                    <select formControlName="visaRevocada" class="form-control">
+      <option value="">Seleccione</option>
+      <option [ngValue]="true">Sí</option>
+      <option [ngValue]="false">No</option>
+    </select>
+                </div>
+
+                <!-- Dirección actual -->
+                <div class="form-group">
+                    <label>Dirección Actual *</label>
+                    <input type="text" formControlName="direccionActual" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label>Código Postal Actual *</label>
+                    <input type="text" formControlName="cpActual" class="form-control" placeholder="5 dígitos" />
+                </div>
+            </fieldset>
+
             <div id="captcha-container"></div>
             <!-- Botón de enviar -->
             <div class="text-center mt-4">
