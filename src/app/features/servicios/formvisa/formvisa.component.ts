@@ -40,38 +40,46 @@ export class FormvisaComponent implements OnInit {
       telefonoCelular: ['', [Validators.required, Validators.pattern('^[0-9]{10,15}$')]],
 
       // Información de Viaje
-      numeroPasaporte: ['', Validators.required],
-      pasaporteVigencia: ['', Validators.required],
+      numeroPasaporte: ['',],
+      pasaporteVigencia: ['',],
       fechaProbableViaje: [''],
       lugarLlegadaEU: [''],
-      direccionUSA: ['', Validators.required],
-      telefonoUSA: ['', [Validators.required, Validators.pattern(/^\d{10}$/)]],
-      cpUSA: ['', [Validators.required, Validators.pattern(/^\d{5}$/)]],
+      direccionUSA: ['',],
+      telefonoUSA: ['', ],
+      cpUSA: ['',],
       nombreHotel: [''],
       direccionHotel: [''],
       visitaFamiliaEmpresa: [''],
-      tieneFamiliaEnEU: ['', Validators.required],
+      tieneFamiliaEnEU: [''],
       viajesOtrosPaises: [''],
       fechaUltimoViaje: [''],
-      haViajadoUSA: [false, Validators.required],
+      haViajadoUSA: [''],
       fechasViaje: [''],
 
       // Visa
       numeroVisa: [''],
       fechaValidezVisa: [''],
-      visaOtorgada: [false, Validators.required],
-      visaRevocada: [false, Validators.required],
+      visaOtorgada: [''],
+      visaRevocada: [''],
       huellasTomadas: [''],
 
       // Viaja acompañado
-      viajaAcompanado: [false, Validators.required],
+      viajaAcompanado: [''],
       acompanantes: this.fb.array([]),
+        personasViajan: [''],
+
+  // Padres
+  padresEnUSA: [''],
+
+  // Visa previa
+  tieneVisa: [''],
+  numeroVisaExtra: [''], // para el input condicional
 
       // Redes sociales
       redesSociales: this.fb.group({
-        usaRedes: [false, Validators.required],
+        usaRedes: [],
         plataforma: [''],
-        link: ['', Validators.pattern(/https?:\/\/.+/)]
+        link: ['',]
       }),
 
       // Información Familiar
@@ -94,8 +102,8 @@ export class FormvisaComponent implements OnInit {
       descripcionPuesto: [{ value: '', disabled: true }],
 
       // Dirección actual
-      direccionActual: ['', Validators.required],
-      cpActual: ['', [Validators.required, Validators.pattern(/^\d{5}$/)]]
+      direccionActual: [''],
+      cpActual: ['']
     });
   }
 
@@ -133,7 +141,14 @@ export class FormvisaComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log('se está enviando correo');
+
+    Object.keys(this.visaForm.controls).forEach(key => {
+  const control = this.visaForm.get(key);
+  if (control?.invalid) {
+    console.log('Campo inválido:', key, control.errors);
+  }
+});
+    console.log('se está enviando correo',this.visaForm);
     console.log('es valido?', this.visaForm.valid);
 
     if (!this.captchaToken) {
