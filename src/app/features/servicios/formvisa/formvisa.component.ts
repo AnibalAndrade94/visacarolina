@@ -162,7 +162,7 @@ export class FormvisaComponent implements OnInit {
         token: this.captchaToken
       };
 
-      this.http.post('https://visaback-production.up.railway.app/send', payload).subscribe({
+      this.http.post('https://visaback-ivory.vercel.app/send', payload).subscribe({
         next: (res) => {
           console.log('Formulario enviado exitosamente', res);
           alert('¡Información enviada!');

@@ -26,7 +26,7 @@ export class ReferidosComponent {
       return;
     }
 
-    this.http.get<any>(`https://visaback-production.up.railway.app/codigos/${this.codigo}`)
+    this.http.get<any>(`https://visaback-ivory.vercel.app//codigos/${this.codigo}`)
       .subscribe({
         next: (res) => {
           if (res && res.codigo) {

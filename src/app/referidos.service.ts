@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 
 @Injectable({ providedIn: 'root' })
 export class ReferidosService {
-  private baseUrl = 'https://visaback-production.up.railway.app';
+  private baseUrl = 'https://visaback-ivory.vercel.app/';
 
   constructor(private http: HttpClient) {}
 
