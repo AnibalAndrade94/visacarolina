@@ -63,16 +63,17 @@ onSubmit(): void {
     };
 
     this.http.post('https://visaback-ivory.vercel.app/send-contacto', payload).subscribe({
-      next: () => {
-        alert('¡Tu mensaje fue enviado con éxito!');
-        this.contactForm.reset();
-        grecaptcha.reset(); // 👈 Resetea el captcha
-        this.captchaToken = '';
-      },
-      error: () => {
-        alert('Hubo un problema. Intenta de nuevo más tarde.');
-      }
-    });
+  next: () => {
+    alert('¡Tu mensaje fue enviado con éxito!');
+    this.contactForm.reset();
+    grecaptcha.reset();
+    this.captchaToken = '';
+  },
+  error: (error) => {
+    console.error('Error:', error);
+    alert('Hubo un problema. Intenta de nuevo más tarde.');
+  }
+});
   } else {
     this.contactForm.markAllAsTouched();
   }
