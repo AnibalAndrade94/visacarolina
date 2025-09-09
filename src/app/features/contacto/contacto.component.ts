@@ -62,7 +62,7 @@ onSubmit(): void {
       token: this.captchaToken // 👈 se incluye el token
     };
 
-    this.http.post('https://visaback-ivory.vercel.app/api/send-contacto', payload).subscribe({
+ this.http.post('https://visaback-ivory.vercel.app/api/send-contacto', payload).subscribe({
   next: () => {
     alert('¡Tu mensaje fue enviado con éxito!');
     this.contactForm.reset();
