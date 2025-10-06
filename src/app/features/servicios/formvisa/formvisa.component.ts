@@ -19,7 +19,8 @@ export class FormvisaComponent implements OnInit {
   originalOrder = () => 0;
   siteKey = '6LcgLEorAAAAAGK31QR006veAiVuKq3O5wfyhp4W';
   captchaToken: string = '';
-private api = environment.apiBaseUrl;
+  private api = environment.apiBaseUrl;
+
   constructor(private fb: FormBuilder, private http: HttpClient) {}
 
   ngOnInit(): void {
@@ -141,7 +142,7 @@ private api = environment.apiBaseUrl;
     this.captchaToken = token;
   }
 
- onSubmit() {
+  onSubmit() {
   // marca inválidos en consola (como ya haces)
   Object.keys(this.visaForm.controls).forEach(key => {
     const control = this.visaForm.get(key);
@@ -192,4 +193,39 @@ private api = environment.apiBaseUrl;
     }
   });
 }
+
+  onCheckChange(type: 'estudia' | 'trabaja') {
+    const estudia = this.visaForm.get('estudia')?.value;
+    const trabaja = this.visaForm.get('trabaja')?.value;
+
+    if (type === 'estudia') {
+      if (estudia) {
+        this.visaForm.get('nombreEscuela')?.enable();
+        this.visaForm.get('direccionEscuela')?.enable();
+      } else {
+        this.visaForm.get('nombreEscuela')?.disable();
+        this.visaForm.get('direccionEscuela')?.disable();
+        this.visaForm.get('nombreEscuela')?.reset();
+        this.visaForm.get('direccionEscuela')?.reset();
+      }
+    }
+
+    if (type === 'trabaja') {
+      if (trabaja) {
+        this.visaForm.get('nombreEmpresa')?.enable();
+        this.visaForm.get('puesto')?.enable();
+        this.visaForm.get('sueldo')?.enable();
+        this.visaForm.get('descripcionPuesto')?.enable();
+      } else {
+        this.visaForm.get('nombreEmpresa')?.disable();
+        this.visaForm.get('puesto')?.disable();
+        this.visaForm.get('sueldo')?.disable();
+        this.visaForm.get('descripcionPuesto')?.disable();
+        this.visaForm.get('nombreEmpresa')?.reset();
+        this.visaForm.get('puesto')?.reset();
+        this.visaForm.get('sueldo')?.reset();
+        this.visaForm.get('descripcionPuesto')?.reset();
+      }
+    }
+  }
 }
