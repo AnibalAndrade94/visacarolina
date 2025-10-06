@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
+import { environment } from '../../../environments/environment';
 declare var grecaptcha: any;
 declare global {
   interface Window {
@@ -18,7 +19,7 @@ export class FormvisaComponent implements OnInit {
   originalOrder = () => 0;
   siteKey = '6LcgLEorAAAAAGK31QR006veAiVuKq3O5wfyhp4W';
   captchaToken: string = '';
-
+private api = environment.apiBaseUrl;
   constructor(private fb: FormBuilder, private http: HttpClient) {}
 
   ngOnInit(): void {
@@ -140,34 +141,41 @@ export class FormvisaComponent implements OnInit {
     this.captchaToken = token;
   }
 
-  onSubmit() {
+ onSubmit() {
+  // marca inválidos en consola (como ya haces)
+  Object.keys(this.visaForm.controls).forEach(key => {
+    const control = this.visaForm.get(key);
+    if (control?.invalid) console.log('Campo inválido:', key, control.errors);
+  });
 
-    Object.keys(this.visaForm.controls).forEach(key => {
-  const control = this.visaForm.get(key);
-  if (control?.invalid) {
-    console.log('Campo inválido:', key, control.errors);
+  if (!this.captchaToken) {
+    alert('Por favor, completa el reCAPTCHA.');
+    return;
   }
-});
-    console.log('se está enviando correo',this.visaForm);
-    console.log('es valido?', this.visaForm.valid);
 
-    if (!this.captchaToken) {
-      alert('Por favor, completa el reCAPTCHA.');
-      return;
-    }
+  if (!this.visaForm.valid) {
+    this.visaForm.markAllAsTouched();
+    return;
+  }
 
-    if (this.visaForm.valid) {
+  // (a) valida captcha en backend (si RECAPTCHA_SECRET ya está listo)
+  this.http.post(`${this.api}/api/verify-captcha`, { token: this.captchaToken }).subscribe({
+    next: (_captchaOk) => {
+      // (b) arma payload y envía el formulario
       const payload = {
         ...this.visaForm.value,
         token: this.captchaToken
       };
 
-      this.http.post('https://visaback-ivory.vercel.app/api/send', payload).subscribe({
+      // usa el endpoint que prefieras:
+      // - `${this.api}/api/form-visa-americana`  (si es ese form)
+      // - `${this.api}/api/send`                 (si es el genérico)
+      this.http.post(`${this.api}/api/form-visa-americana`, payload).subscribe({
         next: (res) => {
           console.log('Formulario enviado exitosamente', res);
           alert('¡Información enviada!');
           this.visaForm.reset();
-          grecaptcha.reset();
+          if (typeof grecaptcha !== 'undefined') grecaptcha.reset();
           this.captchaToken = '';
         },
         error: (err) => {
@@ -175,43 +183,13 @@ export class FormvisaComponent implements OnInit {
           alert('Hubo un error al enviar. Intenta más tarde.');
         }
       });
-    } else {
-      this.visaForm.markAllAsTouched();
+    },
+    error: (err) => {
+      console.error('Captcha inválido:', err);
+      alert('Validación de reCAPTCHA falló. Intenta de nuevo.');
+      if (typeof grecaptcha !== 'undefined') grecaptcha.reset();
+      this.captchaToken = '';
     }
-  }
-
-  onCheckChange(type: 'estudia' | 'trabaja') {
-    const estudia = this.visaForm.get('estudia')?.value;
-    const trabaja = this.visaForm.get('trabaja')?.value;
-
-    if (type === 'estudia') {
-      if (estudia) {
-        this.visaForm.get('nombreEscuela')?.enable();
-        this.visaForm.get('direccionEscuela')?.enable();
-      } else {
-        this.visaForm.get('nombreEscuela')?.disable();
-        this.visaForm.get('direccionEscuela')?.disable();
-        this.visaForm.get('nombreEscuela')?.reset();
-        this.visaForm.get('direccionEscuela')?.reset();
-      }
-    }
-
-    if (type === 'trabaja') {
-      if (trabaja) {
-        this.visaForm.get('nombreEmpresa')?.enable();
-        this.visaForm.get('puesto')?.enable();
-        this.visaForm.get('sueldo')?.enable();
-        this.visaForm.get('descripcionPuesto')?.enable();
-      } else {
-        this.visaForm.get('nombreEmpresa')?.disable();
-        this.visaForm.get('puesto')?.disable();
-        this.visaForm.get('sueldo')?.disable();
-        this.visaForm.get('descripcionPuesto')?.disable();
-        this.visaForm.get('nombreEmpresa')?.reset();
-        this.visaForm.get('puesto')?.reset();
-        this.visaForm.get('sueldo')?.reset();
-        this.visaForm.get('descripcionPuesto')?.reset();
-      }
-    }
-  }
+  });
+}
 }
