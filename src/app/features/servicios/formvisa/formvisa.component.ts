@@ -17,7 +17,7 @@ declare global {
 export class FormvisaComponent implements OnInit {
   visaForm!: FormGroup;
   originalOrder = () => 0;
-  siteKey = '6LcQ5t0rAAAAADK_TQwSNQRbM2OF_a6CHe7u1usI';
+  siteKey = '6LeDZuArAAAAAMQIbKtQJ8V60ePbrjz4VTlQP9Oj'; 
   captchaToken: string = '';
   private api = environment.apiBaseUrl;
 
