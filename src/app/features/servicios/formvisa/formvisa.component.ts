@@ -171,7 +171,7 @@ export class FormvisaComponent implements OnInit {
       // usa el endpoint que prefieras:
       // - `${this.api}/api/form-visa-americana`  (si es ese form)
       // - `${this.api}/api/send`                 (si es el genérico)
-      this.http.post('https://visaback-production.up.railway.app/api/send', payload).subscribe({
+      this.http.post(`${this.api}/api/form-visa-americana`, payload).subscribe({
         next: (res) => {
           console.log('Formulario enviado exitosamente', res);
           alert('¡Información enviada!');
