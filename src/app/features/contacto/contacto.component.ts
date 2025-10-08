@@ -2,7 +2,7 @@ import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
-
+import { AnalyticsService } from 'src/app/services/analytics.service';
 declare var grecaptcha: any;
 
 @Component({
@@ -18,7 +18,7 @@ export class ContactoComponent implements OnInit, AfterViewInit {
 
   private api = environment.apiBaseUrl;
 
-  constructor(private fb: FormBuilder, private http: HttpClient) {
+  constructor(private fb: FormBuilder, private http: HttpClient, public analytics: AnalyticsService) {
     this.contactForm = this.fb.group({
       nombre: ['', Validators.required],
       correo: ['', [Validators.required, Validators.email]],
@@ -65,6 +65,7 @@ export class ContactoComponent implements OnInit, AfterViewInit {
         this.http.post(`${this.api}/api/send-contacto`, payload).subscribe({
           next: () => {
             alert('¡Tu mensaje fue enviado con éxito!');
+            this.analytics.logEvent('form_submit', { form: 'contacto', status: 'success' });
             this.contactForm.reset();
             if (typeof grecaptcha !== 'undefined') {
               try { grecaptcha.reset(); } catch {}

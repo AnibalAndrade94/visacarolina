@@ -2,7 +2,7 @@ import { Component, Input, OnInit, AfterViewInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
-
+import { AnalyticsService } from 'src/app/services/analytics.service';
 declare var grecaptcha: any;
 
 @Component({
@@ -27,7 +27,9 @@ export class Formulario2Component implements OnInit, AfterViewInit {
 
   private api = environment.apiBaseUrl;
 
-  constructor(private fb: FormBuilder, private http: HttpClient) {}
+  constructor(private fb: FormBuilder, private http: HttpClient, public analytics: AnalyticsService) {
+    this.analytics = analytics;
+  }
 
   ngOnInit(): void {
     this.visaForm = this.fb.group({
@@ -113,6 +115,7 @@ export class Formulario2Component implements OnInit, AfterViewInit {
             this.enviado = true;
             this.error = false;
             alert('¡Información enviada!');
+            this.analytics.logEvent('form_submit', { form: 'fomr2', status: 'success' });
             this.visaForm.reset();
             if (typeof grecaptcha !== 'undefined') {
               try { grecaptcha.reset(); } catch {}
