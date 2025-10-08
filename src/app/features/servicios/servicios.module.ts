@@ -9,6 +9,9 @@ import { FormvisaComponent } from './formvisa/formvisa.component';
 import { PasapportComponent } from '../pasapport/pasapport.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { EtaBritanicaComponent } from './eta-britanica/eta-britanica.component';
+import { PasaporteamericanoComponent } from './pasaporteamericano/pasaporteamericano.component';
+import { FormsModule } from '@angular/forms';        // 👈 agrega esto
+
 @NgModule({
   declarations: [
     VisasComponent,
@@ -17,10 +20,12 @@ import { EtaBritanicaComponent } from './eta-britanica/eta-britanica.component';
     EtaCanadaComponent,
     FormvisaComponent,
     EtaBritanicaComponent,
+    PasaporteamericanoComponent,
   ],
   imports: [
-    CommonModule,
+     CommonModule,
     ServiciosRoutingModule,
+    FormsModule,               // 👈 necesario para [(ngModel)]
     ReactiveFormsModule
   ]
 })

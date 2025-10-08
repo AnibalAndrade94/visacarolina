@@ -1,0 +1,185 @@
+<div class="container">
+
+    <!-- Título / Hero -->
+    <section class="titlebox">
+        <div class="card-blur">
+            <h1 class="boho bold600 fontsize2 spacing">Asesoría para Pasaporte Americano</h1>
+            <blockquote class="blockquote">
+                <p>
+                    ¿Necesitas sacar tu pasaporte de EE. UU. por primera vez o renovarlo? En <strong>VisaCarolina</strong> te guiamos paso a paso para presentar correctamente tu trámite <strong>DS-11</strong> o <strong>DS-82</strong>.
+                </p>
+            </blockquote>
+        </div>
+    </section>
+
+    <br>
+
+    <!-- ¿Qué incluye? -->
+    <section class="incluye-servicio">
+        <h2 class="tcolor bold600 spacing boho text-center">¿Qué incluye el servicio?</h2>
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <ul class="list-incluye">
+                    <li>Evaluación de elegibilidad para <strong>DS-11</strong> (primera vez / sin pasaporte vigente) o <strong>DS-82</strong> (renovación elegible).</li>
+                    <li>Llenado del formulario correspondiente (DS-11 o DS-82).</li>
+                    <li>Checklist personalizado de documentos y fotografías 2"×2".</li>
+                    <li>Guía para pago de tarifas y envío/entrega según indique el consulado.</li>
+                    <li>Preparación del paquete y agendado de cita cuando aplique.</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <p class="descripcion">
+        Nuestro objetivo es que tu trámite quede <strong>completo y sin errores</strong>. Tú te enfocas en tus planes y nosotros en tu papeleo.
+    </p>
+
+    <!-- Precios (ajusta si quieres mostrar montos) -->
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 d-flex justify-content-center">
+                <span class="badge-precio mayor">DS-11 (primera vez): desde $1,200 MXN</span>
+            </div>
+            <div class="col-md-4 d-flex justify-content-center">
+                <span class="badge-precio mayor">DS-82 (renovación): desde $1,000 MXN</span>
+            </div>
+            <div class="col-md-4 d-flex justify-content-center">
+                <span class="badge-precio menor">Menores: consulta requisitos</span>
+            </div>
+        </div>
+    </div>
+
+    <br>
+    <p class="descripcion">* El precio de asesoría <strong>no incluye</strong> las tarifas oficiales del pasaporte ni cargos consulares.</p>
+    <br>
+
+    <h2 class="tcolor bold600 spacing boho text-center">¿Cómo comenzamos?</h2>
+    <br>
+
+    <!-- Selector DS-11 / DS-82 + CTAs -->
+    <div class="row">
+        <div class="col-md-6">
+            <div class="row">
+                <h3 class="tcolor bold600 spacing boho text-center">Elige tu tipo de trámite</h3>
+            </div>
+            <div class="row">
+                <!-- Si usas Angular (FormsModule), habilita [(ngModel)] -->
+                <select class="form-select" [(ngModel)]="selectedType" name="tipoPasaporte" aria-label="Selecciona DS-11 o DS-82">
+          <option value="DS-11" selected>DS-11 (primera vez / sin pasaporte vigente)</option>
+          <option value="DS-82">DS-82 (renovación elegible)</option>
+        </select>
+                <small class="text-muted mt-2">
+          Si tu pasaporte está vigente o venció hace poco y no cambiaste datos principales, probablemente seas elegible a DS-82.
+        </small>
+            </div>
+
+            <div class="row mt-4">
+                <p class="descripcion">
+                    Escríbenos por WhatsApp para confirmar tu elegibilidad y agendarte.
+                </p>
+                <a class="btn btn-success" style="width:95%;" [href]="'https://wa.me/5214441776693?text=Hola%20VisaCarolina,%20quiero%20asesor%C3%ADa%20para%20pasaporte%20('+ (selectedType||'DS-11') +')' " target="_blank">Solicita tu asesoría</a>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="row">
+                <h3 class="tcolor bold600 spacing boho text-center">Llena el formulario ahora</h3>
+            </div>
+            <div class="row">
+                <p class="descripcion">
+                    Acelera el proceso. Llena nuestro formulario y te contactamos para revisar documentos y siguientes pasos.
+                </p>
+                <a class="btn btn-danger" style="width:95%;" [href]="'/servicios/formpasaporte?tipo=' + (selectedType||'DS-11')" target="_blank">Continuar con {{ (selectedType||'DS-11') }}</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Comparativa DS-11 vs DS-82 -->
+    <hr class="my-5" />
+    <section>
+        <h2 class="tcolor bold600 spacing boho text-center">¿DS-11 o DS-82?</h2>
+        <div class="row mt-4">
+            <div class="col-md-6">
+                <div class="card p-3 h-100">
+                    <h3 class="tcolor bold600 spacing boho">DS-11 (primera vez)</h3>
+                    <ul class="list-incluye">
+                        <li>Primera vez solicitando pasaporte o no cuentas con uno vigente.</li>
+                        <li>Cambios de datos significativos o pérdida/robo sin posibilidad de renovar por correo.</li>
+                        <li>Suele requerir <strong>cita en persona</strong> y evidencia de ciudadanía.</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card p-3 h-100">
+                    <h3 class="tcolor bold600 spacing boho">DS-82 (renovación)</h3>
+                    <ul class="list-incluye">
+                        <li>Renovación cuando cumples criterios de elegibilidad (pasaporte previo, en buen estado, fechas y datos).</li>
+                        <li>Proceso generalmente más simple.</li>
+                        <li>No siempre requiere presencia en ventanilla (según indicaciones consulares).</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQs -->
+    <hr class="my-5" />
+    <div class="faq-section mt-5">
+        <h2 class="text-success text-center mb-4">Preguntas frecuentes</h2>
+
+        <div class="accordion" id="faqAccordionPass">
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="pf1">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#pc1" aria-expanded="true" aria-controls="pc1">
+            ¿Cómo sé si me toca DS-11 o DS-82?
+          </button>
+                </h2>
+                <div id="pc1" class="accordion-collapse collapse show" aria-labelledby="pf1" data-bs-parent="#faqAccordionPass">
+                    <div class="accordion-body">
+                        Te orientamos con unas preguntas clave sobre tu pasaporte anterior, vigencia y cambios de datos. Así confirmamos tu elegibilidad antes de iniciar.
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="pf2">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#pc2" aria-expanded="false" aria-controls="pc2">
+            ¿Qué documentos necesito?
+          </button>
+                </h2>
+                <div id="pc2" class="accordion-collapse collapse" aria-labelledby="pf2" data-bs-parent="#faqAccordionPass">
+                    <div class="accordion-body">
+                        Varía según el caso, pero normalmente: evidencia de ciudadanía, identificación válida, fotografías 2”×2” y formularios completos. Te damos un checklist personalizado.
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="pf3">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#pc3" aria-expanded="false" aria-controls="pc3">
+            ¿Ustedes pagan las tarifas oficiales?
+          </button>
+                </h2>
+                <div id="pc3" class="accordion-collapse collapse" aria-labelledby="pf3" data-bs-parent="#faqAccordionPass">
+                    <div class="accordion-body">
+                        No. Nosotros brindamos asesoría y preparación del trámite; las tarifas del pasaporte se pagan directamente según indiquen las autoridades.
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="pf4">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#pc4" aria-expanded="false" aria-controls="pc4">
+            ¿Cuánto tarda el proceso?
+          </button>
+                </h2>
+                <div id="pc4" class="accordion-collapse collapse" aria-labelledby="pf4" data-bs-parent="#faqAccordionPass">
+                    <div class="accordion-body">
+                        Los tiempos dependen de la carga de la Sección Consular de EE. UU. y el método seleccionado. Te mantenemos informado y te ayudamos a evitar retrasos por errores.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
