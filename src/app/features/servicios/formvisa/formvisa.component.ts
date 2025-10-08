@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
+import { AnalyticsService } from 'src/app/services/analytics.service';
 declare var grecaptcha: any;
 declare global {
   interface Window {
@@ -20,8 +21,11 @@ export class FormvisaComponent implements OnInit {
   siteKey = '6LeDZuArAAAAAMQIbKtQJ8V60ePbrjz4VTlQP9Oj'; 
   captchaToken: string = '';
   private api = environment.apiBaseUrl;
+  analytics: AnalyticsService;
 
-  constructor(private fb: FormBuilder, private http: HttpClient) {}
+  constructor(private fb: FormBuilder, private http: HttpClient, analytics: AnalyticsService) {
+    this.analytics = analytics
+  }
 
   ngOnInit(): void {
     window['captchaResolved'] = (token: string) => {
@@ -175,6 +179,7 @@ export class FormvisaComponent implements OnInit {
         next: (res) => {
           console.log('Formulario enviado exitosamente', res);
           alert('¡Información enviada!');
+          this.analytics.logEvent('form_submit', { form: 'visa', status: 'success' });
           this.visaForm.reset();
           if (typeof grecaptcha !== 'undefined') grecaptcha.reset();
           this.captchaToken = '';
