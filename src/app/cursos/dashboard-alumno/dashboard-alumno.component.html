@@ -1,0 +1,41 @@
+<section class="py-5">
+    <div class="container">
+        <h1 class="text-center tcolor boho bold600 fontsize2 spacing mb-4">
+            Mis cursos
+        </h1>
+
+        <p class="text-center txtcolor mb-4">
+            Aquí verás todos los cursos que has adquirido en VisaCarolina Academy.
+        </p>
+
+        <div *ngIf="!cursosComprados.length" class="text-center">
+            <p class="txtcolor">
+                Aún no tienes cursos. Comienza con uno:
+            </p>
+            <a routerLink="/cursos/lista" class="btn btn-success">
+        Ver cursos disponibles
+      </a>
+        </div>
+
+        <div class="row g-4" *ngIf="cursosComprados.length">
+            <div class="col-md-4" *ngFor="let curso of cursosComprados">
+                <div class="card h-100 border-0 shadow-sm">
+                    <img *ngIf="curso.imagen" [src]="curso.imagen" class="card-img-top" alt="{{ curso.titulo }}">
+
+                    <div class="card-body text-center">
+                        <h3 class="boho bold700 spacing subcolor mb-2">
+                            {{ curso.titulo }}
+                        </h3>
+                        <p class="txtcolor">
+                            {{ curso.descripcion }}
+                        </p>
+
+                        <a [routerLink]="['/cursos', curso.slug, 'ver']" class="btn btn-success mt-3">
+              Entrar al curso
+            </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

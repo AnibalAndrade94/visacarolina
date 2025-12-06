@@ -1,0 +1,88 @@
+<section class="curso-detalle-section py-5">
+    <div class="container" *ngIf="curso">
+
+        <!-- Título y descripción -->
+        <div class="row align-items-center mb-5">
+            <div class="col-md-7">
+                <h1 class="brittany my-2 tcolor">
+                    {{ curso.titulo }}
+                </h1>
+
+                <h2 class="boho bold600 txtcolor mb-3" style="font-size: 1.6rem;">
+                    Aprende paso a paso con ejemplos reales
+                </h2>
+
+                <p class="txtcolor" style="font-size: 1.1rem;">
+                    {{ curso.descripcion }}
+                </p>
+
+                <!-- Etiqueta de precio -->
+                <div class="mt-4">
+                    <span class="badge-precio mayor">
+            ${{ curso.precio }} MXN
+          </span>
+                </div>
+
+                <!-- Botones de acción -->
+                <div class="mt-4 d-flex flex-wrap gap-3">
+                    <button class="btn btn-success" (click)="onComprar()">
+            Comprar curso
+          </button>
+
+                    <a *ngIf="curso.comprado" [routerLink]="['/cursos', curso.slug, 'ver']" class="btn btn-outline-success">
+            Ir al curso (ya lo tienes)
+          </a>
+                </div>
+            </div>
+
+            <!-- Imagen del curso -->
+            <div class="col-md-5 text-center">
+                <div class="curso-detalle-img-wrapper">
+                    <img *ngIf="curso.imagen" [src]="curso.imagen" [alt]="curso.titulo" class="img-fluid rounded shadow-sm" />
+                </div>
+            </div>
+        </div>
+
+        <!-- Contenido del curso: módulos y lecciones -->
+        <div class="row">
+            <div class="col-12">
+                <h3 class="boho bold700 spacing subcolor mb-3">
+                    ¿Qué vas a aprender en este curso?
+                </h3>
+
+                <p class="txtcolor mb-4">
+                    El curso está organizado en módulos cortos, pensados para que avances a tu ritmo y puedas regresar a las lecciones que más necesites.
+                </p>
+            </div>
+        </div>
+
+        <div class="row g-4">
+            <div class="col-md-6" *ngFor="let modulo of curso.modulos">
+                <div class="card h-100 border-0 shadow-sm modulo-card">
+                    <div class="card-body">
+                        <h4 class="boho bold700 spacing subcolor mb-2">
+                            {{ modulo.titulo }}
+                        </h4>
+
+                        <ul class="list-unstyled mb-0">
+                            <li class="txtcolor mb-1" *ngFor="let leccion of modulo.lecciones">
+                                • {{ leccion.titulo }}
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CTA final -->
+        <div class="text-center mt-5">
+            <p class="txtcolor mb-3" style="font-size: 1.1rem;">
+                ¿Tienes dudas si este curso es para ti? Escríbenos y revisamos tu caso.
+            </p>
+            <a href="https://wa.me/52TU_NUMERO?text=Hola%20quiero%20saber%20si%20este%20curso%20es%20para%20mi" class="btn btn-outline-success">
+        Preguntar por WhatsApp
+      </a>
+        </div>
+
+    </div>
+</section>

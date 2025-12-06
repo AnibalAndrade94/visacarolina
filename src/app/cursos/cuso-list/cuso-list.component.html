@@ -1,0 +1,48 @@
+<section class="py-5 curso-list-container">
+    <div class="container">
+
+        <h1 class="text-center tcolor boho bold600 fontsize2 spacing mb-4">
+            Todos los cursos
+        </h1>
+
+        <p class="text-center txtcolor mb-5" style="font-size: 1.2rem;">
+            Aprende a tu ritmo: Visa Americana, Visa Canadiense y eTA Canadiense.
+        </p>
+
+        <div class="row g-4">
+            <div class="col-md-4" *ngFor="let curso of cursos">
+                <div class="card curso-card h-100 border-0 shadow-sm">
+
+                    <img *ngIf="curso.imagen" [src]="curso.imagen" class="card-img-top curso-img" [alt]="curso.titulo">
+
+                    <div class="card-body text-center">
+
+                        <h3 class="boho bold700 spacing subcolor mb-2">
+                            {{ curso.titulo }}
+                        </h3>
+
+                        <p class="txtcolor" style="min-height: 75px;">
+                            {{ curso.descripcion }}
+                        </p>
+
+                        <span class="badge-precio mayor d-inline-block my-3">
+              ${{ curso.precio }} MXN
+            </span>
+
+                        <div class="d-flex flex-column gap-2">
+                            <a [routerLink]="['/cursos', curso.slug]" class="btn btn-success">
+                Ver detalles
+              </a>
+
+                            <a [routerLink]="['/cursos', curso.slug, 'ver']" class="btn btn-outline-success" *ngIf="curso.comprado">
+                Ir al curso
+              </a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>

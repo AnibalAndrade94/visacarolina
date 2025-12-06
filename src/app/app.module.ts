@@ -19,6 +19,9 @@ import { ReferidosComponent } from './features/referidos/referidos.component';
 import { FormularioComponent } from './formulario/formulario.component';
 import { Formulario2Component } from './features/formulario2/formulario2.component';
 import { AdminCodigosComponent } from './features/admin-codigos/admin-codigos.component';
+import { LandingCursosComponent } from './cursos/landing-cursos/landing-cursos.component';
+import { LoginComponent } from './auth/login/login.component';
+import { RegisterComponent } from './auth/register/register.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +36,10 @@ import { AdminCodigosComponent } from './features/admin-codigos/admin-codigos.co
     ReferidosComponent,
     FormularioComponent,
     Formulario2Component,
-    AdminCodigosComponent
+    AdminCodigosComponent,
+    LoginComponent,
+    RegisterComponent,
+    
   ],
   imports: [
     BrowserModule,

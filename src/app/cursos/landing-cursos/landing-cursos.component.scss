@@ -1,0 +1,206 @@
+/* ---------------------- */
+
+
+/*  Global Landing Style  */
+
+
+/* ---------------------- */
+
+.landing-container {
+    width: 100%;
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+}
+
+
+/* ---------- Hero Section ---------- */
+
+.landing-hero {
+    text-align: center;
+    padding: 5rem 1rem;
+    background: #efe8e7;
+}
+
+.landing-hero h1 {
+    font-family: 'Brittany', serif;
+    font-size: 3rem;
+    color: #6D5352;
+    margin-bottom: 1rem;
+}
+
+.landing-hero p {
+    font-family: 'Boho', serif;
+    font-size: 1.3rem;
+    color: #6D5352;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.landing-cta {
+    margin-top: 2rem;
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+
+
+/* Botones con tu paleta */
+
+.btn-vc-primary {
+    padding: 0.9rem 2rem;
+    background-color: #c18b89;
+    color: #fff;
+    border-radius: 2rem;
+    border: none;
+    font-family: 'Boho';
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.btn-vc-primary:hover {
+    background-color: #b37573;
+}
+
+.btn-vc-secondary {
+    padding: 0.9rem 2rem;
+    background-color: #ddc5bb;
+    color: #6D5352;
+    border-radius: 2rem;
+    border: none;
+    font-family: 'Boho';
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.btn-vc-secondary:hover {
+    background-color: #c8afa4;
+}
+
+
+/* ---------- Section Titles ---------- */
+
+.landing-section-title {
+    text-align: center;
+    font-family: 'Jojoba', serif;
+    font-size: 2.2rem;
+    color: #6D5352;
+    margin: 4rem 0 2rem 0;
+}
+
+
+/* ---------- Grid Cards ---------- */
+
+.landing-grid {
+    display: grid;
+    gap: 2rem;
+}
+
+@media (min-width: 768px) {
+    .landing-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+.landing-card {
+    background-color: #f6f5ef;
+    padding: 2rem;
+    border-radius: 1.2rem;
+    border: 2px solid #ddc5bb;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.landing-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.06);
+}
+
+.landing-card h3 {
+    font-family: 'Brittany', serif;
+    font-size: 1.7rem;
+    color: #6D5352;
+    margin-bottom: 0.6rem;
+}
+
+.landing-card p {
+    font-family: 'Boho', serif;
+    color: #6D5352;
+    line-height: 1.5rem;
+    font-size: 1.1rem;
+}
+
+
+/* ---------------- FAQ ---------------- */
+
+.faq-item {
+    margin-bottom: 1.8rem;
+    background: #f6f5ef;
+    padding: 1.5rem;
+    border-radius: 1rem;
+    border: 2px solid #ddc5bb;
+}
+
+.faq-item h4 {
+    font-family: 'Jojoba', serif;
+    font-size: 1.3rem;
+    color: #6D5352;
+}
+
+.faq-item p {
+    font-family: 'Boho', serif;
+    color: #6D5352;
+    margin-top: 0.5rem;
+}
+
+
+/* ---------- Closing CTA ---------- */
+
+.landing-closing {
+    text-align: center;
+    padding: 4rem 1rem;
+    background-color: #efe8e7;
+}
+
+.landing-closing h2 {
+    font-family: 'Brittany';
+    font-size: 2.5rem;
+    color: #6D5352;
+}
+
+.landing-closing p {
+    font-family: 'Boho';
+    color: #6D5352;
+    font-size: 1.2rem;
+    max-width: 750px;
+    margin: 1rem auto;
+}
+
+.landing-closing .actions {
+    margin-top: 2rem;
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.hero-academy {
+    position: relative;
+    min-height: 70vh;
+    background-image: url('/assets/fondocursos.png'); // opcional, o un color liso
+    background-size: cover;
+    background-position: center;
+}
+
+.hero-academy .overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.25); // un poquito de oscurecido si hay imagen
+}
+
+.hero-academy .card-blur {
+    background: rgba(239, 232, 231, 0.30);
+    border-radius: 1.5rem;
+    padding: 3rem 2rem;
+    backdrop-filter: blur(6px);
+}

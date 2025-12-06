@@ -1,6 +1,13 @@
+/* ----------------------------------------------------- */
+
+
+/*                     TIPOGRAFÍAS                      */
+
+
+/* ----------------------------------------------------- */
+
 @font-face {
     font-family: 'Boho';
-    /* El nombre que vas a usar */
     src: url('assets/fonts/BohoStyle.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
@@ -8,7 +15,6 @@
 
 @font-face {
     font-family: 'Brittany';
-    /* El nombre que vas a usar */
     src: url('assets/fonts/BrittanySignature.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
@@ -16,7 +22,6 @@
 
 @font-face {
     font-family: 'Jojoba';
-    /* El nombre que vas a usar */
     src: url('assets/fonts/Jojoba.otf') format('truetype');
     font-weight: normal;
     font-style: normal;
@@ -24,29 +29,28 @@
 
 @font-face {
     font-family: 'Welcome';
-    /* El nombre que vas a usar */
     src: url('assets/fonts/WelcomeSeptember.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
 }
 
 
-/* fonts */
+/* helpers de fonts */
 
 .brittany {
-    font-family: 'brittany', serif;
+    font-family: 'Brittany', serif;
 }
 
 .jojoba {
-    font-family: 'jojoba', serif;
+    font-family: 'Jojoba', serif;
 }
 
 .welcome {
-    font-family: 'welcome', serif;
+    font-family: 'Welcome', serif;
 }
 
 .boho {
-    font-family: 'boho', serif;
+    font-family: 'Boho', serif;
 }
 
 .bold600 {
@@ -70,30 +74,153 @@
 }
 
 
-/* colors */
+/* ----------------------------------------------------- */
+
+
+/*                     PALETA PREMIUM                    */
+
+
+/*               (Embajada USA & Canadá)                */
+
+
+/* ----------------------------------------------------- */
+
+
+/* Azul bandera – títulos principales, acentos fuertes */
 
 .tcolor {
-    color: #c18b89;
+    color: #0E2A47;
 }
+
+
+/* Rojo intenso – subtítulos, links destacados */
 
 .subcolor {
-    color: #cda09b;
+    color: #C0182C;
 }
+
+
+/* Dorado suave – acentos elegantes, bordes premium */
 
 .pcolor {
-    color: #ddc5bb;
+    color: #C8A772;
 }
+
+
+/* Gris oscuro profesional – texto principal */
 
 .txtcolor {
-    color: #6D5352;
+    color: #2E2E2E;
 }
+
+
+/* Blanco puro – texto sobre fondos oscuros */
 
 .fcolor {
-    color: #efe8e7;
+    color: #FFFFFF;
 }
 
+
+/* Gris diplomático – fondos suaves, secciones claras */
+
 .f2color {
-    color: #C0C28A;
+    color: #C4C6C9;
+}
+
+
+/* Fondo general del sitio */
+
+body,
+html {
+    background-color: #F5F5F7 !important;
+    min-height: 100vh;
+}
+
+
+/* ----------------------------------------------------- */
+
+
+/*                       BOTONES VC                      */
+
+
+/* ----------------------------------------------------- */
+
+.btn-vc-primary {
+    background-color: #0E2A47;
+    color: #FFFFFF;
+    border-radius: 999px;
+    border: 2px solid #0E2A47;
+    padding: 0.6rem 1.6rem;
+    font-family: 'Boho';
+    font-weight: 600;
+    letter-spacing: 0.05rem;
+    transition: 0.3s ease;
+}
+
+.btn-vc-primary:hover {
+    background-color: #FFFFFF;
+    color: #0E2A47;
+}
+
+.btn-vc-secondary {
+    background-color: #C0182C;
+    color: #FFFFFF;
+    border-radius: 999px;
+    border: 2px solid #C0182C;
+    padding: 0.6rem 1.6rem;
+    font-family: 'Boho';
+    font-weight: 600;
+    letter-spacing: 0.05rem;
+    transition: 0.3s ease;
+}
+
+.btn-vc-secondary:hover {
+    background-color: #FFFFFF;
+    color: #C0182C;
+}
+
+
+/* ----------------------------------------------------- */
+
+
+/*                FONDOS Y AYUDAS DE COLOR               */
+
+
+/* ----------------------------------------------------- */
+
+.bg-vc-primary {
+    background-color: #0E2A47 !important;
+    color: #FFFFFF;
+}
+
+.bg-vc-secondary {
+    background-color: #C0182C !important;
+    color: #FFFFFF;
+}
+
+.bg-vc-soft {
+    background-color: #F5F5F7 !important;
+}
+
+.text-vc-primary {
+    color: #0E2A47 !important;
+}
+
+.text-vc-secondary {
+    color: #C0182C !important;
+}
+
+
+/* ----------------------------------------------------- */
+
+
+/*                 BADGES Y ELEMENTOS UI                 */
+
+
+/* ----------------------------------------------------- */
+
+.text-black {
+    color: #000000 !important;
 }
 
 .badge-precio {
@@ -102,26 +229,21 @@
     font-size: 1.5rem;
     font-weight: 600;
     letter-spacing: 0.1rem;
-    background-color: #f6f5ef;
-    border: 2px solid;
+    background-color: #FFFFFF;
+    border: 2px solid #C8A772;
+    color: #0E2A47;
     transition: transform 0.3s ease;
     &.mayor {
-        background-color: #d98e60;
-        border-color: #d98e60;
-        color: #fff;
+        background-color: #C0182C;
+        border-color: #C0182C;
+        color: #FFFFFF;
     }
     &.menor {
-        background-color: #3c5a6e;
-        border-color: #3c5a6e;
-        color: #fff;
+        background-color: #0E2A47;
+        border-color: #0E2A47;
+        color: #FFFFFF;
     }
     &:hover {
         transform: scale(1.05);
     }
-}
-
-body,
-html {
-    background-color: #efe8e7!important;
-    min-height: 100vh;
 }

@@ -1,6 +1,6 @@
 .hero {
     position: relative;
-    background-image: url('/assets/hero.png'); // Puedes poner una imagen bonita de viajes
+    background-image: url('/assets/hero.jpg'); // Puedes poner una imagen bonita de viajes
     background-size: cover;
     background-position: center;
     height: 80vh;
@@ -50,7 +50,7 @@
 }
 
 .testimonios {
-    background-image: url('/assets/testimonios.png');
+    background-image: url('/assets/testimonios.jpeg');
     background-size: cover;
     background-position: center center;
     background-repeat: no-repeat;
@@ -58,11 +58,11 @@
     blockquote {
         font-family: 'Playfair Display', serif;
         font-size: 1.1rem;
-        color: #efe8e7;
+        color: #000000;
     }
     .blockquote-footer {
         font-size: 0.9rem;
-        color: #efe8e7;
+        color: #000000;
     }
 }
 

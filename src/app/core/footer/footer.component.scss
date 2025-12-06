@@ -1,23 +1,59 @@
 .footer {
     font-family: 'Playfair Display', serif;
     font-size: 0.9rem;
-    background-color: #8AC29D;
+    background-color: #0E2A47;
+    /* Azul bandera */
+    color: #FFFFFF !important;
+    /* Todo texto blanco por default */
+    padding: 2rem 0;
 }
+
+
+/* Sobrescribimos text-muted y small dentro del footer */
+
+.footer .text-muted,
+.footer .small,
+.footer p,
+.footer h6 {
+    color: #FFFFFF !important;
+}
+
+
+/* Links tipo botón */
 
 .link-button {
-    text-decoration: none; // Quita el subrayado
-    color: inherit; // Hereda el color del texto padre (o cámbialo a otro, como `#000` para negro)
-    font-weight: bold; // Opcional, si quieres que se vea más sólido
+    text-decoration: none;
+    color: #FFFFFF !important;
+    font-weight: bold;
     display: inline-flex;
     align-items: center;
-    gap: 5px; // Espacio entre el ícono y el texto
+    gap: 5px;
+    transition: 0.3s ease;
+    &:hover {
+        color: #C8A772 !important;
+        /* Dorado premium */
+        text-decoration: none;
+        transform: translateX(2px);
+    }
 }
 
-.link-button:hover {
-    text-decoration: none; // También evita subrayado al pasar el mouse
-    color: inherit;
+
+/* Link de Aviso de privacidad */
+
+.footer a.txtcolor {
+    color: #FFFFFF !important;
+    &:hover {
+        color: #C8A772 !important;
+    }
 }
 
-hr {
-    border-top: 4px solid black;
+
+/* Línea divisora elegante dentro del footer */
+
+.footer hr {
+    border-top: 2px solid #C8A772;
+    /* Dorado suave */
+    opacity: 0.8;
+    width: 80%;
+    margin: 1.2rem auto;
 }
