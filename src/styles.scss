@@ -247,3 +247,50 @@ html {
         transform: scale(1.05);
     }
 }
+
+.hero {
+    position: relative;
+    height: 80vh;
+    padding: 2rem;
+    color: #ffffff;
+    background: url('assets/img/hero.jpg') center center / cover no-repeat;
+}
+
+.hero .overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.45);
+    /* oscurece un poco la foto */
+    z-index: 0;
+}
+
+.hero .card-blur {
+    position: relative;
+    z-index: 1;
+}
+
+.hero h1,
+.hero p {
+    color: #ffffff;
+    /* texto claro sobre fondo oscuro */
+}
+
+
+/* =====================  TESTIMONIOS  ===================== */
+
+.testimonios {
+    background: url('assets/img/testimonios.jpeg') center center / cover no-repeat;
+    border-radius: 1rem;
+}
+
+.testimonios .card-blur {
+    background: rgba(255, 255, 255, 0.85);
+    border-radius: 1rem;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+}
+
+.testimonios .txtcolor,
+.testimonios .blockquote-footer {
+    color: #000000;
+}
