@@ -15,9 +15,12 @@ type LocationPin = {
   styleUrls: ['./embassy-map.component.scss']
 })
 export class EmbassyMapComponent implements AfterViewInit{
+
+
 constructor(@Inject(PLATFORM_ID) private platformId: Object) {}
 
   // Embajada + 9 consulados (por ciudad; coords aprox. al centro)
+  
   private pins: LocationPin[] = [
     { name: 'Embajada de EE.UU.', city: 'Ciudad de México', lat: 19.4326, lng: -99.1332, type: 'Embajada' },
     { name: 'Consulado', city: 'Ciudad Juárez', lat: 31.6904, lng: -106.4245, type: 'Consulado' },
@@ -35,6 +38,11 @@ constructor(@Inject(PLATFORM_ID) private platformId: Object) {}
     if (!isPlatformBrowser(this.platformId)) return; // importante si usas SSR
 
     const L = await import('leaflet');
+L.Icon.Default.mergeOptions({
+    iconRetinaUrl: 'assets/leaflet/marker-icon-2x.png',
+    iconUrl: 'assets/leaflet/marker-icon.png',
+    shadowUrl: 'assets/leaflet/marker-shadow.png',
+  });
 
     const map = L.map('usEmbassyMap', { scrollWheelZoom: false }).setView([23.7, -102.5], 5);
 
