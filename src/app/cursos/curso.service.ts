@@ -26,7 +26,7 @@ export class CursoService {
             {
               id: 'intro',
               titulo: 'Cómo funciona el proceso de visa americana',
-              videoUrl: 'https://URL-DE-TU-VIDEO'
+              videoUrl: 'https://www.youtube.com/embed/qh3BUYK2k0E'
             }
           ]
         },
@@ -36,12 +36,12 @@ export class CursoService {
             {
               id: 'ds160-1',
               titulo: 'Crear tu cuenta DS-160',
-              videoUrl: 'https://URL-DE-TU-VIDEO'
+              videoUrl: 'https://www.youtube.com/embed/qh3BUYK2k0E'
             },
             {
               id: 'ds160-2',
               titulo: 'Llenado profesional del DS-160',
-              videoUrl: 'https://URL-DE-TU-VIDEO'
+              videoUrl: 'https://www.youtube.com/embed/qh3BUYK2k0E'
             }
           ]
         },
@@ -51,12 +51,12 @@ export class CursoService {
             {
               id: 'citas-1',
               titulo: 'Agendar VAC y Consulado',
-              videoUrl: 'https://URL-DE-TU-VIDEO'
+              videoUrl: 'https://www.youtube.com/embed/qh3BUYK2k0E'
             },
             {
               id: 'citas-2',
               titulo: 'Preguntas más comunes en la entrevista',
-              videoUrl: 'https://URL-DE-TU-VIDEO'
+              videoUrl: 'https://www.youtube.com/embed/qh3BUYK2k0E'
             }
           ]
         }
@@ -82,7 +82,7 @@ export class CursoService {
             {
               id: 'trv-intro',
               titulo: 'Cómo funciona IRCC y qué revisan los oficiales',
-              videoUrl: 'https://URL-DE-TU-VIDEO'
+              videoUrl: 'https://www.youtube.com/embed/qh3BUYK2k0E'
             }
           ]
         },
@@ -92,12 +92,12 @@ export class CursoService {
             {
               id: 'imm-1',
               titulo: 'Cuestionario para determinar elegibilidad',
-              videoUrl: 'https://URL-DE-TU-VIDEO'
+              videoUrl: 'https://www.youtube.com/embed/qh3BUYK2k0E'
             },
             {
               id: 'imm-2',
               titulo: 'Cómo llenar el formulario IMM5257 correctamente',
-              videoUrl: 'https://URL-DE-TU-VIDEO'
+              videoUrl: 'https://www.youtube.com/embed/qh3BUYK2k0E'
             }
           ]
         },
@@ -107,12 +107,12 @@ export class CursoService {
             {
               id: 'bio-1',
               titulo: 'Qué hacer después de enviar tu solicitud',
-              videoUrl: 'https://URL-DE-TU-VIDEO'
+              videoUrl: 'https://www.youtube.com/embed/qh3BUYK2k0E'
             },
             {
               id: 'bio-2',
               titulo: 'Carta de aprobación, passport request y tiempos',
-              videoUrl: 'https://URL-DE-TU-VIDEO'
+              videoUrl: 'https://www.youtube.com/embed/qh3BUYK2k0E'
             }
           ]
         }
@@ -138,7 +138,7 @@ export class CursoService {
             {
               id: 'eta-1',
               titulo: 'Qué es la eTA y cómo funciona',
-              videoUrl: 'https://URL-DE-TU-VIDEO'
+              videoUrl: 'https://www.youtube.com/embed/qh3BUYK2k0E'
             }
           ]
         },
@@ -148,12 +148,12 @@ export class CursoService {
             {
               id: 'eta-2',
               titulo: 'Llenado paso a paso',
-              videoUrl: 'https://URL-DE-TU-VIDEO'
+              videoUrl: 'https://www.youtube.com/embed/qh3BUYK2k0E'
             },
             {
               id: 'eta-3',
               titulo: 'Errores comunes del pasaporte que causan rechazo',
-              videoUrl: 'https://URL-DE-TU-VIDEO'
+              videoUrl: 'https://www.youtube.com/embed/qh3BUYK2k0E'
             }
           ]
         },
@@ -163,7 +163,7 @@ export class CursoService {
             {
               id: 'eta-4',
               titulo: 'Qué hacer si se va a revisión o es rechazada',
-              videoUrl: 'https://URL-DE-TU-VIDEO'
+              videoUrl: 'https://www.youtube.com/embed/qh3BUYK2k0E'
             }
           ]
         }

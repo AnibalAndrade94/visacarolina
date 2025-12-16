@@ -22,6 +22,7 @@ import { AdminCodigosComponent } from './features/admin-codigos/admin-codigos.co
 import { LandingCursosComponent } from './cursos/landing-cursos/landing-cursos.component';
 import { LoginComponent } from './auth/login/login.component';
 import { RegisterComponent } from './auth/register/register.component';
+import { EmbassyMapComponent } from './core/embassy-map/embassy-map.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { RegisterComponent } from './auth/register/register.component';
     AdminCodigosComponent,
     LoginComponent,
     RegisterComponent,
+    EmbassyMapComponent,
     
   ],
   imports: [
