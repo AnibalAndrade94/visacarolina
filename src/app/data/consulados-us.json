@@ -1,0 +1,146 @@
+{
+    "updatedAt": "2025-12-20",
+    "items": [{
+            "id": "us-emb-mx",
+            "name": "Embajada de EE.UU. en México",
+            "city": "Ciudad de México",
+            "state": "CDMX",
+            "type": "Embajada",
+            "address": "Ciudad de México (revisa ubicación oficial en el sitio)",
+            "phone": "55 2579 2000",
+            "website": "https://mx.usembassy.gov/es/",
+            "services": ["Visas", "Servicios a ciudadanos de EE.UU.", "Información consular"],
+            "mapUrl": "https://www.google.com/maps?q=Embajada+de+Estados+Unidos+en+Mexico",
+            "coordinates": { "lat": 19.445889, "lng": -99.206776 }
+        },
+        {
+            "id": "us-cons-cdjuarez",
+            "name": "Consulado General de EE.UU. - Ciudad Juárez",
+            "city": "Ciudad Juárez",
+            "state": "Chihuahua",
+            "type": "Consulado",
+            "address": "Paseo de la victoria #3650, Fracc. Partido Senecú, Ciudad Juarez, Chihuahua, México, CP 32543",
+            "phone": "(+52) 656-227-3000",
+            "website": "https://mx.usembassy.gov/es/visas-es/u-s-embassy-mexico-city-es/u-s-consulate-general-ciudad-juarez-es/",
+            "services": ["Visas"],
+            "mapUrl": "https://www.google.com/maps?q=Consulado+General+de+Estados+Unidos+en+Ciudad+Juarez",
+            "coordinates": { "lat": 31.6905291, "lng": -106.4043051 }
+        },
+        {
+            "id": "us-cons-gdl",
+            "name": "Consulado General de EE.UU. - Guadalajara",
+            "city": "Guadalajara",
+            "state": "Jalisco",
+            "type": "Consulado",
+            "address": "Manuel Acuña 3410, Col. Monraz, Guadalajara, Jalisco, México",
+            "phone": "(+52) 33 3111-7800",
+            "website": "https://mx.usembassy.gov/es/",
+            "services": ["Visas"],
+            "mapUrl": "https://www.google.com/maps?q=Consulado+General+de+Estados+Unidos+en+Guadalajara",
+            "coordinates": { "lat": 20.701319, "lng": -103.4099212 }
+        },
+        {
+            "id": "us-cons-hermosillo",
+            "name": "Consulado General de EE.UU. - Hermosillo",
+            "city": "Hermosillo",
+            "state": "Sonora",
+            "type": "Consulado",
+            "address": "Blvd. Navarrete 291 Colonia Raquet Club C.P. 83204 Hermosillo, Sonora, Mexico",
+            "phone": "(+52) 662 689 6206",
+            "website": "https://mx.usembassy.gov/es/visas-es/u-s-embassy-mexico-city-es/u-s-consulate-general-hermosillo-es/",
+            "services": ["Visas"],
+            "mapUrl": "https://www.google.com/maps?q=Consulado+General+de+Estados+Unidos+en+Hermosillo",
+            "coordinates": { "lat": 29.0785051, "lng": -110.958953 }
+        },
+        {
+            "id": "us-cons-matamoros",
+            "name": "Consulado General de EE.UU. - Matamoros",
+            "city": "Matamoros",
+            "state": "Tamaulipas",
+            "type": "Consulado",
+            "address": "Calle Constitución No. 1, Colonia Jardín Matamoros, Tamaulipas 87330",
+            "phone": "(+52) 868-208-2000",
+            "website": "https://mx.usembassy.gov/es/",
+            "services": ["Visas"],
+            "mapUrl": "https://www.google.com/maps?q=Consulado+General+de+Estados+Unidos+en+Matamoros",
+            "coordinates": { "lat": 25.887222, "lng": -97.501944 }
+        },
+        {
+            "id": "us-cons-merida",
+            "name": "Consulado General de EE.UU. - Mérida",
+            "city": "Mérida",
+            "state": "Yucatán",
+            "type": "Consulado",
+            "address": "Calle 60 Avenida Prolongación No. 01, Departamento VM01-D Vía Montejo, 97204, Mérida Yucatán",
+            "phone": "(+52) 999-689-0660",
+            "website": "https://mx.usembassy.gov/es/",
+            "services": ["Visas"],
+            "mapUrl": "https://www.google.com/maps?q=Consulado+General+de+Estados+Unidos+en+Merida",
+            "coordinates": { "lat": 20.9891309, "lng": -89.6198652 }
+        },
+        {
+            "id": "us-cons-monterrey",
+            "name": "Consulado General de EE.UU. - Monterrey",
+            "city": "Monterrey / Santa Catarina",
+            "state": "Nuevo León",
+            "type": "Consulado",
+            "address": "Ave. Alfonso Reyes #150, Col. Valle del Poniente, Santa Catarina, Nuevo León, México 66196",
+            "phone": "81-8047-3100",
+            "website": "https://mx.usembassy.gov/es/",
+            "services": ["Visas"],
+            "mapUrl": "https://www.google.com/maps?q=Consulado+General+de+Estados+Unidos+en+Monterrey",
+            "coordinates": { "lat": 25.6768033, "lng": -100.3550201 }
+        },
+        {
+            "id": "us-cons-nogales",
+            "name": "Consulado General de EE.UU. - Nogales",
+            "city": "Nogales",
+            "state": "Sonora",
+            "type": "Consulado",
+            "address": "Calle Kalamata 99, Colonia Jardines de Kalitea, Nogales, Sonora 84066",
+            "phone": "+52 631-689-1030",
+            "website": "https://mx.usembassy.gov/es/",
+            "services": ["Visas"],
+            "mapUrl": "https://www.google.com/maps?q=Consulado+General+de+Estados+Unidos+en+Nogales",
+            "coordinates": { "lat": 31.2886516, "lng": -110.9400018 }
+        },
+        {
+            "id": "us-cons-nuevolaredo",
+            "name": "Consulado General de EE.UU. - Nuevo Laredo",
+            "city": "Nuevo Laredo",
+            "state": "Tamaulipas",
+            "type": "Consulado",
+            "address": "Paseo Colón 1901, Col. Madero, 88260 Nuevo Laredo, Tamaulipas",
+            "phone": "867 714 0512",
+            "website": "https://mx.usembassy.gov/es/contact-us-es/",
+            "services": ["Visas"],
+            "mapUrl": "https://www.google.com/maps?q=Consulado+General+de+Estados+Unidos+en+Nuevo+Laredo",
+            "coordinates": { "lat": 27.4797704, "lng": -99.5109867 }
+        },
+        {
+            "id": "us-cons-tijuana",
+            "name": "Consulado General de EE.UU. - Tijuana",
+            "city": "Tijuana",
+            "state": "Baja California",
+            "type": "Consulado",
+            "address": "Paseo de las Culturas s/n, Mesa de Otay, Delegación Centenario C.P. 22425, Tijuana, Baja California",
+            "phone": "(664) 977-2000",
+            "website": "https://mx.usembassy.gov/es/",
+            "services": ["Visas"],
+            "mapUrl": "https://www.google.com/maps?q=Consulado+General+de+Estados+Unidos+en+Tijuana",
+            "coordinates": { "lat": 32.5233242, "lng": -116.952467 }
+        }
+    ],
+    "consularAgenciesOptional": [{
+        "id": "us-agency-puertovallarta",
+        "name": "Agencia Consular de EE.UU. - Puerto Vallarta (opcional)",
+        "city": "Puerto Vallarta / Nuevo Vallarta",
+        "state": "Jalisco / Nayarit",
+        "type": "Agencia Consular",
+        "mapUrl": "https://www.google.com/maps?q=U.S.+Consular+Agency+Puerto+Vallarta"
+    }],
+    "notes": [
+        "La misión en México se compone de Embajada en CDMX, 9 Consulados y agencias consulares. Verifica dirección/horarios en la página oficial antes de acudir.",
+        "VisaCarolina brinda asesoría y acompañamiento; no controla disponibilidad de citas ni decisiones consulares."
+    ]
+}

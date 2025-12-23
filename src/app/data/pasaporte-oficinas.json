@@ -1,0 +1,98 @@
+{
+    "updatedAt": "2025-12-20",
+    "items": [{
+            "id": "mx-passport-slp-rio-nazas",
+            "name": "SRE - Oficina de Pasaportes (San Luis Potosí)",
+            "city": "San Luis Potosí",
+            "state": "San Luis Potosí",
+            "type": "Oficina de Pasaportes",
+            "address": "Calle Río Nazas No. 180 y 190, Col. Lomas Los Filtros, C.P. 78210, San Luis Potosí",
+            "phone": "(444) 151 5201",
+            "website": "https://citas.sre.gob.mx/",
+            "mapUrl": "https://www.google.com/maps?q=R%C3%ADo+Nazas+180+San+Luis+Potos%C3%AD",
+            "coordinates": { "lat": 22.1545165, "lng": -100.9737049 }
+        },
+
+        {
+            "id": "mx-passport-slp-terrazas",
+            "name": "SRE - Oficina de Enlace (San Luis Potosí)",
+            "city": "San Luis Potosí",
+            "state": "San Luis Potosí",
+            "type": "Oficina de Enlace",
+            "address": "Terrazas 1280-A, Fracc. Tangamanga, C.P. 78269, San Luis Potosí",
+            "phone": "(444) 814 92221 / 8149 840",
+            "website": "https://portales.sre.gob.mx/directorio/delegaciones/san-luis-potosi",
+            "mapUrl": "https://www.google.com/maps?q=Terrazas+1280-A+San+Luis+Potos%C3%AD",
+            "coordinates": null
+        },
+
+        {
+            "id": "mx-passport-slp-soledad",
+            "name": "SRE - Oficina de Enlace (Soledad de Graciano Sánchez)",
+            "city": "Soledad de Graciano Sánchez",
+            "state": "San Luis Potosí",
+            "type": "Oficina de Enlace",
+            "address": "Blas Escontria 832, Esq. Cruz Verde, Local 3, C.P. 78430, Soledad de Graciano Sánchez, S.L.P.",
+            "phone": "(444) 128 8960 / 64",
+            "website": "https://portales.sre.gob.mx/directorio/delegaciones/san-luis-potosi",
+            "mapUrl": "https://www.google.com/maps?q=Blas+Escontria+832+Soledad+de+Graciano+S%C3%A1nchez",
+            "coordinates": null
+        },
+
+        {
+            "id": "mx-passport-slp-cd-valles",
+            "name": "SRE - Oficina de Enlace (Ciudad Valles)",
+            "city": "Ciudad Valles",
+            "state": "San Luis Potosí",
+            "type": "Oficina de Enlace",
+            "address": "Bocanegra 28 Local \"A\", Col. Obrera, C.P. 79050, Ciudad Valles, S.L.P.",
+            "phone": "(481) 381 5434",
+            "website": "https://portales.sre.gob.mx/directorio/delegaciones/san-luis-potosi",
+            "mapUrl": "https://www.google.com/maps?q=Bocanegra+28+Ciudad+Valles+SLP",
+            "coordinates": null
+        },
+
+        {
+            "id": "mx-passport-slp-matehuala",
+            "name": "SRE - Oficina de Enlace (Matehuala)",
+            "city": "Matehuala",
+            "state": "San Luis Potosí",
+            "type": "Oficina de Enlace",
+            "address": "Galeana S/N, Zona Centro, C.P. 78700, Matehuala, S.L.P.",
+            "phone": "(488) 8820 063",
+            "website": "https://portales.sre.gob.mx/directorio/delegaciones/san-luis-potosi",
+            "mapUrl": "https://www.google.com/maps?q=Galeana+Matehuala+SLP",
+            "coordinates": null
+        },
+
+        {
+            "id": "mx-passport-slp-rioverde",
+            "name": "SRE - Oficina de Enlace (Rioverde)",
+            "city": "Rioverde",
+            "state": "San Luis Potosí",
+            "type": "Oficina de Enlace",
+            "address": "Benito Juárez Norte 101, Esq. Gabriel Martínez, Col. Centro, C.P. 79610, Rioverde, S.L.P.",
+            "phone": "(487) 872 0039",
+            "website": "https://portales.sre.gob.mx/directorio/delegaciones/san-luis-potosi",
+            "mapUrl": "https://www.google.com/maps?q=Benito+Ju%C3%A1rez+Norte+101+Rioverde+SLP",
+            "coordinates": null
+        },
+
+        {
+            "id": "mx-passport-cdmx-miguel-hidalgo",
+            "name": "SRE - Oficina de Pasaportes (Miguel Hidalgo)",
+            "city": "Ciudad de México",
+            "state": "CDMX",
+            "type": "Oficina de Pasaportes",
+            "address": "Parque Lira No. 94, Esq. Sósténes Rocha, Col. Observatorio, C.P. 11860, CDMX",
+            "phone": "36 86 37 56 (verifica extensiones en SRE)",
+            "website": "https://portales.sre.gob.mx/directorio/delegaciones/delegacion-metropolitana-miguel-hidalgo",
+            "mapUrl": "https://www.google.com/maps?q=Av+Parque+Lira+94+CDMX",
+            "coordinates": { "lat": 19.40624, "lng": -99.18928 }
+        }
+    ],
+    "notes": [
+        "Verifica dirección/horarios en el directorio oficial antes de acudir. La disponibilidad depende del sistema de citas.",
+        "Si una oficina cambió de sede, actualiza el pin con el enlace de Maps (compartir ubicación) para evitar coordenadas desfasadas."
+    ]
+}

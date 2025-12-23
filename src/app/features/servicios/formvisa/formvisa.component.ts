@@ -162,6 +162,7 @@ export class FormvisaComponent implements OnInit {
     this.visaForm.markAllAsTouched();
     return;
   }
+  this.http.post(`${this.api}/api/verify-recaptcha`, { token: this.captchaToken })
 
   // (a) valida captcha en backend (si RECAPTCHA_SECRET ya está listo)
   this.http.post(`${this.api}/api/verify-captcha`, { token: this.captchaToken }).subscribe({

@@ -1,0 +1,32 @@
+<h2>Costos oficiales (estimados en MXN)</h2>
+
+<ng-container *ngIf="vm$ | async as vm">
+    <p class="muted">
+        Tipo de cambio (USD→MXN): <b>{{ vm.rate.mxnPerUsd | number:'1.2-2' }}</b>
+        <span class="muted">· actualizado: {{ vm.rate.updatedAt | date:'medium' }}</span>
+        <span class="muted">· fuente: {{ vm.rate.source }}</span>
+    </p>
+
+    <div class="tableWrap">
+        <table>
+            <thead>
+                <tr>
+                    <th>Trámite</th>
+                    <th>USD</th>
+                    <th>MXN (aprox)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let it of vm.fees.items">
+                    <td>{{ it.name }}</td>
+                    <td>\${{ it.usd }}</td>
+                    <td>\${{ (it.usd * vm.rate.mxnPerUsd) | number:'1.0-0' }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <ul class="notes">
+        <li *ngFor="let n of vm.fees.notes">{{ n }}</li>
+    </ul>
+</ng-container>

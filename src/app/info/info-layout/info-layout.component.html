@@ -1,0 +1,25 @@
+<section class="info">
+    <header class="info__header">
+        <h1>Información útil</h1>
+
+        <button class="info__menuBtn" type="button" (click)="toggleMobile()">
+      Menú
+    </button>
+    </header>
+
+    <div class="info__grid">
+        <!-- Sidebar -->
+        <aside class="info__sidebar" [class.info__sidebar--open]="mobileOpen()">
+            <nav class="info__nav">
+                <a *ngFor="let item of menu" [routerLink]="item.path" routerLinkActive="active" (click)="closeMobile()">
+          {{ item.label }}
+        </a>
+            </nav>
+        </aside>
+
+        <!-- Content -->
+        <main class="info__content">
+            <router-outlet />
+        </main>
+    </div>
+</section>

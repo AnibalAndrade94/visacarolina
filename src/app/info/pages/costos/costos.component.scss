@@ -1,0 +1,25 @@
+.muted {
+    opacity: .75
+}
+
+.tableWrap {
+    overflow: auto;
+    border: 1px solid rgba(0, 0, 0, .08);
+    border-radius: 12px
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse
+}
+
+th,
+td {
+    padding: 10px;
+    border-bottom: 1px solid rgba(0, 0, 0, .06);
+    text-align: left
+}
+
+.notes {
+    margin-top: 12px
+}

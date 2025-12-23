@@ -1,0 +1,11 @@
+{
+    "currencyBase": "USD",
+    "items": [
+        { "key": "us_b1b2", "name": "Visa americana B1/B2", "usd": 185 },
+        { "key": "us_f1", "name": "Visa estudiante F-1", "usd": 185 }
+    ],
+    "notes": [
+        "Los costos oficiales pueden cambiar sin previo aviso.",
+        "El tipo de cambio mostrado es estimado."
+    ]
+}

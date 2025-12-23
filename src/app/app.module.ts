@@ -23,6 +23,12 @@ import { LandingCursosComponent } from './cursos/landing-cursos/landing-cursos.c
 import { LoginComponent } from './auth/login/login.component';
 import { RegisterComponent } from './auth/register/register.component';
 import { EmbassyMapComponent } from './core/embassy-map/embassy-map.component';
+import { InfoLayoutComponent } from './info/info-layout/info-layout.component';
+import { ConsuladosComponent } from './info/pages/consulados/consulados.component';
+import { CostosComponent } from './info/pages/costos/costos.component';
+import { PasaporteComponent } from './info/pages/pasaporte/pasaporte.component';
+import { MapaPasaporteComponent } from './info/pages/mapa-pasaporte/mapa-pasaporte.component';
+import { FaqComponent } from './info/pages/faq/faq.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +47,12 @@ import { EmbassyMapComponent } from './core/embassy-map/embassy-map.component';
     LoginComponent,
     RegisterComponent,
     EmbassyMapComponent,
+    InfoLayoutComponent,
+    ConsuladosComponent,
+    CostosComponent,
+    PasaporteComponent,
+    MapaPasaporteComponent,
+    FaqComponent,
     
   ],
   imports: [

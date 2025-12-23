@@ -34,6 +34,10 @@ const routes: Routes = [
     loadChildren: () =>
       import('./features/servicios/servicios.module').then(m => m.ServiciosModule)
   },
+   {
+    path: 'info',
+    loadChildren: () => import('./info/info.routes').then(m => m.INFO_ROUTES),
+  },
 
   // 👇 404 fallback
   { path: '**', redirectTo: '' }
