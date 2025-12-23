@@ -147,7 +147,6 @@ export class FormvisaComponent implements OnInit {
   }
 
   onSubmit() {
-  // marca inválidos en consola (como ya haces)
   Object.keys(this.visaForm.controls).forEach(key => {
     const control = this.visaForm.get(key);
     if (control?.invalid) console.log('Campo inválido:', key, control.errors);
@@ -162,25 +161,18 @@ export class FormvisaComponent implements OnInit {
     this.visaForm.markAllAsTouched();
     return;
   }
-  this.http.post(`${this.api}/api/verify-recaptcha`, { token: this.captchaToken })
 
-  // (a) valida captcha en backend (si RECAPTCHA_SECRET ya está listo)
-  this.http.post(`${this.api}/api/verify-captcha`, { token: this.captchaToken }).subscribe({
+  // (a) valida captcha en backend (ESTE ES EL BUENO)
+  this.http.post(`${this.api}/api/verify-recaptcha`, { token: this.captchaToken }).subscribe({
     next: (_captchaOk) => {
-      // (b) arma payload y envía el formulario
-      const payload = {
-        ...this.visaForm.value,
-        token: this.captchaToken
-      };
+      const payload = { ...this.visaForm.value };
 
-      // usa el endpoint que prefieras:
-      // - `${this.api}/api/form-visa-americana`  (si es ese form)
-      // - `${this.api}/api/send`                 (si es el genérico)
       this.http.post(`${this.api}/api/form-visa-americana`, payload).subscribe({
         next: (res) => {
           console.log('Formulario enviado exitosamente', res);
           alert('¡Información enviada!');
           this.analytics.logEvent('form_submit', { form: 'visa', status: 'success' });
+
           this.visaForm.reset();
           if (typeof grecaptcha !== 'undefined') grecaptcha.reset();
           this.captchaToken = '';
@@ -199,6 +191,7 @@ export class FormvisaComponent implements OnInit {
     }
   });
 }
+
 
   onCheckChange(type: 'estudia' | 'trabaja') {
     const estudia = this.visaForm.get('estudia')?.value;
