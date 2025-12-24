@@ -1,0 +1,357 @@
+<div class="wizard">
+    <div class="header">
+        <h2>Evaluación de elegibilidad</h2>
+        <p class="muted">Paso {{ step + 1 }} de {{ steps.length }} • {{ steps[step] }}</p>
+
+        <div class="progress">
+            <div class="bar" [style.width.%]="progressPct"></div>
+        </div>
+
+        <div class="chips">
+            <button type="button" class="chip" *ngFor="let s of steps; let i = index" [class.active]="i === step" [class.done]="i < step" (click)="goTo(i)" [disabled]="i > step">
+        {{ i + 1 }}
+      </button>
+        </div>
+    </div>
+
+    <form [formGroup]="form" (ngSubmit)="submit()">
+        <!-- STEP 0: Datos personales -->
+        <section *ngIf="step === 0" class="card">
+            <h3>Datos personales</h3>
+
+            <label>
+        Nombre completo
+        <input type="text" formControlName="fullName" placeholder="Ej. Juan Pérez" />
+        <small class="err" *ngIf="form.controls.fullName.touched && form.controls.fullName.invalid">
+          Escribe tu nombre completo.
+        </small>
+      </label>
+
+            <label>
+        Correo
+        <input type="email" formControlName="email" placeholder="correo@ejemplo.com" />
+        <small class="err" *ngIf="form.controls.email.touched && form.controls.email.invalid">
+          Correo inválido.
+        </small>
+      </label>
+
+            <label>
+        WhatsApp
+        <input type="tel" formControlName="whatsapp" placeholder="10 dígitos" />
+        <small class="err" *ngIf="form.controls.whatsapp.touched && form.controls.whatsapp.invalid">
+          WhatsApp inválido.
+        </small>
+      </label>
+
+            <div class="grid2">
+                <label>
+          Edad
+          <input type="number" formControlName="age" placeholder="Ej. 28" />
+          <small class="err" *ngIf="form.controls.age.touched && form.controls.age.invalid">
+            Edad inválida.
+          </small>
+        </label>
+
+                <label>
+          Estado civil
+          <select formControlName="civilStatus">
+            <option value="" disabled>Selecciona...</option>
+            <option>Soltero(a)</option>
+            <option>Casado(a)</option>
+            <option>Unión libre</option>
+            <option>Divorciado(a)</option>
+            <option>Viudo(a)</option>
+          </select>
+          <small class="err" *ngIf="form.controls.civilStatus.touched && form.controls.civilStatus.invalid">
+            Selecciona una opción.
+          </small>
+        </label>
+            </div>
+        </section>
+
+        <!-- STEP 1: Historial visa -->
+        <section *ngIf="step === 1" class="card">
+            <h3>Historial de visa</h3>
+
+            <label>
+        ¿Has tramitado visa americana antes?
+        <select formControlName="visaStatus">
+          <option value="NEVER">Nunca</option>
+          <option value="APPROVED">Sí, aprobada</option>
+          <option value="DENIED">Sí, negada</option>
+        </select>
+      </label>
+
+            <label *ngIf="visaStatus === 'APPROVED'">
+        ¿En qué año expiró tu última visa?
+        <input type="number" formControlName="visaExpiredYear" placeholder="Ej. 2023" />
+        <small class="err" *ngIf="form.controls.visaExpiredYear.errors?.['year']">
+          Ingresa un año válido.
+        </small>
+      </label>
+
+            <label *ngIf="visaStatus === 'DENIED'">
+        ¿En qué año te negaron la visa?
+        <input type="number" formControlName="visaDeniedYear" placeholder="Ej. 2021" />
+        <small class="err" *ngIf="form.controls.visaDeniedYear.errors?.['year']">
+          Ingresa un año válido.
+        </small>
+      </label>
+        </section>
+
+        <!-- STEP 2: Viajes -->
+        <section *ngIf="step === 2" class="card">
+            <h3>Viajes internacionales</h3>
+
+            <label class="radioRow">
+        ¿Has viajado a otros países en los últimos 5 años?
+        <div class="radioGroup">
+          <label><input type="radio" [value]="true" formControlName="traveledLast5Years" /> Sí</label>
+            <label><input type="radio" [value]="false" formControlName="traveledLast5Years" /> No</label>
+</div>
+</label>
+
+<div *ngIf="form.controls.traveledLast5Years.value === true" class="subcard">
+    <label>
+          ¿A qué países?
+          <input type="text" formControlName="countriesVisited" placeholder="Ej. Canadá, Colombia, España" />
+          <small class="err" *ngIf="form.controls.countriesVisited.touched && form.controls.countriesVisited.invalid">
+            Especifica los países.
+          </small>
+        </label>
+
+    <label>
+          ¿Con qué frecuencia viajaste?
+          <select formControlName="travelFrequency">
+            <option value="" disabled>Selecciona...</option>
+            <option value="1-2">1–2 viajes</option>
+            <option value="3-5">3–5 viajes</option>
+            <option value="+5">Más de 5</option>
+          </select>
+          <small class="err" *ngIf="form.controls.travelFrequency.touched && form.controls.travelFrequency.invalid">
+            Selecciona una opción.
+          </small>
+        </label>
+</div>
+</section>
+
+<!-- STEP 3: Arraigo -->
+<section *ngIf="step === 3" class="card">
+    <h3>Arraigo laboral y económico</h3>
+
+    <label>
+        Ocupación actual
+        <select formControlName="occupation">
+          <option value="" disabled>Selecciona...</option>
+          <option value="empleado">Empleado</option>
+          <option value="negocio">Negocio propio</option>
+          <option value="estudiante">Estudiante</option>
+          <option value="sin_empleo">Sin empleo</option>
+        </select>
+        <small class="err" *ngIf="form.controls.occupation.touched && form.controls.occupation.invalid">
+          Selecciona una opción.
+        </small>
+      </label>
+
+    <label>
+        ¿Cuánto tiempo tienes en tu empleo actual?
+        <select formControlName="employmentTime">
+          <option value="" disabled>Selecciona...</option>
+          <option value="<6m">Menos de 6 meses</option>
+          <option value="6-12m">6 meses – 1 año</option>
+          <option value="1-3y">1 – 3 años</option>
+          <option value="+3y">Más de 3 años</option>
+        </select>
+        <small class="err" *ngIf="form.controls.employmentTime.touched && form.controls.employmentTime.invalid">
+          Selecciona una opción.
+        </small>
+      </label>
+
+    <label>
+        Ingreso mensual aproximado
+        <select formControlName="incomeRange">
+          <option value="" disabled>Selecciona...</option>
+          <option value="<10k">Menos de $10,000</option>
+          <option value="10-20k">$10,000 – $20,000</option>
+          <option value="20-35k">$20,000 – $35,000</option>
+          <option value="+35k">Más de $35,000</option>
+        </select>
+        <small class="err" *ngIf="form.controls.incomeRange.touched && form.controls.incomeRange.invalid">
+          Selecciona una opción.
+        </small>
+      </label>
+
+    <div class="grid2">
+        <label class="radioRow">
+          ¿Tienes propiedades a tu nombre?
+          <div class="radioGroup">
+            <label><input type="radio" [value]="true" formControlName="hasProperties" /> Sí</label>
+        <label><input type="radio" [value]="false" formControlName="hasProperties" /> No</label>
+    </div>
+    </label>
+
+    <label class="radioRow">
+          ¿Tienes dependientes económicos?
+          <div class="radioGroup">
+            <label><input type="radio" [value]="true" formControlName="hasDependents" /> Sí</label>
+    <label><input type="radio" [value]="false" formControlName="hasDependents" /> No</label>
+    </div>
+    </label>
+    </div>
+</section>
+
+<!-- STEP 4: Motivo -->
+<section *ngIf="step === 4" class="card">
+    <h3>Motivo del viaje</h3>
+
+    <label>
+        Motivo principal
+        <select formControlName="tripPurpose">
+          <option value="" disabled>Selecciona...</option>
+          <option value="turismo">Turismo</option>
+          <option value="visita_familiar">Visita familiar</option>
+          <option value="negocios">Negocios</option>
+        </select>
+        <small class="err" *ngIf="form.controls.tripPurpose.touched && form.controls.tripPurpose.invalid">
+          Selecciona una opción.
+        </small>
+      </label>
+
+    <label>
+        Tiempo estimado de estancia
+        <select formControlName="stayDuration">
+          <option value="" disabled>Selecciona...</option>
+          <option value="<1w">Menos de 1 semana</option>
+          <option value="1-2w">1 – 2 semanas</option>
+          <option value="+2w">Más de 2 semanas</option>
+        </select>
+        <small class="err" *ngIf="form.controls.stayDuration.touched && form.controls.stayDuration.invalid">
+          Selecciona una opción.
+        </small>
+      </label>
+
+    <label class="radioRow">
+        ¿Tienes familiares directos en EE.UU.?
+        <div class="radioGroup">
+          <label><input type="radio" [value]="true" formControlName="hasFamilyInUS" /> Sí</label>
+    <label><input type="radio" [value]="false" formControlName="hasFamilyInUS" /> No</label>
+    </div>
+    </label>
+
+    <label *ngIf="form.controls.hasFamilyInUS.value === true">
+        ¿Quién y estatus migratorio (si lo sabes)?
+        <input type="text" formControlName="familyInUSDetails" placeholder="Ej. Hermano (residente), mamá (ciudadana)" />
+        <small class="err" *ngIf="form.controls.familyInUSDetails.errors?.['required']">
+          Especifica el familiar.
+        </small>
+      </label>
+
+    <label>
+        Comentarios adicionales (opcional)
+        <textarea rows="3" formControlName="extraComments" placeholder="Cuéntanos tu caso brevemente..."></textarea>
+      </label>
+</section>
+
+<!-- STEP 5: Alertas -->
+<section *ngIf="step === 5" class="card">
+    <h3>Información importante</h3>
+
+    <label class="radioRow">
+        ¿Has vivido o trabajado ilegalmente en EE.UU.?
+        <div class="radioGroup">
+          <label><input type="radio" [value]="true" formControlName="illegalStayOrWork" /> Sí</label>
+    <label><input type="radio" [value]="false" formControlName="illegalStayOrWork" /> No</label>
+    </div>
+    </label>
+
+    <label class="radioRow">
+        ¿Has sido deportado alguna vez?
+        <div class="radioGroup">
+          <label><input type="radio" [value]="true" formControlName="deported" /> Sí</label>
+    <label><input type="radio" [value]="false" formControlName="deported" /> No</label>
+    </div>
+    </label>
+
+    <label class="radioRow">
+        ¿Has tenido problemas legales graves?
+        <div class="radioGroup">
+          <label><input type="radio" [value]="true" formControlName="seriousLegalIssues" /> Sí</label>
+    <label><input type="radio" [value]="false" formControlName="seriousLegalIssues" /> No</label>
+    </div>
+    </label>
+
+    <p class="note">
+        *Esta evaluación no garantiza aprobación. La decisión final depende del oficial consular.*
+    </p>
+</section>
+
+<!-- STEP 6: Resumen -->
+<section *ngIf="step === 6" class="card">
+    <h3>Resumen</h3>
+
+    <div class="summary">
+        <div><b>Nombre:</b> {{ value.fullName }}</div>
+        <div><b>Correo:</b> {{ value.email }}</div>
+        <div><b>WhatsApp:</b> {{ value.whatsapp }}</div>
+        <div><b>Edad:</b> {{ value.age }}</div>
+        <div><b>Estado civil:</b> {{ value.civilStatus }}</div>
+
+        <hr />
+
+        <div><b>Visa previa:</b> {{ value.visaStatus }}</div>
+        <div *ngIf="value.visaStatus === 'APPROVED'"><b>Año expiración:</b> {{ value.visaExpiredYear }}</div>
+        <div *ngIf="value.visaStatus === 'DENIED'"><b>Año negativa:</b> {{ value.visaDeniedYear }}</div>
+
+        <hr />
+
+        <div><b>Viajó últimos 5 años:</b> {{ value.traveledLast5Years ? 'Sí' : 'No' }}</div>
+        <div *ngIf="value.traveledLast5Years"><b>Países:</b> {{ value.countriesVisited }}</div>
+        <div *ngIf="value.traveledLast5Years"><b>Frecuencia:</b> {{ value.travelFrequency }}</div>
+
+        <hr />
+
+        <div><b>Ocupación:</b> {{ value.occupation }}</div>
+        <div><b>Tiempo empleo:</b> {{ value.employmentTime }}</div>
+        <div><b>Ingreso:</b> {{ value.incomeRange }}</div>
+        <div><b>Propiedades:</b> {{ value.hasProperties ? 'Sí' : 'No' }}</div>
+        <div><b>Dependientes:</b> {{ value.hasDependents ? 'Sí' : 'No' }}</div>
+
+        <hr />
+
+        <div><b>Motivo:</b> {{ value.tripPurpose }}</div>
+        <div><b>Estancia:</b> {{ value.stayDuration }}</div>
+        <div><b>Familia en EE.UU.:</b> {{ value.hasFamilyInUS ? 'Sí' : 'No' }}</div>
+        <div *ngIf="value.hasFamilyInUS"><b>Detalle:</b> {{ value.familyInUSDetails }}</div>
+
+        <hr />
+
+        <div><b>Ilegal:</b> {{ value.illegalStayOrWork ? 'Sí' : 'No' }}</div>
+        <div><b>Deportación:</b> {{ value.deported ? 'Sí' : 'No' }}</div>
+        <div><b>Problemas legales:</b> {{ value.seriousLegalIssues ? 'Sí' : 'No' }}</div>
+
+        <hr />
+
+        <div *ngIf="value.extraComments"><b>Comentarios:</b> {{ value.extraComments }}</div>
+    </div>
+
+    <p class="note">
+        Al enviar, tu información se revisará y te contactaremos por WhatsApp.
+    </p>
+</section>
+
+<!-- Footer buttons -->
+<div class="footer">
+    <button type="button" class="btn secondary" (click)="prev()" [disabled]="step === 0">
+        Atrás
+      </button>
+
+    <button type="button" class="btn" (click)="next()" *ngIf="step < steps.length - 1">
+        Siguiente
+      </button>
+
+    <button type="submit" class="btn" *ngIf="step === steps.length - 1">
+        Enviar evaluación
+      </button>
+</div>
+</form>
+</div>
