@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
+import { environment } from '../../environments/environment';
 
 type VisaStatus = 'NEVER' | 'APPROVED' | 'DENIED';
 
@@ -12,6 +13,8 @@ type VisaStatus = 'NEVER' | 'APPROVED' | 'DENIED';
 })
 export class VisaEligibilityWizardComponent {
  step = 0;
+   private api = environment.apiBaseUrl;
+
 
   steps = [
     'Datos personales',
@@ -94,7 +97,7 @@ export class VisaEligibilityWizardComponent {
     }
 
     // Aquí solo frontend: por ahora imprime el payload
-    this.http.post('https://visaback-production-3ac4.up.railway.app/api/evaluacion-visa', this.form.getRawValue())
+    this.http.post(`${this.api}/api/evaluacion-visa`, this.form.getRawValue())
   .subscribe({
     next: () => alert('Enviado ✅'),
     error: (e) => alert('Error al enviar ❌')
