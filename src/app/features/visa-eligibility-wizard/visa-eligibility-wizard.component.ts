@@ -101,7 +101,10 @@ export class VisaEligibilityWizardComponent {
   .subscribe({
     next: () => alert('Enviado ✅'),
     error: (e) => alert('Error al enviar ❌')
+
   });
+  console.log('API BASE:', this.api);
+
   }
 
   // --- Validación por step ---
