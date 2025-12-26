@@ -289,6 +289,40 @@
 <section *ngIf="step === 6" class="card">
     <h3>Resumen</h3>
 
+    <!-- ✅ BLOQUE SCORE + MENSAJE DE VENTA -->
+    <div class="scoreBox">
+        <div class="scoreTop">
+            <div class="scoreTitle">Resultado estimado</div>
+            <div class="scoreValue">{{ scoreResult.score }}/100</div>
+        </div>
+
+        <div class="riskLine">
+            <b>Riesgo:</b>
+            <span class="riskBadge low" *ngIf="scoreResult.label === 'BAJO'">Bajo ✅</span>
+            <span class="riskBadge mid" *ngIf="scoreResult.label === 'MEDIO'">Medio ⚠️</span>
+            <span class="riskBadge high" *ngIf="scoreResult.label === 'ALTO'">Alto 🚩</span>
+        </div>
+
+        <div class="salesBox">
+            <h4 class="salesTitle">{{ salesMessage.title }}</h4>
+            <p class="salesBody" [innerHTML]="salesMessage.body"></p>
+
+            <div class="cta">
+                <p><b>Siguiente paso recomendado:</b> agenda una asesoría personalizada para revisar tu caso y avanzar con estrategia.</p>
+
+                <!-- Cambia a tu Whats real -->
+                <a class="btn ctaBtn" href="https://wa.me/521XXXXXXXXXX?text=Hola%2C%20quiero%20una%20asesor%C3%ADa%20para%20mi%20evaluaci%C3%B3n%20de%20visa.%20Mi%20nombre%20es%20{{ value.fullName }}" target="_blank" rel="noopener">
+              👉 Hablar con un asesor ahora
+            </a>
+            </div>
+
+            <p class="disclaimer">
+                Esta evaluación es una estimación basada en la información proporcionada. La decisión final depende del oficial consular.
+            </p>
+        </div>
+    </div>
+
+    <!-- TU RESUMEN -->
     <div class="summary">
         <div><b>Nombre:</b> {{ value.fullName }}</div>
         <div><b>Correo:</b> {{ value.email }}</div>

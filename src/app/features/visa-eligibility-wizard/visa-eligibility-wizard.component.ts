@@ -84,11 +84,112 @@ export class VisaEligibilityWizardComponent {
   prev(): void {
     if (this.step > 0) this.step--;
   }
+  private clamp(n: number, min = 0, max = 100) {
+  return Math.max(min, Math.min(max, n));
+}
+
+get scoreResult() {
+  const v = this.form.getRawValue();
+
+  let score = 100;
+  const reasons: string[] = [];
+
+  // Banderas rojas
+  if (v.illegalStayOrWork) { score -= 50; reasons.push('Antecedente de estancia/trabajo irregular.'); }
+  if (v.deported) { score -= 60; reasons.push('Antecedente de deportación.'); }
+  if (v.seriousLegalIssues) { score -= 40; reasons.push('Problemas legales relevantes.'); }
+
+  // Historial visa
+  if (v.visaStatus === 'DENIED') {
+    const year = v.visaDeniedYear ?? 0;
+    const current = new Date().getFullYear();
+    const yearsAgo = year ? (current - year) : 0;
+
+    if (!year) { score -= 20; reasons.push('Visa negada sin año indicado.'); }
+    else if (yearsAgo <= 5) { score -= 25; reasons.push('Negativa reciente (≤ 5 años).'); }
+    else { score -= 15; reasons.push('Negativa antigua (> 5 años).'); }
+  }
+
+  // Viajes
+  if (!v.traveledLast5Years) { score -= 10; reasons.push('Sin viajes internacionales recientes.'); }
+  else {
+    // si declaró viajes, suma un poco
+    score += 10;
+  }
+
+  // Arraigo
+  if (v.hasProperties) score += 10;
+  if (v.hasDependents) score += 8;
+
+  // Tiempo empleo (parse simple)
+  const emp = (v.employmentTime || '').toLowerCase();
+  if (emp.includes('mes') || emp.includes('0') || emp.includes('1 ')) {
+    score -= 10;
+    reasons.push('Poco tiempo en empleo (según lo declarado).');
+  } else if (emp.includes('1 año') || emp.includes('2 años')) {
+    score += 10;
+  } else if (emp.includes('3') || emp.includes('4') || emp.includes('5') || emp.includes('años')) {
+    score += 15;
+  }
+
+  score = this.clamp(score);
+
+  let label: 'BAJO' | 'MEDIO' | 'ALTO' = 'MEDIO';
+  if (score >= 80) label = 'BAJO';
+  else if (score <= 54) label = 'ALTO';
+
+  return { score, label, reasons };
+}
 
   goTo(stepIndex: number): void {
     // opcional: permitir saltos solo hacia atrás
     if (stepIndex <= this.step) this.step = stepIndex;
   }
+  get salesMessage() {
+  const { label } = this.scoreResult;
+
+  if (label === 'BAJO') {
+    return {
+      title: '🎉 Buen perfil para iniciar tu trámite',
+      body: `
+        Con base en tus respuestas, tu perfil muestra buen arraigo y pocos factores de riesgo.
+        <br><br>
+        Esto no garantiza la aprobación, pero sí te coloca en una posición favorable
+        si tu trámite se hace correctamente.
+        <br><br>
+        Muchos perfiles “buenos” fallan por errores evitables en el formulario
+        o en la entrevista. Nuestro trabajo es ayudarte a no cometerlos.
+      `
+    };
+  }
+
+  if (label === 'MEDIO') {
+    return {
+      title: '⚠️ Tu perfil es viable, pero requiere estrategia',
+      body: `
+        Tu perfil puede avanzar, pero hay puntos que deben manejarse con cuidado.
+        <br><br>
+        En este tipo de casos, la diferencia entre aprobación o negativa
+        suele estar en los detalles.
+        <br><br>
+        Antes de enviar cualquier formulario, es clave revisar tu información
+        y preparar correctamente tu entrevista.
+      `
+    };
+  }
+
+  return {
+    title: '🚩 Tu perfil necesita una revisión antes de continuar',
+    body: `
+      Hay factores que podrían complicar tu trámite si se inicia sin una estrategia adecuada.
+      <br><br>
+      Esto no significa que sea imposible, pero hacerlo sin asesoría
+      aumenta el riesgo de una negativa y puede afectar futuros intentos.
+      <br><br>
+      Lo más importante aquí es analizar tu caso y definir el mejor momento para aplicar.
+    `
+  };
+}
 
   submit(): void {
     if (this.form.invalid) {
