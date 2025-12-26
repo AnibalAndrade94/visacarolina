@@ -29,6 +29,7 @@ import { CostosComponent } from './info/pages/costos/costos.component';
 import { PasaporteComponent } from './info/pages/pasaporte/pasaporte.component';
 import { MapaPasaporteComponent } from './info/pages/mapa-pasaporte/mapa-pasaporte.component';
 import { FaqComponent } from './info/pages/faq/faq.component';
+import { VisaEligibilityWizardComponent } from './features/visa-eligibility-wizard/visa-eligibility-wizard.component';
 
 @NgModule({
   declarations: [
@@ -53,6 +54,7 @@ import { FaqComponent } from './info/pages/faq/faq.component';
     PasaporteComponent,
     MapaPasaporteComponent,
     FaqComponent,
+    VisaEligibilityWizardComponent,
     
   ],
   imports: [

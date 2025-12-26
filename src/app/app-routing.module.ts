@@ -7,7 +7,7 @@ import { UxuiComponent } from './features/uxui/uxui.component';
 import { AvisosComponent } from './features/avisos/avisos.component';
 import { ReferidosComponent } from './features/referidos/referidos.component';
 import { AdminCodigosComponent } from './features/admin-codigos/admin-codigos.component';
-
+import { VisaEligibilityWizardComponent } from './features/visa-eligibility-wizard/visa-eligibility-wizard.component';
 const routes: Routes = [
   // 👇 HOME como raíz absoluta
   { path: '', component: HomeComponent },
@@ -20,7 +20,7 @@ const routes: Routes = [
   { path: 'avisos', component: AvisosComponent },
   { path: 'contacto', component: ContactoComponent },
   { path: 'admincodes', component: AdminCodigosComponent },
-
+{ path: 'evaluacion', component: VisaEligibilityWizardComponent },
   // 👇 Módulo lazy para cursos
   {
     path: 'cursos',
