@@ -15,6 +15,10 @@
     }
 }
 
+.scoreTop2 {
+    align-content: center;
+}
+
 .progress {
     height: 8px;
     border-radius: 999px;
@@ -151,5 +155,150 @@
         border: none;
         border-top: 1px solid rgba(0, 0, 0, 0.1);
         margin: 10px 0;
+    }
+}
+
+.resumenCard {
+    .resumenHeader {
+        text-align: center;
+        margin-bottom: 14px;
+        h3 {
+            margin: 0;
+        }
+        .muted {
+            margin: 6px 0 0;
+            opacity: .75;
+            font-size: 0.95rem;
+        }
+    }
+    .resultGrid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 14px;
+        @media (min-width: 900px) {
+            grid-template-columns: 1fr 1.2fr;
+            align-items: start;
+        }
+    }
+    .resultBox,
+    .salesCard {
+        border: 1px solid rgba(0, 0, 0, .08);
+        border-radius: 14px;
+        padding: 14px;
+        background: rgba(255, 255, 255, .7);
+    }
+    .pill {
+        display: inline-block;
+        padding: 6px 10px;
+        border-radius: 999px;
+        font-size: .85rem;
+        border: 1px solid rgba(0, 0, 0, .08);
+        opacity: .9;
+    }
+    .scoreBig {
+        display: flex;
+        justify-content: center;
+        align-items: baseline;
+        gap: 6px;
+        padding: 10px 0 6px;
+        .scoreNum {
+            font-size: 3rem;
+            font-weight: 800;
+            line-height: 1;
+        }
+        .scoreDen {
+            font-size: 1.2rem;
+            opacity: .7;
+        }
+    }
+    .riskRow {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        margin-top: 4px;
+        .riskLabel {
+            font-weight: 700;
+            opacity: .85;
+        }
+    }
+    .riskBadge {
+        display: inline-block;
+        padding: 6px 10px;
+        border-radius: 999px;
+        font-size: .9rem;
+        border: 1px solid rgba(0, 0, 0, .08);
+        &.low {
+            background: rgba(0, 200, 120, .10);
+        }
+        &.mid {
+            background: rgba(255, 180, 0, .12);
+        }
+        &.high {
+            background: rgba(255, 70, 70, .12);
+        }
+    }
+    .meter {
+        height: 10px;
+        border-radius: 999px;
+        background: rgba(0, 0, 0, .08);
+        overflow: hidden;
+        margin: 12px 0 8px;
+        .meterFill {
+            height: 100%;
+            background: rgba(0, 0, 0, .35);
+            border-radius: 999px;
+            transition: width 250ms ease;
+        }
+    }
+    .salesTitle {
+        margin: 0 0 8px;
+        font-weight: 800;
+        font-size: 1.15rem;
+    }
+    .salesBody {
+        margin: 0 0 12px;
+        line-height: 1.5;
+        opacity: .92;
+    }
+    .ctaBox {
+        border: 1px dashed rgba(0, 0, 0, .15);
+        border-radius: 12px;
+        padding: 12px;
+        background: rgba(0, 0, 0, .03);
+        .ctaText {
+            margin: 0 0 10px;
+        }
+    }
+    .ctaBtn {
+        width: 100%;
+        justify-content: center;
+        display: flex;
+        padding: 12px 14px;
+        border-radius: 12px;
+        font-weight: 800;
+    }
+    .importantBox {
+        margin-top: 12px;
+        border-radius: 12px;
+        padding: 12px;
+        background: rgba(0, 0, 0, .04);
+        border: 1px solid rgba(0, 0, 0, .08);
+        .importantTitle {
+            font-weight: 900;
+            margin-bottom: 6px;
+            text-align: center;
+        }
+        .disclaimer {
+            margin: 0;
+            opacity: .85;
+            text-align: center;
+        }
+    }
+    .tinyMuted {
+        margin: 8px 0 0;
+        font-size: .85rem;
+        opacity: .7;
+        text-align: center;
     }
 }

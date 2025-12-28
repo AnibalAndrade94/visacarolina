@@ -1,25 +1,38 @@
-<div class="wizard">
-    <div class="header">
-        <h2>Evaluación de elegibilidad</h2>
-        <p class="muted">Paso {{ step + 1 }} de {{ steps.length }} • {{ steps[step] }}</p>
+<div class="container-fluid py-3">
+    <div class="row g-3 align-items-start">
 
-        <div class="progress">
-            <div class="bar" [style.width.%]="progressPct"></div>
-        </div>
+        <!-- COLUMNA PRINCIPAL: WIZARD -->
+        <main class="col-12 col-lg-8">
+            <div class="wizard">
 
-        <div class="chips">
-            <button type="button" class="chip" *ngFor="let s of steps; let i = index" [class.active]="i === step" [class.done]="i < step" (click)="goTo(i)" [disabled]="i > step">
-        {{ i + 1 }}
-      </button>
-        </div>
-    </div>
+                <!-- HEADER -->
+                <div class="header">
+                    <h2>Evaluación de elegibilidad</h2>
+                    <p class="muted">
+                        Paso {{ step + 1 }} de {{ steps.length }} • {{ steps[step] }}
+                    </p>
 
-    <form [formGroup]="form" (ngSubmit)="submit()">
-        <!-- STEP 0: Datos personales -->
-        <section *ngIf="step === 0" class="card">
-            <h3>Datos personales</h3>
+                    <div class="progress">
+                        <div class="bar" [style.width.%]="progressPct"></div>
+                    </div>
 
-            <label>
+                    <div class="chips">
+                        <button type="button" class="chip" *ngFor="let s of steps; let i = index" [class.active]="i === step" [class.done]="i < step" (click)="goTo(i)" [disabled]="i > step">
+              {{ i + 1 }}
+            </button>
+                    </div>
+                </div>
+
+                <!-- FORM -->
+                <form [formGroup]="form" (ngSubmit)="submit()">
+                    <!-- STEP 0: Datos personales -->
+
+
+
+                    <section *ngIf="step === 0" class="card">
+                        <h3>Datos personales</h3>
+
+                        <label>
         Nombre completo
         <input type="text" formControlName="fullName" placeholder="Ej. Juan Pérez" />
         <small class="err" *ngIf="form.controls.fullName.touched && form.controls.fullName.invalid">
@@ -27,7 +40,7 @@
         </small>
       </label>
 
-            <label>
+                        <label>
         Correo
         <input type="email" formControlName="email" placeholder="correo@ejemplo.com" />
         <small class="err" *ngIf="form.controls.email.touched && form.controls.email.invalid">
@@ -35,7 +48,7 @@
         </small>
       </label>
 
-            <label>
+                        <label>
         WhatsApp
         <input type="tel" formControlName="whatsapp" placeholder="10 dígitos" />
         <small class="err" *ngIf="form.controls.whatsapp.touched && form.controls.whatsapp.invalid">
@@ -43,8 +56,8 @@
         </small>
       </label>
 
-            <div class="grid2">
-                <label>
+                        <div class="grid2">
+                            <label>
           Edad
           <input type="number" formControlName="age" placeholder="Ej. 28" />
           <small class="err" *ngIf="form.controls.age.touched && form.controls.age.invalid">
@@ -52,7 +65,7 @@
           </small>
         </label>
 
-                <label>
+                            <label>
           Estado civil
           <select formControlName="civilStatus">
             <option value="" disabled>Selecciona...</option>
@@ -66,14 +79,14 @@
             Selecciona una opción.
           </small>
         </label>
-            </div>
-        </section>
+                        </div>
+                    </section>
 
-        <!-- STEP 1: Historial visa -->
-        <section *ngIf="step === 1" class="card">
-            <h3>Historial de visa</h3>
+                    <!-- STEP 1: Historial visa -->
+                    <section *ngIf="step === 1" class="card">
+                        <h3>Historial de visa</h3>
 
-            <label>
+                        <label>
         ¿Has tramitado visa americana antes?
         <select formControlName="visaStatus">
           <option value="NEVER">Nunca</option>
@@ -82,7 +95,7 @@
         </select>
       </label>
 
-            <label *ngIf="visaStatus === 'APPROVED'">
+                        <label *ngIf="visaStatus === 'APPROVED'">
         ¿En qué año expiró tu última visa?
         <input type="number" formControlName="visaExpiredYear" placeholder="Ej. 2023" />
         <small class="err" *ngIf="form.controls.visaExpiredYear.errors?.['year']">
@@ -90,29 +103,29 @@
         </small>
       </label>
 
-            <label *ngIf="visaStatus === 'DENIED'">
+                        <label *ngIf="visaStatus === 'DENIED'">
         ¿En qué año te negaron la visa?
         <input type="number" formControlName="visaDeniedYear" placeholder="Ej. 2021" />
         <small class="err" *ngIf="form.controls.visaDeniedYear.errors?.['year']">
           Ingresa un año válido.
         </small>
       </label>
-        </section>
+                    </section>
 
-        <!-- STEP 2: Viajes -->
-        <section *ngIf="step === 2" class="card">
-            <h3>Viajes internacionales</h3>
+                    <!-- STEP 2: Viajes -->
+                    <section *ngIf="step === 2" class="card">
+                        <h3>Viajes internacionales</h3>
 
-            <label class="radioRow">
+                        <label class="radioRow">
         ¿Has viajado a otros países en los últimos 5 años?
         <div class="radioGroup">
           <label><input type="radio" [value]="true" formControlName="traveledLast5Years" /> Sí</label>
-            <label><input type="radio" [value]="false" formControlName="traveledLast5Years" /> No</label>
-</div>
-</label>
+                        <label><input type="radio" [value]="false" formControlName="traveledLast5Years" /> No</label>
+            </div>
+            </label>
 
-<div *ngIf="form.controls.traveledLast5Years.value === true" class="subcard">
-    <label>
+            <div *ngIf="form.controls.traveledLast5Years.value === true" class="subcard">
+                <label>
           ¿A qué países?
           <input type="text" formControlName="countriesVisited" placeholder="Ej. Canadá, Colombia, España" />
           <small class="err" *ngIf="form.controls.countriesVisited.touched && form.controls.countriesVisited.invalid">
@@ -120,7 +133,7 @@
           </small>
         </label>
 
-    <label>
+                <label>
           ¿Con qué frecuencia viajaste?
           <select formControlName="travelFrequency">
             <option value="" disabled>Selecciona...</option>
@@ -132,14 +145,14 @@
             Selecciona una opción.
           </small>
         </label>
-</div>
-</section>
+            </div>
+            </section>
 
-<!-- STEP 3: Arraigo -->
-<section *ngIf="step === 3" class="card">
-    <h3>Arraigo laboral y económico</h3>
+            <!-- STEP 3: Arraigo -->
+            <section *ngIf="step === 3" class="card">
+                <h3>Arraigo laboral y económico</h3>
 
-    <label>
+                <label>
         Ocupación actual
         <select formControlName="occupation">
           <option value="" disabled>Selecciona...</option>
@@ -153,7 +166,7 @@
         </small>
       </label>
 
-    <label>
+                <label>
         ¿Cuánto tiempo tienes en tu empleo actual?
         <select formControlName="employmentTime">
           <option value="" disabled>Selecciona...</option>
@@ -167,7 +180,7 @@
         </small>
       </label>
 
-    <label>
+                <label>
         Ingreso mensual aproximado
         <select formControlName="incomeRange">
           <option value="" disabled>Selecciona...</option>
@@ -181,23 +194,23 @@
         </small>
       </label>
 
-    <div class="grid2">
-        <label class="radioRow">
+                <div class="grid2">
+                    <label class="radioRow">
           ¿Tienes propiedades a tu nombre?
           <div class="radioGroup">
             <label><input type="radio" [value]="true" formControlName="hasProperties" /> Sí</label>
-        <label><input type="radio" [value]="false" formControlName="hasProperties" /> No</label>
-    </div>
-    </label>
+                    <label><input type="radio" [value]="false" formControlName="hasProperties" /> No</label>
+                </div>
+                </label>
 
-    <label class="radioRow">
+                <label class="radioRow">
           ¿Tienes dependientes económicos?
           <div class="radioGroup">
             <label><input type="radio" [value]="true" formControlName="hasDependents" /> Sí</label>
-    <label><input type="radio" [value]="false" formControlName="hasDependents" /> No</label>
+                <label><input type="radio" [value]="false" formControlName="hasDependents" /> No</label>
     </div>
     </label>
-    </div>
+</div>
 </section>
 
 <!-- STEP 4: Motivo -->
@@ -287,90 +300,68 @@
 
 <!-- STEP 6: Resumen -->
 <section *ngIf="step === 6" class="card">
-    <h3>Resumen</h3>
+    <h3 class="text-center mb-3">Resumen</h3>
 
-    <!-- ✅ BLOQUE SCORE + MENSAJE DE VENTA -->
-    <div class="scoreBox">
-        <div class="scoreTop">
-            <div class="scoreTitle">Resultado estimado</div>
-            <div class="scoreValue">{{ scoreResult.score }}/100</div>
-        </div>
+    <div class="row g-3">
 
-        <div class="riskLine">
-            <b>Riesgo:</b>
-            <span class="riskBadge low" *ngIf="scoreResult.label === 'BAJO'">Bajo ✅</span>
-            <span class="riskBadge mid" *ngIf="scoreResult.label === 'MEDIO'">Medio ⚠️</span>
-            <span class="riskBadge high" *ngIf="scoreResult.label === 'ALTO'">Alto 🚩</span>
-        </div>
+        <!-- COLUMNA RESULTADO -->
+        <div class="col-12 col-lg-5">
+            <div class="border rounded p-3 h-100 text-center">
 
-        <div class="salesBox">
-            <h4 class="salesTitle">{{ salesMessage.title }}</h4>
-            <p class="salesBody" [innerHTML]="salesMessage.body"></p>
+                <span class="badge bg-secondary mb-2">Resultado estimado</span>
 
-            <div class="cta">
-                <p><b>Siguiente paso recomendado:</b> agenda una asesoría personalizada para revisar tu caso y avanzar con estrategia.</p>
+                <div class="display-4 fw-bold">
+                    {{ scoreResult.score }}<small class="fs-5 text-muted">/100</small>
+                </div>
 
-                <!-- Cambia a tu Whats real -->
-                <a class="btn ctaBtn" href="https://wa.me/521XXXXXXXXXX?text=Hola%2C%20quiero%20una%20asesor%C3%ADa%20para%20mi%20evaluaci%C3%B3n%20de%20visa.%20Mi%20nombre%20es%20{{ value.fullName }}" target="_blank" rel="noopener">
-              👉 Hablar con un asesor ahora
-            </a>
+                <div class="mt-2">
+                    <b>Riesgo:</b>
+                    <span class="badge bg-success ms-1" *ngIf="scoreResult.label === 'BAJO'">
+            Bajo ✅
+          </span>
+                    <span class="badge bg-warning text-dark ms-1" *ngIf="scoreResult.label === 'MEDIO'">
+            Medio ⚠️
+          </span>
+                    <span class="badge bg-danger ms-1" *ngIf="scoreResult.label === 'ALTO'">
+            Alto 🚩
+          </span>
+                </div>
+
+                <div class="progress mt-3">
+                    <div class="progress-bar" role="progressbar" [style.width.%]="scoreResult.score">
+                    </div>
+                </div>
+
+                <small class="text-muted d-block mt-2">
+          *Esta evaluación es solo una estimación.*
+        </small>
             </div>
-
-            <p class="disclaimer">
-                Esta evaluación es una estimación basada en la información proporcionada. La decisión final depende del oficial consular.
-            </p>
         </div>
+
+        <!-- COLUMNA MENSAJE + CTA -->
+        <div class="col-12 col-lg-7">
+            <div class="border rounded p-3 h-100">
+
+                <h5 class="fw-bold">{{ salesMessage.title }}</h5>
+
+                <p [innerHTML]="salesMessage.body"></p>
+
+                <div class="alert alert-light border">
+                    <b>Siguiente paso recomendado:</b><br> Agenda una asesoría personalizada para revisar tu caso y avanzar con estrategia.
+                </div>
+
+                <a class="btn btn-success w-100 fw-bold" [href]="whatsappHref" target="_blank" rel="noopener">
+          👉 Hablar con un asesor ahora
+        </a>
+
+                <div class="alert alert-warning mt-3 mb-0 text-center">
+                    <b>Importante:</b><br> La decisión final depende del oficial consular.
+                </div>
+
+            </div>
+        </div>
+
     </div>
-
-    <!-- TU RESUMEN -->
-    <div class="summary">
-        <div><b>Nombre:</b> {{ value.fullName }}</div>
-        <div><b>Correo:</b> {{ value.email }}</div>
-        <div><b>WhatsApp:</b> {{ value.whatsapp }}</div>
-        <div><b>Edad:</b> {{ value.age }}</div>
-        <div><b>Estado civil:</b> {{ value.civilStatus }}</div>
-
-        <hr />
-
-        <div><b>Visa previa:</b> {{ value.visaStatus }}</div>
-        <div *ngIf="value.visaStatus === 'APPROVED'"><b>Año expiración:</b> {{ value.visaExpiredYear }}</div>
-        <div *ngIf="value.visaStatus === 'DENIED'"><b>Año negativa:</b> {{ value.visaDeniedYear }}</div>
-
-        <hr />
-
-        <div><b>Viajó últimos 5 años:</b> {{ value.traveledLast5Years ? 'Sí' : 'No' }}</div>
-        <div *ngIf="value.traveledLast5Years"><b>Países:</b> {{ value.countriesVisited }}</div>
-        <div *ngIf="value.traveledLast5Years"><b>Frecuencia:</b> {{ value.travelFrequency }}</div>
-
-        <hr />
-
-        <div><b>Ocupación:</b> {{ value.occupation }}</div>
-        <div><b>Tiempo empleo:</b> {{ value.employmentTime }}</div>
-        <div><b>Ingreso:</b> {{ value.incomeRange }}</div>
-        <div><b>Propiedades:</b> {{ value.hasProperties ? 'Sí' : 'No' }}</div>
-        <div><b>Dependientes:</b> {{ value.hasDependents ? 'Sí' : 'No' }}</div>
-
-        <hr />
-
-        <div><b>Motivo:</b> {{ value.tripPurpose }}</div>
-        <div><b>Estancia:</b> {{ value.stayDuration }}</div>
-        <div><b>Familia en EE.UU.:</b> {{ value.hasFamilyInUS ? 'Sí' : 'No' }}</div>
-        <div *ngIf="value.hasFamilyInUS"><b>Detalle:</b> {{ value.familyInUSDetails }}</div>
-
-        <hr />
-
-        <div><b>Ilegal:</b> {{ value.illegalStayOrWork ? 'Sí' : 'No' }}</div>
-        <div><b>Deportación:</b> {{ value.deported ? 'Sí' : 'No' }}</div>
-        <div><b>Problemas legales:</b> {{ value.seriousLegalIssues ? 'Sí' : 'No' }}</div>
-
-        <hr />
-
-        <div *ngIf="value.extraComments"><b>Comentarios:</b> {{ value.extraComments }}</div>
-    </div>
-
-    <p class="note">
-        Al enviar, tu información se revisará y te contactaremos por WhatsApp.
-    </p>
 </section>
 
 <!-- Footer buttons -->
@@ -388,4 +379,86 @@
       </button>
 </div>
 </form>
+</div>
+</main>
+
+<!-- ASIDE DERECHO: PUBLICIDAD -->
+<aside class="col-12 col-lg-4">
+    <div class="sticky-top" style="top: 90px;">
+
+        <div class="border rounded p-3 bg-white">
+            <h5 class="fw-bold mb-3 text-center">
+                Otros trámites disponibles
+            </h5>
+
+            <div id="promoCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="6000">
+
+                <div class="carousel-inner">
+
+                    <!-- PASAPORTE -->
+                    <div class="carousel-item active">
+                        <div class="text-center">
+                            <img src="assets/promos/pasaporte.jpg" class="d-block w-100 rounded mb-2" alt="Pasaporte mexicano">
+
+                            <h6 class="fw-bold">Pasaporte Mexicano</h6>
+                            <p class="small text-muted">
+                                Agenda, requisitos y acompañamiento completo.
+                            </p>
+
+                            <a routerLink="/servicios/pasaporte" class="btn btn-outline-primary btn-sm w-100">
+                    Ver trámite
+                  </a>
+                        </div>
+                    </div>
+
+                    <!-- ETA CANADÁ -->
+                    <div class="carousel-item">
+                        <div class="text-center">
+                            <img src="assets/promos/eta-canada.jpg" class="d-block w-100 rounded mb-2" alt="eTA Canadá">
+
+                            <h6 class="fw-bold">eTA Canadá</h6>
+                            <p class="small text-muted">
+                                Ideal si ya tienes visa americana vigente.
+                            </p>
+
+                            <a routerLink="/servicios/eta-canada" class="btn btn-outline-primary btn-sm w-100">
+                    Ver trámite
+                  </a>
+                        </div>
+                    </div>
+
+                    <!-- ETA UK -->
+                    <div class="carousel-item">
+                        <div class="text-center">
+                            <img src="assets/promos/eta-uk.jpg" class="d-block w-100 rounded mb-2" alt="eTA Reino Unido">
+
+                            <h6 class="fw-bold">eTA Reino Unido</h6>
+                            <p class="small text-muted">
+                                Trámite rápido y 100% en línea.
+                            </p>
+
+                            <a routerLink="/servicios/eta-uk" class="btn btn-outline-primary btn-sm w-100">
+                    Ver trámite
+                  </a>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- CONTROLES -->
+                <button class="carousel-control-prev" type="button" data-bs-target="#promoCarousel" data-bs-slide="prev">
+              <span class="carousel-control-prev-icon"></span>
+            </button>
+
+                <button class="carousel-control-next" type="button" data-bs-target="#promoCarousel" data-bs-slide="next">
+              <span class="carousel-control-next-icon"></span>
+            </button>
+
+            </div>
+        </div>
+
+    </div>
+</aside>
+
+</div>
 </div>

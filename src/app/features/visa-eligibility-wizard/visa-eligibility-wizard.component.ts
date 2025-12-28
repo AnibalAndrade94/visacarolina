@@ -150,7 +150,7 @@ get scoreResult() {
 
   if (label === 'BAJO') {
     return {
-      title: '🎉 Buen perfil para iniciar tu trámite',
+      title: 'Buen perfil para iniciar tu trámite',
       body: `
         Con base en tus respuestas, tu perfil muestra buen arraigo y pocos factores de riesgo.
         <br><br>
@@ -165,7 +165,7 @@ get scoreResult() {
 
   if (label === 'MEDIO') {
     return {
-      title: '⚠️ Tu perfil es viable, pero requiere estrategia',
+      title: 'Tu perfil es viable, pero requiere estrategia',
       body: `
         Tu perfil puede avanzar, pero hay puntos que deben manejarse con cuidado.
         <br><br>
@@ -179,7 +179,7 @@ get scoreResult() {
   }
 
   return {
-    title: '🚩 Tu perfil necesita una revisión antes de continuar',
+    title: 'Tu perfil necesita una revisión antes de continuar',
     body: `
       Hay factores que podrían complicar tu trámite si se inicia sin una estrategia adecuada.
       <br><br>
@@ -190,23 +190,31 @@ get scoreResult() {
     `
   };
 }
+get whatsappHref(): string {
+  const name = this.value.fullName || '';
+  const msg = `Hola, quiero una asesoría para mi evaluación de visa. Mi nombre es ${name}`;
+  return `https://wa.me/521XXXXXXXXXX?text=${encodeURIComponent(msg)}`;
+}
 
-  submit(): void {
-    if (this.form.invalid) {
-      this.form.markAllAsTouched();
-      return;
-    }
-
-    // Aquí solo frontend: por ahora imprime el payload
-    this.http.post(`${this.api}/api/evaluacion-visa`, this.form.getRawValue())
-  .subscribe({
-    next: () => alert('Enviado ✅'),
-    error: (e) => alert('Error al enviar ❌')
-
-  });
-  console.log('API BASE:', this.api);
-
+ submit(): void {
+  if (this.form.invalid) {
+    this.form.markAllAsTouched();
+    return;
   }
+
+  const payload = {
+    ...this.form.getRawValue(),
+    score: this.scoreResult.score,
+    risk: this.scoreResult.label,
+    scoreReasons: this.scoreResult.reasons,
+  };
+
+  this.http.post(`${this.api}/api/evaluacion-visa`, payload)
+    .subscribe({
+      next: () => alert('Enviado ✅'),
+      error: () => alert('Error al enviar ❌')
+    });
+}
 
   // --- Validación por step ---
   private canGoNext(): boolean {
