@@ -112,24 +112,64 @@ get scoreResult() {
 
   // Viajes
   if (!v.traveledLast5Years) { score -= 10; reasons.push('Sin viajes internacionales recientes.'); }
-  else {
-    // si declaró viajes, suma un poco
-    score += 10;
-  }
+  else { score += 10; }
 
-  // Arraigo
+  // Arraigo: propiedades / dependientes
   if (v.hasProperties) score += 10;
   if (v.hasDependents) score += 8;
 
-  // Tiempo empleo (parse simple)
-  const emp = (v.employmentTime || '').toLowerCase();
-  if (emp.includes('mes') || emp.includes('0') || emp.includes('1 ')) {
-    score -= 10;
-    reasons.push('Poco tiempo en empleo (según lo declarado).');
-  } else if (emp.includes('1 año') || emp.includes('2 años')) {
-    score += 10;
-  } else if (emp.includes('3') || emp.includes('4') || emp.includes('5') || emp.includes('años')) {
-    score += 15;
+  // ✅ Arraigo: ocupación (usa valores reales del select)
+  switch (v.occupation) {
+    case 'sin_empleo':
+      score -= 25;
+      reasons.push('Actualmente sin empleo.');
+      break;
+    case 'estudiante':
+      score -= 10;
+      reasons.push('Perfil estudiante (se evalúa con más detalle el arraigo).');
+      break;
+    case 'negocio':
+      score += 8;
+      break;
+    case 'empleado':
+      score += 10;
+      break;
+  }
+
+  // ✅ Arraigo: ingresos (usa valores reales del select)
+  switch (v.incomeRange) {
+    case '<10k':
+      score -= 15;
+      reasons.push('Ingreso mensual bajo (según lo declarado).');
+      break;
+    case '10-20k':
+      score -= 5;
+      break;
+    case '20-35k':
+      score += 5;
+      break;
+    case '+35k':
+      score += 10;
+      break;
+  }
+
+  // ✅ Tiempo en empleo (solo si no está "sin empleo")
+  if (v.occupation !== 'sin_empleo') {
+    switch (v.employmentTime) {
+      case '<6m':
+        score -= 15;
+        reasons.push('Menos de 6 meses en el empleo.');
+        break;
+      case '6-12m':
+        score -= 5;
+        break;
+      case '1-3y':
+        score += 8;
+        break;
+      case '+3y':
+        score += 12;
+        break;
+    }
   }
 
   score = this.clamp(score);
@@ -140,6 +180,7 @@ get scoreResult() {
 
   return { score, label, reasons };
 }
+
 
   goTo(stepIndex: number): void {
     // opcional: permitir saltos solo hacia atrás
