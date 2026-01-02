@@ -14,6 +14,7 @@ type VisaStatus = 'NEVER' | 'APPROVED' | 'DENIED';
 export class VisaEligibilityWizardComponent {
  step = 0;
    private api = environment.apiBaseUrl;
+   resume: boolean = false;
 
 
   steps = [
@@ -78,14 +79,22 @@ export class VisaEligibilityWizardComponent {
 
     this.applyStepSideEffects();
 
+    this.resume = false; 
+
     if (this.step < this.steps.length - 1) this.step++;
   }
 
   prev(): void {
     if (this.step > 0) this.step--;
+    this.resume = false;  
   }
   private clamp(n: number, min = 0, max = 100) {
   return Math.max(min, Math.min(max, n));
+}
+
+
+toggleResume(): void {
+  this.resume = !this.resume;
 }
 
 get scoreResult() {

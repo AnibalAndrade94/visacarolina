@@ -340,7 +340,7 @@
 
         <!-- COLUMNA MENSAJE + CTA -->
         <div class="col-12 col-lg-12">
-            <div class="border rounded p-3 h-100">
+            <div class="border rounded p-3 h-120">
 
                 <h5 class="fw-bold">{{ salesMessage.title }}</h5>
 
@@ -351,15 +351,88 @@
                 </div>
 
                 <a class="btn btn-success w-100 fw-bold" [href]="whatsappHref" target="_blank" rel="noopener">
-          👉 Hablar con un asesor ahora
+           Hablar con un asesor ahora
         </a>
+                <br>
+                <button type="button" *ngIf="!resume" class="btn btn-outline-primary w-100 fw-bold mt-3" (click)="toggleResume()">
+  Ver datos
+</button>
+                <br>
 
                 <div class="alert alert-warning mt-3 mb-0 text-center">
                     <b>Importante:</b><br> La decisión final depende del oficial consular.
+                    <br>
+                    <br>
+                    <b>Uso de la información:</b><br> La información proporcionada será utilizada únicamente para contactarte y ofrecerte nuestros servicios de asesoría migratoria. No compartimos tus datos con terceros.
                 </div>
+                <br>
+                <small class="text-muted d-block mt-2 text-center">
+  Al enviar este formulario aceptas nuestro
+  <a routerLink="/avisos">Aviso de Privacidad</a>.
+</small>
 
             </div>
+
+
         </div>
+
+        <div class="col-12 col-lg-12" *ngIf="resume">
+            <div class="border rounded p-3 h-100">
+                <div class="summary">
+                    <div><b>Nombre:</b> {{ value.fullName }}</div>
+                    <div><b>Correo:</b> {{ value.email }}</div>
+                    <div><b>WhatsApp:</b> {{ value.whatsapp }}</div>
+                    <div><b>Edad:</b> {{ value.age }}</div>
+                    <div><b>Estado civil:</b> {{ value.civilStatus }}</div>
+
+                    <hr />
+
+                    <div><b>Visa previa:</b> {{ value.visaStatus }}</div>
+                    <div *ngIf="value.visaStatus === 'APPROVED'"><b>Año expiración:</b> {{ value.visaExpiredYear }}</div>
+                    <div *ngIf="value.visaStatus === 'DENIED'"><b>Año negativa:</b> {{ value.visaDeniedYear }}</div>
+
+                    <hr />
+
+                    <div><b>Viajó últimos 5 años:</b> {{ value.traveledLast5Years ? 'Sí' : 'No' }}</div>
+                    <div *ngIf="value.traveledLast5Years"><b>Países:</b> {{ value.countriesVisited }}</div>
+                    <div *ngIf="value.traveledLast5Years"><b>Frecuencia:</b> {{ value.travelFrequency }}</div>
+
+                    <hr />
+
+                    <div><b>Ocupación:</b> {{ value.occupation }}</div>
+                    <div><b>Tiempo empleo:</b> {{ value.employmentTime }}</div>
+                    <div><b>Ingreso:</b> {{ value.incomeRange }}</div>
+                    <div><b>Propiedades:</b> {{ value.hasProperties ? 'Sí' : 'No' }}</div>
+                    <div><b>Dependientes:</b> {{ value.hasDependents ? 'Sí' : 'No' }}</div>
+
+                    <hr />
+
+                    <div><b>Motivo:</b> {{ value.tripPurpose }}</div>
+                    <div><b>Estancia:</b> {{ value.stayDuration }}</div>
+                    <div><b>Familia en EE.UU.:</b> {{ value.hasFamilyInUS ? 'Sí' : 'No' }}</div>
+                    <div *ngIf="value.hasFamilyInUS"><b>Detalle:</b> {{ value.familyInUSDetails }}</div>
+
+                    <hr />
+
+                    <div><b>Ilegal:</b> {{ value.illegalStayOrWork ? 'Sí' : 'No' }}</div>
+                    <div><b>Deportación:</b> {{ value.deported ? 'Sí' : 'No' }}</div>
+                    <div><b>Problemas legales:</b> {{ value.seriousLegalIssues ? 'Sí' : 'No' }}</div>
+
+                    <hr />
+
+                    <div *ngIf="value.extraComments"><b>Comentarios:</b> {{ value.extraComments }}</div>
+                    <br>
+                    <button type="button" class="btn btn-outline-secondary w-100 fw-bold mt-3" (click)="toggleResume()">
+    Ocultar
+  </button>
+                    <br>
+
+
+                </div>
+            </div>
+        </div>
+
+
 
     </div>
 </section>
