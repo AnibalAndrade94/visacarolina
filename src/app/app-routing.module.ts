@@ -8,6 +8,8 @@ import { AvisosComponent } from './features/avisos/avisos.component';
 import { ReferidosComponent } from './features/referidos/referidos.component';
 import { AdminCodigosComponent } from './features/admin-codigos/admin-codigos.component';
 import { VisaEligibilityWizardComponent } from './features/visa-eligibility-wizard/visa-eligibility-wizard.component';
+import { VisaAppointmentComponent } from './features/visa-appointment/visa-appointment.component';
+
 const routes: Routes = [
   // 👇 HOME como raíz absoluta
   { path: '', component: HomeComponent },
@@ -38,6 +40,8 @@ const routes: Routes = [
     path: 'info',
     loadChildren: () => import('./info/info.routes').then(m => m.INFO_ROUTES),
   },
+    { path: 'recomendaciones-cita-visa', component: VisaAppointmentComponent },
+
 
   // 👇 404 fallback
   { path: '**', redirectTo: '' }

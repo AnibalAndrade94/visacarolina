@@ -1,0 +1,105 @@
+<div class="page">
+    <header class="hero">
+        <div class="hero__content">
+            <span class="badge">Guía rápida</span>
+            <h1>Recomendaciones para llevar a tu cita de visa</h1>
+            <p class="subtitle">
+                Evita contratiempos: llega preparado, con documentos correctos y sin objetos prohibidos.
+            </p>
+
+            <div class="actions">
+                <a class="btn btn--primary" [href]="whatsappLink" target="_blank" rel="noopener">
+          {{ supportCtaText }}
+        </a>
+                <button class="btn btn--ghost" type="button" (click)="printPage()">
+          Imprimir / Guardar PDF
+        </button>
+            </div>
+
+            <div class="disclaimer">
+                <b>Aviso:</b> Esta guía es informativa. {{ brandName }} no garantiza aprobación; la decisión final corresponde a la autoridad consular.
+            </div>
+        </div>
+    </header>
+
+    <main class="content">
+        <section class="card">
+            <h2>Antes de tu cita</h2>
+            <ul class="list">
+                <li *ngFor="let item of beforeList">{{ item }}</li>
+            </ul>
+        </section>
+
+        <section class="grid">
+            <article class="card">
+                <h2>Documentos recomendados</h2>
+                <p class="muted">Llévalos <b>impresos y ordenados</b> en una carpeta.</p>
+                <ul class="list">
+                    <li *ngFor="let item of docsList">{{ item }}</li>
+                </ul>
+            </article>
+
+            <article class="card card--danger">
+                <h2>Objetos NO permitidos</h2>
+                <p class="muted">Evita perder tiempo: no podrás ingresar con esto.</p>
+                <ul class="list">
+                    <li *ngFor="let item of forbiddenList">{{ item }}</li>
+                </ul>
+                <div class="tip">
+                    <b>Tip:</b> Lleva solo tu carpeta y lo estrictamente necesario.
+                </div>
+            </article>
+        </section>
+
+        <section class="grid">
+            <article class="card">
+                <h2>Presentación personal</h2>
+                <ul class="list">
+                    <li *ngFor="let item of presentationList">{{ item }}</li>
+                </ul>
+            </article>
+
+            <article class="card">
+                <h2>Durante la entrevista</h2>
+                <ul class="list">
+                    <li *ngFor="let item of interviewList">{{ item }}</li>
+                </ul>
+            </article>
+        </section>
+
+        <section class="card">
+            <h2>Consideraciones importantes</h2>
+            <ul class="list">
+                <li *ngFor="let item of notesList">{{ item }}</li>
+            </ul>
+        </section>
+
+        <section class="card">
+            <h2>Preguntas frecuentes</h2>
+
+            <div class="faq">
+                <div class="faq__item" *ngFor="let f of faqs; let i = index">
+                    <button class="faq__q" type="button" (click)="toggleFaq(i)" [attr.aria-expanded]="f.open">
+            <span>{{ f.q }}</span>
+            <span class="faq__icon" [class.open]="f.open">▾</span>
+          </button>
+                    <div class="faq__a" *ngIf="f.open">
+                        {{ f.a }}
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer class="footer">
+            <div class="footer__card">
+                <h3>¿Quieres que revisemos tu caso?</h3>
+                <p class="muted">
+                    Te ayudamos a preparar tu proceso y a llegar a tu cita con todo en orden.
+                </p>
+                <a class="btn btn--primary" [href]="whatsappLink" target="_blank" rel="noopener">
+          Contactar por WhatsApp
+        </a>
+            </div>
+        </footer>
+    </main>
+</div>
