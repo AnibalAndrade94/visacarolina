@@ -1,10 +1,20 @@
+.formulario-page {
+    width: 100%;
+    padding: 2rem;
+    /* centra y permite más ancho */
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
 .formulario-container {
-    background-color: #efe8e7; // fondo clarito
+    background-color: #efe8e7;
     padding: 2rem;
     border-radius: 1rem;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-    max-width: 700px;
-    margin: 0 auto;
+    /* IMPORTANTE: ya no limites el ancho */
+    width: 100%;
+    max-width: none;
+    margin: 0;
 }
 
 h1 {
@@ -13,93 +23,10 @@ h1 {
     margin-bottom: 1.5rem;
 }
 
-.formulario-content {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-}
-
-.form-group {
-    display: flex;
-    flex-direction: column;
-    label {
-        font-family: 'Playfair Display', serif;
-        font-weight: 600;
-        margin-bottom: 0.5rem;
-        color: #6D5352; // texto principal
-    }
-    input {
-        padding: 0.8rem;
-        border: 1px solid #cda09b;
-        border-radius: 0.5rem;
-        background-color: #ffffff;
-        font-family: 'Playfair Display', serif;
-        color: #6D5352;
-        &:focus {
-            outline: none;
-            border-color: #c18b89;
-            box-shadow: 0 0 0 0.2rem rgba(193, 139, 137, 0.25);
-        }
-    }
-}
-
-.btn-submit {
-    padding: 0.8rem 2rem;
-    background-color: #c18b89; // rosa cálido
-    border: none;
-    border-radius: 2rem;
-    font-family: 'Playfair Display', serif;
-    font-weight: 600;
-    color: white;
-    font-size: 1rem;
-    transition: background-color 0.3s ease;
-    &:hover {
-        background-color: #cda09b;
-        cursor: pointer;
-    }
-}
-
-.formulario-page {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: flex-start;
-    gap: 2rem;
-    padding: 2rem;
-    .formulario-container {
-        background-color: #efe8e7;
-        padding: 2rem;
-        border-radius: 1rem;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-        width: 100%;
-        flex: 1 1 60%;
-    }
-    .formulario-aside {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 1.5rem;
-        height: 100%;
-        flex: 0 0 35%;
-        /* Parte del espacio, como una columna delgada */
-        overflow: hidden;
-        img {
-            width: 120%;
-            /* Mostrar más zoom horizontalmente */
-            height: 2100px;
-            /* Altura fija para cada imagen */
-            object-fit: cover;
-            object-position: 12% center;
-            /* Centrar el corte */
-            border-radius: 1rem;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-    }
-}
-
 form {
     width: 100%;
-    max-width: 900px;
+    /* Quita límite o súbelo */
+    max-width: none;
     margin: 0 auto;
     padding: 2rem;
     background-color: #efe8e7;
@@ -135,7 +62,8 @@ form {
             color: #6D5352;
         }
         input,
-        select {
+        select,
+        textarea {
             width: 100%;
             padding: 0.8rem;
             border: 1px solid #cda09b;
@@ -205,7 +133,6 @@ form {
     display: block;
     margin-top: 0.3rem;
     color: #d9534f;
-    /* Rojo clarito */
     font-size: 0.9rem;
     font-family: 'Playfair Display', serif;
     animation: fadeIn 0.4s ease-in-out;
