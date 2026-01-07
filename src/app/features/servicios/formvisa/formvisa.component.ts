@@ -11,6 +11,8 @@ import {
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { AnalyticsService } from 'src/app/services/analytics.service';
+import { Router } from '@angular/router';
+import { finalize, switchMap } from 'rxjs/operators';
 
 declare var grecaptcha: any;
 
@@ -33,13 +35,17 @@ export class FormvisaComponent implements OnInit, AfterViewInit {
 
   siteKey = '6LeDZuArAAAAAMQIbKtQJ8V60ePbrjz4VTlQP9Oj';
   captchaToken: string = '';
+  isSubmitting = false;
+submitMsg: string | null = null;
+submitOk = false;
 
   private api = environment.apiBaseUrl;
 
   constructor(
     private fb: FormBuilder,
     private http: HttpClient,
-    public analytics: AnalyticsService
+    public analytics: AnalyticsService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -136,11 +142,7 @@ export class FormvisaComponent implements OnInit, AfterViewInit {
 
       // ====== (B) CAMPOS DS-160 EXTRA ======
 
-      // Application meta (si ya no lo usas en HTML, no estorba)
-      ds160_post: ['', Validators.required],
-      ds160_language: ['es'],
-      ds160_securityQuestion: ['', Validators.required],
-      ds160_securityAnswer: ['', [Validators.required, Validators.minLength(2)]],
+      // Application meta (si ya no lo usas en HTML, no estorbas)
 
       // Personal
       ds160_apellidos: [''],
@@ -570,62 +572,77 @@ export class FormvisaComponent implements OnInit, AfterViewInit {
   // =========================
   // SUBMIT
   // =========================
-  onSubmit() {
-    // debug invalids
-    Object.keys(this.visaForm.controls).forEach((key) => {
-      const control = this.visaForm.get(key);
-      if (control?.invalid) console.log('Campo inválido:', key, control.errors);
-    });
+onSubmit() {
+  this.submitMsg = null;
+  this.submitOk = false;
 
-    if (!this.captchaToken) {
-      alert('Por favor, completa el reCAPTCHA.');
-      return;
-    }
+  // Evita doble click
+  if (this.isSubmitting) return;
 
-    if (!this.visaForm.valid) {
-      this.visaForm.markAllAsTouched();
-      return;
-    }
+  // Marca todo para que salgan errores visibles
+  this.visaForm.markAllAsTouched();
 
-    // (a) valida captcha en backend
-    this.http.post(`${this.api}/api/verify-recaptcha`, { token: this.captchaToken }).subscribe({
-      next: () => {
-        const payload = {
-          ...this.visaForm.getRawValue(),
-          _meta: {
-            form: 'ds160_extended',
-            submittedAt: new Date().toISOString()
-          }
-        };
+  if (!this.captchaToken) {
+    this.submitMsg = 'Por favor, completa el reCAPTCHA.';
+    return;
+  }
 
-        this.http.post(`${this.api}/api/form-visa-americana`, payload).subscribe({
-          next: (res) => {
-            console.log('Formulario enviado exitosamente', res);
-            alert('¡Información enviada!');
-            this.analytics.logEvent('form_submit', { form: 'visa', status: 'success' });
+  if (this.visaForm.invalid) {
+    this.submitMsg = 'Revisa los campos obligatorios antes de enviar.';
+    this.scrollToFirstInvalid();
+    return;
+  }
 
-            this.visaForm.reset();
+  this.isSubmitting = true;
 
-            // Re-aplica defaults seguros después del reset (para que no se quede todo null)
-            this.applySafeDefaultsAfterReset();
+  const payload = {
+    ...this.visaForm.getRawValue(),
+    _meta: { form: 'ds160_extended', submittedAt: new Date().toISOString() }
+  };
 
-            if (typeof grecaptcha !== 'undefined') grecaptcha.reset();
-            this.captchaToken = '';
-          },
-          error: (err) => {
-            console.error('Error al enviar el formulario', err);
-            alert('Hubo un error al enviar. Intenta más tarde.');
-          }
-        });
+  this.http
+    .post(`${this.api}/api/verify-recaptcha`, { token: this.captchaToken })
+    .pipe(
+      switchMap(() => this.http.post(`${this.api}/api/form-visa-americana`, payload)),
+      finalize(() => (this.isSubmitting = false))
+    )
+    .subscribe({
+      next: (res) => {
+        console.log('✅ Formulario enviado', res);
+
+        this.submitOk = true;
+        this.submitMsg = '¡Información enviada! Redirigiendo al inicio...';
+
+        this.analytics.logEvent('form_submit', { form: 'visa', status: 'success' });
+
+        this.visaForm.reset();
+        this.applySafeDefaultsAfterReset();
+
+        if (typeof grecaptcha !== 'undefined') grecaptcha.reset();
+        this.captchaToken = '';
+
+        // Redirige a Home (ajusta la ruta si la tuya no es '/')
+        setTimeout(() => this.router.navigate(['/']), 1200);
       },
       error: (err) => {
-        console.error('Captcha inválido:', err);
-        alert('Validación de reCAPTCHA falló. Intenta de nuevo.');
+        console.error('❌ Error al enviar', err);
+
+        this.submitOk = false;
+        this.submitMsg = 'Hubo un error al enviar. Intenta más tarde.';
+
+        // opcional: resetea captcha si quieres forzar uno nuevo
         if (typeof grecaptcha !== 'undefined') grecaptcha.reset();
         this.captchaToken = '';
       }
     });
-  }
+}
+
+private scrollToFirstInvalid() {
+  setTimeout(() => {
+    const el = document.querySelector('.ng-invalid[formControlName], .ng-invalid input, .ng-invalid select, .ng-invalid textarea') as HTMLElement | null;
+    if (el?.scrollIntoView) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }, 0);
+}
 
   private applySafeDefaultsAfterReset(): void {
     // Defaults que evitan que arranque inválido (YesNo -> false)

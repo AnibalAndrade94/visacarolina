@@ -807,14 +807,18 @@
             <!-- =========================
            PREGUNTAS EXTRA (TU SECCIÓN + DS-160 VISA)
       ========================== -->
-
+            <div *ngIf="submitMsg" class="alert" [class.alert-success]="submitOk" [class.alert-danger]="!submitOk">
+                {{ submitMsg }}
+            </div>
 
             <!-- CAPTCHA -->
             <div id="captcha-container" class="mt-3"></div>
 
             <!-- Botón de enviar -->
             <div class="text-center mt-4">
-                <button type="submit" class="btn btn-success btn-lg">Enviar Información</button>
+                <button type="submit" class="btn btn-success btn-lg" [disabled]="isSubmitting">
+  {{ isSubmitting ? 'Enviando...' : 'Enviar Información' }}
+</button>
             </div>
         </form>
     </div>
