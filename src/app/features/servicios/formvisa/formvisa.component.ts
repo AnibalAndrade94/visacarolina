@@ -77,9 +77,9 @@ submitOk = false;
       lugarLlegadaEU: [''],
 
       // Dirección USA (tu sección en HTML la marca con *)
-      direccionUSA: ['', Validators.required],
-      telefonoUSA: ['', Validators.required],
-      cpUSA: ['', Validators.required],
+      direccionUSA: ['', ],
+      telefonoUSA: ['', ],
+      cpUSA: ['', ],
 
       nombreHotel: [''],
       direccionHotel: [''],
@@ -150,7 +150,7 @@ submitOk = false;
       ds160_fullNameNative: [''],
 
       // IMPORTANT: defaults en false para que no arranque inválido
-      ds160_hasOtherNames: [false as YesNo, Validators.required],
+      ds160_hasOtherNames: [false as YesNo,],
       ds160_otherNames: this.fb.array([]), // {apellidos, nombres}
 
       ds160_birthCity: [''],
@@ -159,10 +159,10 @@ submitOk = false;
 
       ds160_nationality: ['Mexico', Validators.required],
 
-      ds160_hasOtherNationalities: [false as YesNo, Validators.required],
+      ds160_hasOtherNationalities: [false as YesNo,],
       ds160_otherNationalities: this.fb.array([]), // {country, explain}
 
-      ds160_permResidentOtherCountry: [false as YesNo, Validators.required],
+      ds160_permResidentOtherCountry: [false as YesNo, ],
       ds160_permResidentCountry: [''],
 
       ds160_usSSN: [''],
@@ -170,10 +170,10 @@ submitOk = false;
 
       // Travel
       ds160_visaCategory: ['B1/B2', Validators.required],
-      ds160_purposeOfTrip: ['', Validators.required],
+      ds160_purposeOfTrip: ['',],
       ds160_purposeDetail: [''],
 
-      ds160_hasSpecificPlans: [false as YesNo, Validators.required],
+      ds160_hasSpecificPlans: [false as YesNo, ],
       ds160_arrivalDate: [''],
       ds160_departureDate: [''],
       ds160_arrivalCity: [''],
@@ -182,7 +182,7 @@ submitOk = false;
       ds160_intendedLengthOfStay: [''],
       ds160_lengthUnit: ['DAYS'],
 
-      ds160_payingEntity: ['SELF', Validators.required], // SELF|OTHER_PERSON|COMPANY|OTHER
+      ds160_payingEntity: ['SELF', ], // SELF|OTHER_PERSON|COMPANY|OTHER
       ds160_payerPerson: this.fb.group({
         fullName: [''],
         relationship: [''],
@@ -199,24 +199,24 @@ submitOk = false;
       }),
 
       // Previous U.S. Travel
-      ds160_beenToUS: [false as YesNo, Validators.required],
+      ds160_beenToUS: [false as YesNo, ],
       ds160_previousTrips: this.fb.array([]), // {arrivalDate, departureDate, durationText}
 
-      ds160_usDriversLicense: [false as YesNo, Validators.required],
+      ds160_usDriversLicense: [false as YesNo,],
       ds160_dlNumber: [''],
       ds160_dlState: [''],
 
-      ds160_hadUSVisa: [false as YesNo, Validators.required],
+      ds160_hadUSVisa: [false as YesNo, ],
       ds160_previousVisaNumber: [''],
       ds160_previousVisaIssueDate: [''],
 
-      ds160_visaRefused: [false as YesNo, Validators.required],
+      ds160_visaRefused: [false as YesNo,],
       ds160_visaRefusedExplain: [''],
 
-      ds160_visaRevoked: [false as YesNo, Validators.required],
+      ds160_visaRevoked: [false as YesNo,],
       ds160_visaRevokedExplain: [''],
 
-      ds160_immigrantPetition: [false as YesNo, Validators.required],
+      ds160_immigrantPetition: [false as YesNo,],
       ds160_immigrantPetitionExplain: [''],
 
       // Address / Mailing
@@ -241,26 +241,26 @@ submitOk = false;
       ds160_passportIssuedCountry: ['Mexico'],
       ds160_passportIssueDate: [''],
 
-      ds160_passportLostOrStolen: [false as YesNo, Validators.required],
+      ds160_passportLostOrStolen: [false as YesNo,],
       ds160_passportLostOrStolenExplain: [''],
 
       // U.S. Point of Contact
-      ds160_usContactType: ['PERSON', Validators.required], // PERSON|ORGANIZATION
-      ds160_usContactNameOrOrg: ['', Validators.required],
-      ds160_usContactRelationship: ['', Validators.required],
-      ds160_usContactAddress: ['', Validators.required],
-      ds160_usContactPhone: ['', Validators.required],
+      ds160_usContactType: ['PERSON', ], // PERSON|ORGANIZATION
+      ds160_usContactNameOrOrg: ['', ],
+      ds160_usContactRelationship: ['',],
+      ds160_usContactAddress: ['', ],
+      ds160_usContactPhone: ['', ],
       ds160_usContactEmail: [''],
 
       // Family DS-160
-      ds160_hasImmediateRelativesInUS: [false as YesNo, Validators.required],
+      ds160_hasImmediateRelativesInUS: [false as YesNo, ],
       ds160_relativesInUS: this.fb.array([]), // {relationship, fullName, statusInUS, cityState}
 
-      ds160_hasChildren: [false as YesNo, Validators.required],
+      ds160_hasChildren: [false as YesNo, ],
       ds160_children: this.fb.array([]), // {apellidos,nombres,birthDate,birthCity,birthCountry}
 
       // Work/Education/Training
-      ds160_primaryOccupation: ['', Validators.required],
+      ds160_primaryOccupation: ['',],
       ds160_presentEmployer: this.fb.group({
         employerName: [''],
         address: [''],
@@ -292,44 +292,11 @@ submitOk = false;
       ds160_specializedSkills: [''],
 
       // Security and Background
-      ds160_security_part1: this.fb.group({
-        communicableDisease: [false as YesNo, Validators.required],
-        mentalOrPhysicalDisorder: [false as YesNo, Validators.required],
-        drugAbuser: [false as YesNo, Validators.required],
-        explain: ['']
-      }),
-      ds160_security_part2: this.fb.group({
-        arrestedOrConvicted: [false as YesNo, Validators.required],
-        violatedDrugLaws: [false as YesNo, Validators.required],
-        engagedInProstitution: [false as YesNo, Validators.required],
-        moneyLaundering: [false as YesNo, Validators.required],
-        explain: ['']
-      }),
-      ds160_security_part3: this.fb.group({
-        soughtToViolateUSImmigration: [false as YesNo, Validators.required],
-        childCustody: [false as YesNo, Validators.required],
-        voterFraud: [false as YesNo, Validators.required],
-        renouncedCitizenshipToAvoidTax: [false as YesNo, Validators.required],
-        explain: ['']
-      }),
-      ds160_security_part4: this.fb.group({
-        terroristActivities: [false as YesNo, Validators.required],
-        genocide: [false as YesNo, Validators.required],
-        torture: [false as YesNo, Validators.required],
-        recruitedChildSoldiers: [false as YesNo, Validators.required],
-        explain: ['']
-      }),
-      ds160_security_part5: this.fb.group({
-        deportedOrRemoved: [false as YesNo, Validators.required],
-        immigrationFraud: [false as YesNo, Validators.required],
-        failedToAttendHearing: [false as YesNo, Validators.required],
-        unlawfulPresence: [false as YesNo, Validators.required],
-        explain: ['']
-      }),
+
 
       // Consent
-      ds160_confirmTruth: [false, Validators.requiredTrue],
-      ds160_acceptPrivacy: [false, Validators.requiredTrue]
+      ds160_confirmTruth: [false,],
+      ds160_acceptPrivacy: [false,]
     });
 
     // Mantengo tu lógica de habilitar/deshabilitar estudio/trabajo
