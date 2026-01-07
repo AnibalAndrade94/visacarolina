@@ -57,247 +57,170 @@ submitOk = false;
     // FORM BASE
     // =========================
     this.visaForm = this.fb.group({
-      // ====== (A) TU FORM ACTUAL ======
-      // Información Personal
-      nombre: ['', Validators.required],
-      estadoCivil: ['', Validators.required],
-      lugarNacimiento: ['', Validators.required],
-      fechaNacimiento: ['', Validators.required],
-      sexo: ['', Validators.required],
-      curp: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
-      direccionCasa: ['', Validators.required],
-      telefonoCasa: ['', [Validators.required, Validators.pattern('^[0-9]{10,15}$')]],
-      telefonoCelular: ['', [Validators.required, Validators.pattern('^[0-9]{10,15}$')]],
+  // =========================
+  // INFORMACIÓN PERSONAL (HTML)
+  // =========================
+  nombre: ['', Validators.required],
+  estadoCivil: ['', Validators.required],
+  lugarNacimiento: ['', Validators.required],
 
-      // Información de Viaje (legacy; si no lo usas en HTML no estorba)
-      numeroPasaporte: [''],
-      pasaporteVigencia: [''],
-      fechaProbableViaje: [''],
-      lugarLlegadaEU: [''],
+  ds160_birthCity: [''],
+  ds160_birthState: [''],
+  ds160_birthCountry: ['Mexico'],
 
-      // Dirección USA (tu sección en HTML la marca con *)
-      direccionUSA: ['', ],
-      telefonoUSA: ['', ],
-      cpUSA: ['', ],
+  fechaNacimiento: ['', Validators.required],
+  sexo: ['', Validators.required],
 
-      nombreHotel: [''],
-      direccionHotel: [''],
-      visitaFamiliaEmpresa: [''],
+  ds160_nationality: ['Mexico', Validators.required],
 
-      tieneFamiliaEnEU: [''],
-      viajesOtrosPaises: [''],
-      fechaUltimoViaje: [''],
-      haViajadoUSA: [''],
-      fechasViaje: [''],
+  ds160_hasOtherNames: [false], // (si luego agregas el select, ya está listo)
+  ds160_otherNames: this.fb.array([]), // {apellidos, nombres}
 
-      // Visa
-      numeroVisa: [''],
-      fechaValidezVisa: [''],
-      visaOtorgada: [''],
-      visaRevocada: [''],
-      huellasTomadas: [''],
+  ds160_hasOtherNationalities: [null, Validators.required],
+  ds160_otherNationalities: this.fb.array([]), // {country, explain}
 
-      // Viaja acompañado (legacy)
-      viajaAcompanado: [''],
-      acompanantes: this.fb.array([]),
-      personasViajan: [''],
+  ds160_permResidentOtherCountry: [null, Validators.required],
+  ds160_permResidentCountry: [''],
 
-      // Padres
-      padresEnUSA: [''],
+  curp: ['', Validators.required],
+  email: ['', [Validators.required, Validators.email]],
+  direccionCasa: ['', Validators.required],
+  telefonoCasa: ['', [Validators.required, Validators.pattern('^[0-9]{10,15}$')]],
+  telefonoCelular: ['', [Validators.required, Validators.pattern('^[0-9]{10,15}$')]],
 
-      // Visa previa (legacy)
-      tieneVisa: [''],
-      numeroVisaExtra: [''],
+  // =========================
+  // INFORMACIÓN DE VIAJE (HTML)
+  // =========================
+  ds160_visaCategory: ['', Validators.required],
+  ds160_purposeOfTrip: ['', Validators.required],
+  ds160_purposeDetail: [''],
 
-      // Redes sociales (tu group actual)
-      redesSociales: this.fb.group({
-        usaRedes: [false as YesNo], // antes null -> false para no arrancar inválido
-        plataforma: [''],
-        link: ['']
-      }),
+  ds160_hasSpecificPlans: [null, Validators.required],
 
-      // Información Familiar
-      nombrePadre: [''],
-      fechaNacimientoPadre: [''],
-      nombreMadre: [''],
-      fechaNacimientoMadre: [''],
-      nombreConyuge: [''],
-      lugarNacimientoConyuge: [''],
-      fechaNacimientoConyuge: [''],
+  // Planes específicos (si true)
+  ds160_arrivalDate: [''],
+  ds160_departureDate: [''],
+  ds160_arrivalCity: [''],
+  ds160_usStayAddress: [''],
 
-      // Información Profesional
-      estudia: [false],
-      trabaja: [false],
-      nombreEscuela: [{ value: '', disabled: true }],
-      direccionEscuela: [{ value: '', disabled: true }],
-      nombreEmpresa: [{ value: '', disabled: true }],
-      puesto: [{ value: '', disabled: true }],
-      sueldo: [{ value: '', disabled: true }],
-      descripcionPuesto: [{ value: '', disabled: true }],
+  // Sin planes específicos (si false)
+  ds160_intendedArrivalDate: [''],
+  ds160_intendedLengthOfStay: [''],
+  ds160_lengthUnit: ['DAYS'],
 
-      // Dirección actual (legacy)
-      direccionActual: [''],
-      cpActual: [''],
+  numeroPasaporte: [''],
+  numeroVisa: [''],
+  huellasTomadas: [''],
+  fechaUltimoViaje: [''],
+  personasViajan: [''],
 
-      // ====== (B) CAMPOS DS-160 EXTRA ======
+  ds160_payingEntity: ['', Validators.required], // SELF | OTHER_PERSON | COMPANY | OTHER
 
-      // Application meta (si ya no lo usas en HTML, no estorbas)
+  ds160_payerPerson: this.fb.group({
+    fullName: [''],
+    relationship: [''],
+    phone: [''],
+    email: [''],
+    address: ['']
+  }),
 
-      // Personal
-      ds160_apellidos: [''],
-      ds160_nombres: [''],
-      ds160_fullNameNative: [''],
+  ds160_payerCompany: this.fb.group({
+    companyName: [''],
+    relationship: [''],
+    phone: [''],
+    email: [''],
+    address: ['']
+  }),
 
-      // IMPORTANT: defaults en false para que no arranque inválido
-      ds160_hasOtherNames: [false as YesNo,],
-      ds160_otherNames: this.fb.array([]), // {apellidos, nombres}
+  // =========================
+  // VIAJES PREVIOS USA (HTML)
+  // =========================
+  ds160_beenToUS: [null, Validators.required],
+  ds160_previousTrips: this.fb.array([]), // {arrivalDate, departureDate, durationText}
 
-      ds160_birthCity: [''],
-      ds160_birthState: [''],
-      ds160_birthCountry: ['Mexico'],
+  ds160_usDriversLicense: [null, Validators.required],
+  ds160_dlNumber: [''],
+  ds160_dlState: [''],
 
-      ds160_nationality: ['Mexico', Validators.required],
+  // =========================
+  // DIRECCIÓN EN USA (HTML)
+  // =========================
+  direccionUSA: ['', Validators.required],
+  telefonoUSA: ['', Validators.required],
+  cpUSA: ['', Validators.required],
 
-      ds160_hasOtherNationalities: [false as YesNo,],
-      ds160_otherNationalities: this.fb.array([]), // {country, explain}
+  nombreHotel: [''],
+  direccionHotel: [''],
+  visitaFamiliaEmpresa: [''],
 
-      ds160_permResidentOtherCountry: [false as YesNo, ],
-      ds160_permResidentCountry: [''],
+  // =========================
+  // PUNTO DE CONTACTO EN USA (HTML)
+  // =========================
+  ds160_usContactType: ['PERSON', Validators.required],
+  ds160_usContactNameOrOrg: ['', Validators.required],
+  ds160_usContactRelationship: ['', Validators.required],
+  ds160_usContactAddress: ['', Validators.required],
+  ds160_usContactPhone: ['', Validators.required],
+  ds160_usContactEmail: [''],
 
-      ds160_usSSN: [''],
-      ds160_usTaxId: [''],
+  // =========================
+  // INFORMACIÓN FAMILIAR (HTML)
+  // =========================
+  nombrePadre: [''],
+  fechaNacimientoPadre: [''],
+  nombreMadre: [''],
+  fechaNacimientoMadre: [''],
+  nombreConyuge: [''],
+  lugarNacimientoConyuge: [''],
+  fechaNacimientoConyuge: [''],
 
-      // Travel
-      ds160_visaCategory: ['B1/B2', Validators.required],
-      ds160_purposeOfTrip: ['',],
-      ds160_purposeDetail: [''],
+  ds160_hasImmediateRelativesInUS: [null, Validators.required],
+  ds160_relativesInUS: this.fb.array([]), // {relationship, fullName, statusInUS, cityState}
 
-      ds160_hasSpecificPlans: [false as YesNo, ],
-      ds160_arrivalDate: [''],
-      ds160_departureDate: [''],
-      ds160_arrivalCity: [''],
-      ds160_usStayAddress: [''],
-      ds160_intendedArrivalDate: [''],
-      ds160_intendedLengthOfStay: [''],
-      ds160_lengthUnit: ['DAYS'],
+  ds160_hasChildren: [null, Validators.required],
+  ds160_children: this.fb.array([]), // {apellidos, nombres, birthDate, birthCity, birthCountry}
 
-      ds160_payingEntity: ['SELF', ], // SELF|OTHER_PERSON|COMPANY|OTHER
-      ds160_payerPerson: this.fb.group({
-        fullName: [''],
-        relationship: [''],
-        phone: [''],
-        email: [''],
-        address: ['']
-      }),
-      ds160_payerCompany: this.fb.group({
-        companyName: [''],
-        relationship: [''],
-        phone: [''],
-        email: [''],
-        address: ['']
-      }),
+  // =========================
+  // INFORMACIÓN PROFESIONAL (HTML)
+  // =========================
+  ds160_primaryOccupation: ['', Validators.required],
 
-      // Previous U.S. Travel
-      ds160_beenToUS: [false as YesNo, ],
-      ds160_previousTrips: this.fb.array([]), // {arrivalDate, departureDate, durationText}
+  estudia: [false],
+  trabaja: [false],
 
-      ds160_usDriversLicense: [false as YesNo,],
-      ds160_dlNumber: [''],
-      ds160_dlState: [''],
+  nombreEscuela: [{ value: '', disabled: true }],
+  direccionEscuela: [{ value: '', disabled: true }],
 
-      ds160_hadUSVisa: [false as YesNo, ],
-      ds160_previousVisaNumber: [''],
-      ds160_previousVisaIssueDate: [''],
+  nombreEmpresa: [{ value: '', disabled: true }],
+  puesto: [{ value: '', disabled: true }],
+  sueldo: [{ value: '', disabled: true }],
+  descripcionPuesto: [{ value: '', disabled: true }],
 
-      ds160_visaRefused: [false as YesNo,],
-      ds160_visaRefusedExplain: [''],
+  // DS-160 Empleo actual (HTML)
+  ds160_presentEmployer: this.fb.group({
+    employerName: [''],
+    city: [''],
+    country: [''],
+    jobTitle: [''],
+    startDate: [''],
+    monthlySalary: [''],
+    duties: ['']
+  }),
 
-      ds160_visaRevoked: [false as YesNo,],
-      ds160_visaRevokedExplain: [''],
+  // DS-160 Escuela actual (HTML)
+  ds160_presentSchool: this.fb.group({
+    schoolName: [''],
+    city: [''],
+    country: [''],
+    courseOfStudy: [''],
+    startDate: ['']
+  }),
 
-      ds160_immigrantPetition: [false as YesNo,],
-      ds160_immigrantPetitionExplain: [''],
+  ds160_previousEmployers: this.fb.array([]), // {employerName, jobTitle, city, country, from, to, duties}
+  ds160_previousSchools: this.fb.array([]), // {schoolName, city, country, from, to, course}
+  ds160_languages: this.fb.array([]) // {language}
+});
 
-      // Address / Mailing
-      ds160_mailingSameAsHome: [true],
-      ds160_mailingAddress: this.fb.group({
-        line1: [''],
-        line2: [''],
-        city: [''],
-        state: [''],
-        postalCode: [''],
-        country: ['']
-      }),
-
-      // Social media DS-160
-      ds160_socialProfiles: this.fb.array([]), // {platform, handle, url}
-      ds160_otherWebsites: this.fb.array([]), // {url}
-
-      // Passport DS-160
-      ds160_passportBookNumber: [''],
-      ds160_passportIssuedCity: [''],
-      ds160_passportIssuedState: [''],
-      ds160_passportIssuedCountry: ['Mexico'],
-      ds160_passportIssueDate: [''],
-
-      ds160_passportLostOrStolen: [false as YesNo,],
-      ds160_passportLostOrStolenExplain: [''],
-
-      // U.S. Point of Contact
-      ds160_usContactType: ['PERSON', ], // PERSON|ORGANIZATION
-      ds160_usContactNameOrOrg: ['', ],
-      ds160_usContactRelationship: ['',],
-      ds160_usContactAddress: ['', ],
-      ds160_usContactPhone: ['', ],
-      ds160_usContactEmail: [''],
-
-      // Family DS-160
-      ds160_hasImmediateRelativesInUS: [false as YesNo, ],
-      ds160_relativesInUS: this.fb.array([]), // {relationship, fullName, statusInUS, cityState}
-
-      ds160_hasChildren: [false as YesNo, ],
-      ds160_children: this.fb.array([]), // {apellidos,nombres,birthDate,birthCity,birthCountry}
-
-      // Work/Education/Training
-      ds160_primaryOccupation: ['',],
-      ds160_presentEmployer: this.fb.group({
-        employerName: [''],
-        address: [''],
-        city: [''],
-        state: [''],
-        postalCode: [''],
-        country: [''],
-        phone: [''],
-        jobTitle: [''],
-        monthlySalary: [''],
-        duties: [''],
-        startDate: ['']
-      }),
-      ds160_presentSchool: this.fb.group({
-        schoolName: [''],
-        address: [''],
-        city: [''],
-        state: [''],
-        postalCode: [''],
-        country: [''],
-        courseOfStudy: [''],
-        startDate: ['']
-      }),
-      ds160_previousEmployers: this.fb.array([]),
-      ds160_previousSchools: this.fb.array([]),
-      ds160_languages: this.fb.array([]),
-      ds160_countriesVisited5Years: this.fb.array([]),
-      ds160_organizations: this.fb.array([]),
-      ds160_specializedSkills: [''],
-
-      // Security and Background
-
-
-      // Consent
-      ds160_confirmTruth: [false,],
-      ds160_acceptPrivacy: [false,]
-    });
 
     // Mantengo tu lógica de habilitar/deshabilitar estudio/trabajo
     // + lógica DS-160 condicional
