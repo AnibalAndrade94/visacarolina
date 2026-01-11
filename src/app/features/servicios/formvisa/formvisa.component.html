@@ -83,11 +83,9 @@
                 </div>
 
                 <div class="form-group">
-                    <label>Nacionalidad *</label>
+                    <label>Nacionalidad </label>
                     <input type="text" formControlName="ds160_nationality" class="form-control" placeholder="Ej. Mexico" />
-                    <span *ngIf="visaForm.get('ds160_nationality')?.invalid && visaForm.get('ds160_nationality')?.touched" class="error-span">
-            ⚠️ Este campo es obligatorio
-          </span>
+
                 </div>
 
                 <div class="form-group">
@@ -180,7 +178,7 @@
                 <legend>Información de Viaje</legend>
 
                 <div class="form-group">
-                    <label>Categoría de visa *</label>
+                    <label>Categoría de visa </label>
                     <select formControlName="ds160_visaCategory" class="form-control">
             <option value="">Seleccione</option>
             <option value="B1/B2">B1/B2 (Turismo/Negocios)</option>
@@ -191,17 +189,13 @@
             <option value="H1B">H1B</option>
             <option value="OTHER">Otra</option>
           </select>
-                    <span *ngIf="visaForm.get('ds160_visaCategory')?.invalid && visaForm.get('ds160_visaCategory')?.touched" class="error-span">
-            ⚠️ Este campo es obligatorio
-          </span>
+
                 </div>
 
                 <div class="form-group">
-                    <label>Propósito del viaje *</label>
+                    <label>Propósito del viaje </label>
                     <input type="text" formControlName="ds160_purposeOfTrip" class="form-control" placeholder="Ej. Turismo, Negocios, Visitar familia..." />
-                    <span *ngIf="visaForm.get('ds160_purposeOfTrip')?.invalid && visaForm.get('ds160_purposeOfTrip')?.touched" class="error-span">
-            ⚠️ Este campo es obligatorio
-          </span>
+
                 </div>
 
                 <div class="form-group">
@@ -210,56 +204,48 @@
                 </div>
 
                 <div class="form-group">
-                    <label>¿Tiene planes específicos? *</label>
+                    <label>¿Tiene planes específicos? </label>
                     <select formControlName="ds160_hasSpecificPlans" class="form-control">
             <option value="">Seleccione</option>
             <option [ngValue]="true">Sí</option>
             <option [ngValue]="false">No</option>
           </select>
-                    <span *ngIf="visaForm.get('ds160_hasSpecificPlans')?.invalid && visaForm.get('ds160_hasSpecificPlans')?.touched" class="error-span">
-            ⚠️ Responda esta pregunta
-          </span>
+
                 </div>
 
                 <!-- Planes específicos -->
                 <div *ngIf="visaForm.get('ds160_hasSpecificPlans')?.value === true" class="fade-in">
                     <div class="form-group">
-                        <label>Fecha de llegada *</label>
+                        <label>Fecha de llegada </label>
                         <input type="date" formControlName="ds160_arrivalDate" class="form-control" />
-                        <span *ngIf="visaForm.get('ds160_arrivalDate')?.invalid && visaForm.get('ds160_arrivalDate')?.touched" class="error-span">⚠️ Obligatorio</span>
                     </div>
 
                     <div class="form-group">
-                        <label>Fecha de salida *</label>
+                        <label>Fecha de salida </label>
                         <input type="date" formControlName="ds160_departureDate" class="form-control" />
-                        <span *ngIf="visaForm.get('ds160_departureDate')?.invalid && visaForm.get('ds160_departureDate')?.touched" class="error-span">⚠️ Obligatorio</span>
                     </div>
 
                     <div class="form-group">
-                        <label>Ciudad de llegada *</label>
+                        <label>Ciudad de llegada </label>
                         <input type="text" formControlName="ds160_arrivalCity" class="form-control" placeholder="Ciudad" />
-                        <span *ngIf="visaForm.get('ds160_arrivalCity')?.invalid && visaForm.get('ds160_arrivalCity')?.touched" class="error-span">⚠️ Obligatorio</span>
                     </div>
 
                     <div class="form-group">
-                        <label>Dirección donde se hospedará *</label>
+                        <label>Dirección donde se hospedará </label>
                         <input type="text" formControlName="ds160_usStayAddress" class="form-control" placeholder="Dirección completa" />
-                        <span *ngIf="visaForm.get('ds160_usStayAddress')?.invalid && visaForm.get('ds160_usStayAddress')?.touched" class="error-span">⚠️ Obligatorio</span>
                     </div>
                 </div>
 
                 <!-- No tiene planes específicos -->
                 <div *ngIf="visaForm.get('ds160_hasSpecificPlans')?.value === false" class="fade-in">
                     <div class="form-group">
-                        <label>Fecha aproximada de llegada *</label>
+                        <label>Fecha aproximada de llegada </label>
                         <input type="date" formControlName="ds160_intendedArrivalDate" class="form-control" />
-                        <span *ngIf="visaForm.get('ds160_intendedArrivalDate')?.invalid && visaForm.get('ds160_intendedArrivalDate')?.touched" class="error-span">⚠️ Obligatorio</span>
                     </div>
 
                     <div class="form-group">
-                        <label>Duración aproximada de estancia *</label>
+                        <label>Duración aproximada de estancia </label>
                         <input type="text" formControlName="ds160_intendedLengthOfStay" class="form-control" placeholder="Ej. 2 semanas / 10 días" />
-                        <span *ngIf="visaForm.get('ds160_intendedLengthOfStay')?.invalid && visaForm.get('ds160_intendedLengthOfStay')?.touched" class="error-span">⚠️ Obligatorio</span>
                     </div>
 
                     <div class="form-group">
@@ -300,7 +286,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label>¿Quién pagará el viaje? *</label>
+                    <label>¿Quién pagará el viaje? </label>
                     <select formControlName="ds160_payingEntity" class="form-control">
             <option value="">Seleccione</option>
             <option value="SELF">Yo</option>
@@ -308,64 +294,54 @@
             <option value="COMPANY">Empresa</option>
             <option value="OTHER">Otro</option>
           </select>
-                    <span *ngIf="visaForm.get('ds160_payingEntity')?.invalid && visaForm.get('ds160_payingEntity')?.touched" class="error-span">
-            ⚠️ Este campo es obligatorio
-          </span>
+
                 </div>
 
                 <!-- Payer person -->
                 <div formGroupName="ds160_payerPerson" *ngIf="visaForm.get('ds160_payingEntity')?.value === 'OTHER_PERSON'" class="fade-in">
                     <div class="form-group">
-                        <label>Nombre completo *</label>
+                        <label>Nombre completo </label>
                         <input type="text" formControlName="fullName" class="form-control" />
-                        <span *ngIf="visaForm.get('ds160_payerPerson.fullName')?.invalid && visaForm.get('ds160_payerPerson.fullName')?.touched" class="error-span">⚠️ Obligatorio</span>
                     </div>
                     <div class="form-group">
-                        <label>Relación *</label>
+                        <label>Relación </label>
                         <input type="text" formControlName="relationship" class="form-control" />
-                        <span *ngIf="visaForm.get('ds160_payerPerson.relationship')?.invalid && visaForm.get('ds160_payerPerson.relationship')?.touched" class="error-span">⚠️ Obligatorio</span>
                     </div>
                     <div class="form-group">
-                        <label>Teléfono *</label>
+                        <label>Teléfono </label>
                         <input type="tel" formControlName="phone" class="form-control" />
-                        <span *ngIf="visaForm.get('ds160_payerPerson.phone')?.invalid && visaForm.get('ds160_payerPerson.phone')?.touched" class="error-span">⚠️ Obligatorio</span>
                     </div>
                     <div class="form-group">
                         <label>Email</label>
                         <input type="email" formControlName="email" class="form-control" />
                     </div>
                     <div class="form-group">
-                        <label>Dirección *</label>
+                        <label>Dirección </label>
                         <input type="text" formControlName="address" class="form-control" />
-                        <span *ngIf="visaForm.get('ds160_payerPerson.address')?.invalid && visaForm.get('ds160_payerPerson.address')?.touched" class="error-span">⚠️ Obligatorio</span>
                     </div>
                 </div>
 
                 <!-- Payer company -->
                 <div formGroupName="ds160_payerCompany" *ngIf="visaForm.get('ds160_payingEntity')?.value === 'COMPANY'" class="fade-in">
                     <div class="form-group">
-                        <label>Nombre de la empresa *</label>
+                        <label>Nombre de la empresa </label>
                         <input type="text" formControlName="companyName" class="form-control" />
-                        <span *ngIf="visaForm.get('ds160_payerCompany.companyName')?.invalid && visaForm.get('ds160_payerCompany.companyName')?.touched" class="error-span">⚠️ Obligatorio</span>
                     </div>
                     <div class="form-group">
-                        <label>Relación *</label>
+                        <label>Relación </label>
                         <input type="text" formControlName="relationship" class="form-control" />
-                        <span *ngIf="visaForm.get('ds160_payerCompany.relationship')?.invalid && visaForm.get('ds160_payerCompany.relationship')?.touched" class="error-span">⚠️ Obligatorio</span>
                     </div>
                     <div class="form-group">
-                        <label>Teléfono *</label>
+                        <label>Teléfono </label>
                         <input type="tel" formControlName="phone" class="form-control" />
-                        <span *ngIf="visaForm.get('ds160_payerCompany.phone')?.invalid && visaForm.get('ds160_payerCompany.phone')?.touched" class="error-span">⚠️ Obligatorio</span>
                     </div>
                     <div class="form-group">
                         <label>Email</label>
                         <input type="email" formControlName="email" class="form-control" />
                     </div>
                     <div class="form-group">
-                        <label>Dirección *</label>
+                        <label>Dirección </label>
                         <input type="text" formControlName="address" class="form-control" />
-                        <span *ngIf="visaForm.get('ds160_payerCompany.address')?.invalid && visaForm.get('ds160_payerCompany.address')?.touched" class="error-span">⚠️ Obligatorio</span>
                     </div>
                 </div>
             </fieldset>
@@ -377,23 +353,22 @@
                 <legend>Viajes previos a Estados Unidos</legend>
 
                 <div class="form-group">
-                    <label>¿Ha estado antes en Estados Unidos? *</label>
+                    <label>¿Ha estado antes en Estados Unidos? </label>
                     <select formControlName="ds160_beenToUS" class="form-control">
             <option value="">Seleccione</option>
             <option [ngValue]="true">Sí</option>
             <option [ngValue]="false">No</option>
           </select>
-                    <span *ngIf="visaForm.get('ds160_beenToUS')?.invalid && visaForm.get('ds160_beenToUS')?.touched" class="error-span">⚠️ Responda esta pregunta</span>
                 </div>
 
                 <div formArrayName="ds160_previousTrips" *ngIf="visaForm.get('ds160_beenToUS')?.value">
                     <div *ngFor="let trip of dsPreviousTrips.controls; let i=index" [formGroupName]="i" class="sub-form">
                         <div class="form-group">
-                            <label>Fecha de llegada *</label>
+                            <label>Fecha de llegada </label>
                             <input type="date" formControlName="arrivalDate" class="form-control" />
                         </div>
                         <div class="form-group">
-                            <label>Fecha de salida *</label>
+                            <label>Fecha de salida </label>
                             <input type="date" formControlName="departureDate" class="form-control" />
                         </div>
                         <div class="form-group">
@@ -406,25 +381,22 @@
                 </div>
 
                 <div class="form-group mt-3">
-                    <label>¿Tiene licencia de conducir de USA? *</label>
+                    <label>¿Tiene licencia de conducir de USA? </label>
                     <select formControlName="ds160_usDriversLicense" class="form-control">
             <option value="">Seleccione</option>
             <option [ngValue]="true">Sí</option>
             <option [ngValue]="false">No</option>
           </select>
-                    <span *ngIf="visaForm.get('ds160_usDriversLicense')?.invalid && visaForm.get('ds160_usDriversLicense')?.touched" class="error-span">⚠️ Responda esta pregunta</span>
                 </div>
 
                 <div *ngIf="visaForm.get('ds160_usDriversLicense')?.value" class="fade-in">
                     <div class="form-group">
-                        <label>Número de licencia *</label>
+                        <label>Número de licencia </label>
                         <input type="text" formControlName="ds160_dlNumber" class="form-control" />
-                        <span *ngIf="visaForm.get('ds160_dlNumber')?.invalid && visaForm.get('ds160_dlNumber')?.touched" class="error-span">⚠️ Obligatorio</span>
                     </div>
                     <div class="form-group">
-                        <label>Estado que la emitió *</label>
+                        <label>Estado que la emitió </label>
                         <input type="text" formControlName="ds160_dlState" class="form-control" />
-                        <span *ngIf="visaForm.get('ds160_dlState')?.invalid && visaForm.get('ds160_dlState')?.touched" class="error-span">⚠️ Obligatorio</span>
                     </div>
                 </div>
             </fieldset>
@@ -436,12 +408,12 @@
                 <legend>Dirección en USA</legend>
 
                 <div class="form-group">
-                    <label>Dirección de llegada en USA *</label>
+                    <label>Dirección de llegada en USA </label>
                     <input type="text" formControlName="direccionUSA" class="form-control" />
                 </div>
 
                 <div class="form-group">
-                    <label>Teléfono en USA *</label>
+                    <label>Teléfono en USA </label>
                     <input type="tel" formControlName="telefonoUSA" class="form-control" placeholder="10 dígitos" />
                 </div>
 
@@ -473,7 +445,7 @@
                 <legend>Punto de contacto en USA</legend>
 
                 <div class="form-group">
-                    <label>Tipo de contacto *</label>
+                    <label>Tipo de contacto </label>
                     <select formControlName="ds160_usContactType" class="form-control">
             <option value="PERSON">Persona</option>
             <option value="ORGANIZATION">Organización</option>
@@ -481,27 +453,23 @@
                 </div>
 
                 <div class="form-group">
-                    <label>Nombre / Organización *</label>
+                    <label>Nombre / Organización </label>
                     <input type="text" formControlName="ds160_usContactNameOrOrg" class="form-control" />
-                    <span *ngIf="visaForm.get('ds160_usContactNameOrOrg')?.invalid && visaForm.get('ds160_usContactNameOrOrg')?.touched" class="error-span">⚠️ Obligatorio</span>
                 </div>
 
                 <div class="form-group">
-                    <label>Relación *</label>
+                    <label>Relación </label>
                     <input type="text" formControlName="ds160_usContactRelationship" class="form-control" placeholder="Ej. Amigo, Familiar, Empresa..." />
-                    <span *ngIf="visaForm.get('ds160_usContactRelationship')?.invalid && visaForm.get('ds160_usContactRelationship')?.touched" class="error-span">⚠️ Obligatorio</span>
                 </div>
 
                 <div class="form-group">
-                    <label>Dirección *</label>
+                    <label>Dirección </label>
                     <input type="text" formControlName="ds160_usContactAddress" class="form-control" />
-                    <span *ngIf="visaForm.get('ds160_usContactAddress')?.invalid && visaForm.get('ds160_usContactAddress')?.touched" class="error-span">⚠️ Obligatorio</span>
                 </div>
 
                 <div class="form-group">
-                    <label>Teléfono *</label>
+                    <label>Teléfono </label>
                     <input type="tel" formControlName="ds160_usContactPhone" class="form-control" />
-                    <span *ngIf="visaForm.get('ds160_usContactPhone')?.invalid && visaForm.get('ds160_usContactPhone')?.touched" class="error-span">⚠️ Obligatorio</span>
                 </div>
 
                 <div class="form-group">
@@ -554,13 +522,12 @@
                 <hr class="my-3">
 
                 <div class="form-group">
-                    <label>¿Tiene familiares inmediatos en USA? *</label>
+                    <label>¿Tiene familiares inmediatos en USA? </label>
                     <select formControlName="ds160_hasImmediateRelativesInUS" class="form-control">
             <option value="">Seleccione</option>
             <option [ngValue]="true">Sí</option>
             <option [ngValue]="false">No</option>
           </select>
-                    <span *ngIf="visaForm.get('ds160_hasImmediateRelativesInUS')?.invalid && visaForm.get('ds160_hasImmediateRelativesInUS')?.touched" class="error-span">⚠️ Responda esta pregunta</span>
                 </div>
 
                 <div formArrayName="ds160_relativesInUS" *ngIf="visaForm.get('ds160_hasImmediateRelativesInUS')?.value">
@@ -581,7 +548,6 @@
             <option [ngValue]="true">Sí</option>
             <option [ngValue]="false">No</option>
           </select>
-                    <span *ngIf="visaForm.get('ds160_hasChildren')?.invalid && visaForm.get('ds160_hasChildren')?.touched" class="error-span">⚠️ Responda esta pregunta</span>
                 </div>
 
                 <div formArrayName="ds160_children" *ngIf="visaForm.get('ds160_hasChildren')?.value">
@@ -604,7 +570,7 @@
                 <legend>Información Profesional</legend>
 
                 <div class="form-group">
-                    <label>Ocupación principal *</label>
+                    <label>Ocupación principal </label>
                     <select formControlName="ds160_primaryOccupation" class="form-control">
             <option value="">Seleccione</option>
             <option value="EMPLOYED">Empleado</option>
@@ -614,7 +580,6 @@
             <option value="RETIRED">Retirado</option>
             <option value="OTHER">Otro</option>
           </select>
-                    <span *ngIf="visaForm.get('ds160_primaryOccupation')?.invalid && visaForm.get('ds160_primaryOccupation')?.touched" class="error-span">⚠️ Este campo es obligatorio</span>
                 </div>
 
                 <!-- (TU CHECK) -->
@@ -669,33 +634,28 @@
                     <h5 class="mt-3">Empleo actual</h5>
 
                     <div class="form-group">
-                        <label>Nombre del empleador *</label>
+                        <label>Nombre del empleador </label>
                         <input type="text" formControlName="employerName" class="form-control" />
-                        <span *ngIf="visaForm.get('ds160_presentEmployer.employerName')?.invalid && visaForm.get('ds160_presentEmployer.employerName')?.touched" class="error-span">⚠️ Obligatorio</span>
                     </div>
 
                     <div class="form-group">
-                        <label>Ciudad *</label>
+                        <label>Ciudad </label>
                         <input type="text" formControlName="city" class="form-control" />
-                        <span *ngIf="visaForm.get('ds160_presentEmployer.city')?.invalid && visaForm.get('ds160_presentEmployer.city')?.touched" class="error-span">⚠️ Obligatorio</span>
                     </div>
 
                     <div class="form-group">
-                        <label>País *</label>
+                        <label>País </label>
                         <input type="text" formControlName="country" class="form-control" />
-                        <span *ngIf="visaForm.get('ds160_presentEmployer.country')?.invalid && visaForm.get('ds160_presentEmployer.country')?.touched" class="error-span">⚠️ Obligatorio</span>
                     </div>
 
                     <div class="form-group">
-                        <label>Puesto / cargo *</label>
+                        <label>Puesto / cargo </label>
                         <input type="text" formControlName="jobTitle" class="form-control" />
-                        <span *ngIf="visaForm.get('ds160_presentEmployer.jobTitle')?.invalid && visaForm.get('ds160_presentEmployer.jobTitle')?.touched" class="error-span">⚠️ Obligatorio</span>
                     </div>
 
                     <div class="form-group">
-                        <label>Fecha de inicio *</label>
+                        <label>Fecha de inicio </label>
                         <input type="date" formControlName="startDate" class="form-control" />
-                        <span *ngIf="visaForm.get('ds160_presentEmployer.startDate')?.invalid && visaForm.get('ds160_presentEmployer.startDate')?.touched" class="error-span">⚠️ Obligatorio</span>
                     </div>
 
                     <div class="form-group">
@@ -714,33 +674,28 @@
                     <h5 class="mt-3">Escuela actual</h5>
 
                     <div class="form-group">
-                        <label>Nombre de la escuela *</label>
+                        <label>Nombre de la escuela </label>
                         <input type="text" formControlName="schoolName" class="form-control" />
-                        <span *ngIf="visaForm.get('ds160_presentSchool.schoolName')?.invalid && visaForm.get('ds160_presentSchool.schoolName')?.touched" class="error-span">⚠️ Obligatorio</span>
                     </div>
 
                     <div class="form-group">
-                        <label>Ciudad *</label>
+                        <label>Ciudad </label>
                         <input type="text" formControlName="city" class="form-control" />
-                        <span *ngIf="visaForm.get('ds160_presentSchool.city')?.invalid && visaForm.get('ds160_presentSchool.city')?.touched" class="error-span">⚠️ Obligatorio</span>
                     </div>
 
                     <div class="form-group">
-                        <label>País *</label>
+                        <label>País </label>
                         <input type="text" formControlName="country" class="form-control" />
-                        <span *ngIf="visaForm.get('ds160_presentSchool.country')?.invalid && visaForm.get('ds160_presentSchool.country')?.touched" class="error-span">⚠️ Obligatorio</span>
                     </div>
 
                     <div class="form-group">
-                        <label>Curso / carrera *</label>
+                        <label>Curso / carrera </label>
                         <input type="text" formControlName="courseOfStudy" class="form-control" />
-                        <span *ngIf="visaForm.get('ds160_presentSchool.courseOfStudy')?.invalid && visaForm.get('ds160_presentSchool.courseOfStudy')?.touched" class="error-span">⚠️ Obligatorio</span>
                     </div>
 
                     <div class="form-group">
-                        <label>Fecha de inicio *</label>
+                        <label>Fecha de inicio </label>
                         <input type="date" formControlName="startDate" class="form-control" />
-                        <span *ngIf="visaForm.get('ds160_presentSchool.startDate')?.invalid && visaForm.get('ds160_presentSchool.startDate')?.touched" class="error-span">⚠️ Obligatorio</span>
                     </div>
                 </div>
 
