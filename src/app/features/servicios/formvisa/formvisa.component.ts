@@ -91,11 +91,11 @@ submitOk = false;
   // =========================
   // INFORMACIÓN DE VIAJE (HTML)
   // =========================
-  ds160_visaCategory: ['', Validators.required],
-  ds160_purposeOfTrip: ['', Validators.required],
+  ds160_visaCategory: [''],
+  ds160_purposeOfTrip: ['', ],
   ds160_purposeDetail: [''],
 
-  ds160_hasSpecificPlans: [null, Validators.required],
+  ds160_hasSpecificPlans: [null, ],
 
   // Planes específicos (si true)
   ds160_arrivalDate: [''],
@@ -114,7 +114,7 @@ submitOk = false;
   fechaUltimoViaje: [''],
   personasViajan: [''],
 
-  ds160_payingEntity: ['', Validators.required], // SELF | OTHER_PERSON | COMPANY | OTHER
+  ds160_payingEntity: [''], // SELF | OTHER_PERSON | COMPANY | OTHER
 
   ds160_payerPerson: this.fb.group({
     fullName: [''],
@@ -135,19 +135,19 @@ submitOk = false;
   // =========================
   // VIAJES PREVIOS USA (HTML)
   // =========================
-  ds160_beenToUS: [null, Validators.required],
+  ds160_beenToUS: [null,],
   ds160_previousTrips: this.fb.array([]), // {arrivalDate, departureDate, durationText}
 
-  ds160_usDriversLicense: [null, Validators.required],
+  ds160_usDriversLicense: [null,],
   ds160_dlNumber: [''],
   ds160_dlState: [''],
 
   // =========================
   // DIRECCIÓN EN USA (HTML)
   // =========================
-  direccionUSA: ['', Validators.required],
-  telefonoUSA: ['', Validators.required],
-  cpUSA: ['', Validators.required],
+  direccionUSA: ['', ],
+  telefonoUSA: ['', ],
+  cpUSA: ['', ],
 
   nombreHotel: [''],
   direccionHotel: [''],
@@ -156,11 +156,11 @@ submitOk = false;
   // =========================
   // PUNTO DE CONTACTO EN USA (HTML)
   // =========================
-  ds160_usContactType: ['PERSON', Validators.required],
-  ds160_usContactNameOrOrg: ['', Validators.required],
-  ds160_usContactRelationship: ['', Validators.required],
-  ds160_usContactAddress: ['', Validators.required],
-  ds160_usContactPhone: ['', Validators.required],
+  ds160_usContactType: ['PERSON',],
+  ds160_usContactNameOrOrg: [''],
+  ds160_usContactRelationship: [''],
+  ds160_usContactAddress: [''],
+  ds160_usContactPhone: [''],
   ds160_usContactEmail: [''],
 
   // =========================
@@ -174,16 +174,16 @@ submitOk = false;
   lugarNacimientoConyuge: [''],
   fechaNacimientoConyuge: [''],
 
-  ds160_hasImmediateRelativesInUS: [null, Validators.required],
+  ds160_hasImmediateRelativesInUS: [null],
   ds160_relativesInUS: this.fb.array([]), // {relationship, fullName, statusInUS, cityState}
 
-  ds160_hasChildren: [null, Validators.required],
+  ds160_hasChildren: [null],
   ds160_children: this.fb.array([]), // {apellidos, nombres, birthDate, birthCity, birthCountry}
 
   // =========================
   // INFORMACIÓN PROFESIONAL (HTML)
   // =========================
-  ds160_primaryOccupation: ['', Validators.required],
+  ds160_primaryOccupation: [''],
 
   estudia: [false],
   trabaja: [false],
@@ -290,8 +290,8 @@ submitOk = false;
   // =========================
   agregarAcompanante() {
     const acomp = this.fb.group({
-      nombre: ['', Validators.required],
-      parentesco: ['', Validators.required]
+      nombre: [''],
+      parentesco: ['']
     });
     this.acompanantes.push(acomp);
   }
@@ -306,8 +306,8 @@ submitOk = false;
   dsAddOtherName() {
     this.dsOtherNames.push(
       this.fb.group({
-        apellidos: ['', Validators.required],
-        nombres: ['', Validators.required]
+        apellidos: [''],
+        nombres: ['']
       })
     );
   }
@@ -318,7 +318,7 @@ submitOk = false;
   dsAddOtherNationality() {
     this.dsOtherNationalities.push(
       this.fb.group({
-        country: ['', Validators.required],
+        country: [''],
         explain: ['']
       })
     );
@@ -330,8 +330,8 @@ submitOk = false;
   dsAddPreviousTrip() {
     this.dsPreviousTrips.push(
       this.fb.group({
-        arrivalDate: ['', Validators.required],
-        departureDate: ['', Validators.required],
+        arrivalDate: [''],
+        departureDate: [''],
         durationText: ['']
       })
     );
@@ -343,8 +343,8 @@ submitOk = false;
   dsAddSocialProfile() {
     this.dsSocialProfiles.push(
       this.fb.group({
-        platform: ['', Validators.required],
-        handle: ['', Validators.required],
+        platform: [''],
+        handle: [''],
         url: ['', this.optionalUrlValidator()]
       })
     );
@@ -356,7 +356,7 @@ submitOk = false;
   dsAddOtherWebsite() {
     this.dsOtherWebsites.push(
       this.fb.group({
-        url: ['', [Validators.required, this.optionalUrlValidator()]]
+        url: ['', [ this.optionalUrlValidator()]]
       })
     );
   }
@@ -367,8 +367,8 @@ submitOk = false;
   dsAddRelativeInUS() {
     this.dsRelativesInUS.push(
       this.fb.group({
-        relationship: ['', Validators.required],
-        fullName: ['', Validators.required],
+        relationship: [''],
+        fullName: [''],
         statusInUS: [''],
         cityState: ['']
       })
@@ -381,9 +381,9 @@ submitOk = false;
   dsAddChild() {
     this.dsChildren.push(
       this.fb.group({
-        apellidos: ['', Validators.required],
-        nombres: ['', Validators.required],
-        birthDate: ['', Validators.required],
+        apellidos: [''],
+        nombres: [''],
+        birthDate: [''],
         birthCity: [''],
         birthCountry: ['']
       })
@@ -396,12 +396,12 @@ submitOk = false;
   dsAddPreviousEmployer() {
     this.dsPrevEmployers.push(
       this.fb.group({
-        employerName: ['', Validators.required],
-        jobTitle: ['', Validators.required],
-        city: ['', Validators.required],
-        country: ['', Validators.required],
-        from: ['', Validators.required],
-        to: ['', Validators.required],
+        employerName: [''],
+        jobTitle: [''],
+        city: [''],
+        country: [''],
+        from: [''],
+        to: [''],
         duties: ['']
       })
     );
@@ -413,11 +413,11 @@ submitOk = false;
   dsAddPreviousSchool() {
     this.dsPrevSchools.push(
       this.fb.group({
-        schoolName: ['', Validators.required],
-        city: ['', Validators.required],
-        country: ['', Validators.required],
-        from: ['', Validators.required],
-        to: ['', Validators.required],
+        schoolName: [''],
+        city: [''],
+        country: [''],
+        from: [''],
+        to: [''],
         course: ['']
       })
     );
@@ -427,14 +427,14 @@ submitOk = false;
   }
 
   dsAddLanguage() {
-    this.dsLanguages.push(this.fb.group({ language: ['', Validators.required] }));
+    this.dsLanguages.push(this.fb.group({ language: [''] }));
   }
   dsRemoveLanguage(i: number) {
     this.dsLanguages.removeAt(i);
   }
 
   dsAddCountryVisited() {
-    this.dsCountriesVisited.push(this.fb.group({ country: ['', Validators.required] }));
+    this.dsCountriesVisited.push(this.fb.group({ country: [''] }));
   }
   dsRemoveCountryVisited(i: number) {
     this.dsCountriesVisited.removeAt(i);
