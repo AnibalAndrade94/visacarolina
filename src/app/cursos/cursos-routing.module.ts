@@ -6,7 +6,9 @@ import { CusoListComponent } from './cuso-list/cuso-list.component';
 import { CursoDetalleComponent } from './curso-detalle/curso-detalle.component';
 import { CursoPlayerComponent } from './curso-player/curso-player.component';
 import { DashboardAlumnoComponent } from './dashboard-alumno/dashboard-alumno.component';
-
+import { LoginComponent } from '../auth/login/login.component';
+import { RegisterComponent } from '../auth/register/register.component';
+import { registerLocaleData } from '@angular/common';
 const routes: Routes = [
   {
     path: '',
@@ -16,6 +18,8 @@ const routes: Routes = [
     path: 'lista',
     component: CusoListComponent, // /cursos/lista
   },
+  { path:'login',component: LoginComponent},
+  { path:'registro',component:RegisterComponent},
   { path: 'mis-cursos', component: DashboardAlumnoComponent },
   {
     path: ':slug',

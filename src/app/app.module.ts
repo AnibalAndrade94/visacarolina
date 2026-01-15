@@ -4,6 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FormsModule } from '@angular/forms'; // 👈 Importar esto
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 // Componentes principales
 import { HomeComponent } from './features/home/home.component';
@@ -12,7 +13,6 @@ import { NavbarComponent } from './core/navbar/navbar.component';
 import { FooterComponent } from './core/footer/footer.component';
 import { UxuiComponent } from './features/uxui/uxui.component';
 import { ReactiveFormsModule } from '@angular/forms'; // 👈 Importa esto
-import { HttpClientModule } from '@angular/common/http';
 import { PasapportComponent } from './features/pasapport/pasapport.component';
 import { AvisosComponent } from './features/avisos/avisos.component';
 import { ReferidosComponent } from './features/referidos/referidos.component';
@@ -31,6 +31,7 @@ import { MapaPasaporteComponent } from './info/pages/mapa-pasaporte/mapa-pasapor
 import { FaqComponent } from './info/pages/faq/faq.component';
 import { VisaEligibilityWizardComponent } from './features/visa-eligibility-wizard/visa-eligibility-wizard.component';
 import { VisaAppointmentComponent } from './features/visa-appointment/visa-appointment.component';
+import { AuthInterceptor } from './services/auth.interceptor'; // <-- ajusta ruta
 
 @NgModule({
   declarations: [
@@ -66,7 +67,9 @@ import { VisaAppointmentComponent } from './features/visa-appointment/visa-appoi
     HttpClientModule,
     FormsModule
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
