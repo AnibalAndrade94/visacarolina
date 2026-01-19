@@ -11,6 +11,7 @@ import { CursoPlayerComponent } from './curso-player/curso-player.component';
 // Opcional: si vas a usar formularios dentro de cursos
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DashboardAlumnoComponent } from './dashboard-alumno/dashboard-alumno.component';
+import { ConfirmarCorreoComponent } from './confirmar-correo/confirmar-correo.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { DashboardAlumnoComponent } from './dashboard-alumno/dashboard-alumno.co
     CusoListComponent,
     CursoDetalleComponent,
     CursoPlayerComponent,
-    DashboardAlumnoComponent
+    DashboardAlumnoComponent,
+    ConfirmarCorreoComponent
   ],
   imports: [
     CommonModule,

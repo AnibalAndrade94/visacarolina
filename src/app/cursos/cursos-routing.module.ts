@@ -9,6 +9,8 @@ import { DashboardAlumnoComponent } from './dashboard-alumno/dashboard-alumno.co
 import { LoginComponent } from '../auth/login/login.component';
 import { RegisterComponent } from '../auth/register/register.component';
 import { registerLocaleData } from '@angular/common';
+import { ConfirmarCorreoComponent } from './confirmar-correo/confirmar-correo.component';
+
 const routes: Routes = [
   {
     path: '',
@@ -17,6 +19,9 @@ const routes: Routes = [
   {
     path: 'lista',
     component: CusoListComponent, // /cursos/lista
+  },
+  {
+    path: 'confirmar-correo', component:ConfirmarCorreoComponent
   },
   { path:'login',component: LoginComponent},
   { path:'registro',component:RegisterComponent},
