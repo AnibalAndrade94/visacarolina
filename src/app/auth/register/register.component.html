@@ -67,6 +67,20 @@
                 <span *ngIf="f.password.errors?.['minlength']">Mínimo 8 caracteres.</span>
             </div>
         </div>
+        <div class="mb-3">
+            <label class="form-label">Confirmar contraseña *</label>
+            <input class="form-control" type="password" formControlName="confirmPassword" placeholder="Repite tu contraseña">
+
+            <div class="text-danger small mt-1" *ngIf="submitted && f.confirmPassword.invalid">
+                <span *ngIf="f.confirmPassword.errors?.['required']">Este campo es obligatorio.</span>
+                <span *ngIf="f.confirmPassword.errors?.['minlength']">Mínimo 8 caracteres.</span>
+            </div>
+
+            <!-- Error cuando NO coincide -->
+            <div class="text-danger small mt-1" *ngIf="submitted && !f.confirmPassword.invalid && form.hasError('passwordMismatch')">
+                Las contraseñas no coinciden.
+            </div>
+        </div>
 
         <!-- Opcional: de dónde nos conoció -->
         <div class="mb-3">
