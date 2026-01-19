@@ -107,53 +107,68 @@ errorMsg = '';
     };
 
     this.loading = true;
-
+//registro
     this.auth.register(payload, true).subscribe({
-      next: () => {
-        this.loading = false;
+  next: (resp: any) => {
+    this.loading = false;
 
-        Swal.fire({
-          icon: 'success',
-          title: 'Registro exitoso',
-          text: 'Tu cuenta fue creada correctamente.',
-          confirmButtonText: 'Continuar'
-        });
+    // resp.emailSent viene del backend
+    if (resp?.emailSent) {
+      Swal.fire({
+        icon: 'success',
+        title: 'Registro exitoso',
+        text: resp?.message || 'Revisa tu correo para confirmar tu cuenta.',
+        confirmButtonText: 'Ok'
+      });
 
-        // Si quieres redirigir aquí, lo hacemos cuando tengas la ruta
-        // this.router.navigate(['/mi-cuenta']);
-      },
-      error: (err) => {
-        this.loading = false;
+      // opcional: mandar a una pantalla tipo "revisa tu correo"
+      // this.router.navigate(['/confirmacion-enviada'], { queryParams: { email: payload.email } });
+      return;
+    }
 
-        if (err?.status === 409) {
-          Swal.fire({
-            icon: 'info',
-            title: 'Correo ya registrado',
-            text: 'Ya existe una cuenta con ese correo. Inicia sesión.',
-            confirmButtonText: 'Ok'
-          });
-          return;
-        }
-
-        // Validaciones del backend (express-validator)
-        const details = err?.error?.details;
-        if (Array.isArray(details) && details.length) {
-          Swal.fire({
-            icon: 'warning',
-            title: 'Datos inválidos',
-            text: details.map((d: any) => d.msg).join(' • '),
-            confirmButtonText: 'Ok'
-          });
-          return;
-        }
-
-        Swal.fire({
-          icon: 'error',
-          title: 'Error',
-          text: err?.error?.error || 'No se pudo completar el registro.',
-          confirmButtonText: 'Ok'
-        });
-      }
+    // Si se registró pero NO se pudo mandar correo
+    Swal.fire({
+      icon: 'info',
+      title: 'Cuenta creada',
+      text: resp?.message || 'No se pudo enviar el correo de confirmación. Intenta reenviarlo.',
+      confirmButtonText: 'Ok'
     });
+
+    // aquí podrías mostrar un botón "Reenviar correo" (paso siguiente)
+  },
+
+  error: (err) => {
+    this.loading = false;
+
+    if (err?.status === 409) {
+      Swal.fire({
+        icon: 'info',
+        title: 'Correo ya registrado',
+        text: 'Ya existe una cuenta con ese correo. Inicia sesión.',
+        confirmButtonText: 'Ok'
+      });
+      return;
+    }
+
+    const details = err?.error?.details;
+    if (Array.isArray(details) && details.length) {
+      Swal.fire({
+        icon: 'warning',
+        title: 'Datos inválidos',
+        text: details.map((d: any) => d.msg).join(' • '),
+        confirmButtonText: 'Ok'
+      });
+      return;
+    }
+
+    Swal.fire({
+      icon: 'error',
+      title: 'Error',
+      text: err?.error?.error || 'No se pudo completar el registro.',
+      confirmButtonText: 'Ok'
+    });
+  }
+});
+
   }
 }

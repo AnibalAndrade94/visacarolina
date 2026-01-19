@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { tap } from 'rxjs/operators';
 import { environment } from '../environments/environment';
+import { Observable } from 'rxjs';
+
 type LoginPayload = { email: string; password: string };
 type AuthResponse = {
   ok: boolean;
@@ -28,7 +30,10 @@ export class AuthService {
    private baseUrl = `${environment.apiBaseUrl}/api/auth`;
 
   constructor(private http: HttpClient) {}
-
+verifyEmail(token: string, email: string): Observable<{ ok: boolean; error?: string }> {
+  const params = new HttpParams().set('token', token).set('email', email);
+  return this.http.get<{ ok: boolean; error?: string }>(`${this.baseUrl}/verify-email`, { params });
+}
   login(payload: LoginPayload, rememberMe: boolean) {
     return this.http.post<AuthResponse>(`${this.baseUrl}/login`, payload).pipe(
       tap((resp) => {
