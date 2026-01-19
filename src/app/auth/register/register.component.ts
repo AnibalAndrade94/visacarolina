@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { AuthService } from '../../services/auth.service';
+
+
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -8,7 +11,8 @@ import { FormBuilder, Validators } from '@angular/forms';
 export class RegisterComponent {
 loading = false;
   submitted = false;
-
+successMsg = '';
+errorMsg = '';
   // Si tienes una lista de estados en un archivo, mejor; aquí va corta de ejemplo
   states = [
     'Aguascalientes','Baja California','Baja California Sur','Campeche','CDMX','Chiapas','Chihuahua',
@@ -41,7 +45,7 @@ loading = false;
     interest: [''], // opcional recomendado
   });
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder, private auth: AuthService) {}
 
   get f() { return this.form.controls; }
 
@@ -59,24 +63,49 @@ loading = false;
 
     const raw = this.form.getRawValue();
 
-    const payload = {
-      fullName: raw.fullName?.trim(),
-      city: raw.city?.trim(),
-      state: raw.state,
-      whatsapp: this.normalizeWhatsApp(raw.whatsapp || ''),
-      email: raw.email?.trim().toLowerCase(),
-      password: raw.password,
-      acceptTerms: raw.acceptTerms,
-
-      source: raw.source || undefined,
-      interest: raw.interest || undefined,
-    };
+     const payload = {
+    name: (raw.fullName ?? '').trim(),
+    city: (raw.city ?? '').trim(),
+    state: (raw.state ?? '').trim(),
+    whatsapp: this.normalizeWhatsApp(raw.whatsapp || ''),
+    email: (raw.email ?? '').trim().toLowerCase(),
+    password: raw.password ?? '',
+    acceptTerms: !!raw.acceptTerms,
+    source: raw.source || undefined,
+    interest: raw.interest || undefined,
+  };
 
     this.loading = true;
 
     // TODO: aquí conectas tu AuthService.register(payload)
-    console.log('REGISTER_PAYLOAD', payload);
+    this.auth.register(payload, true).subscribe({
+  next: () => {
+    this.loading = false;
 
-    setTimeout(() => (this.loading = false), 600);
+    this.successMsg = 'Registro exitoso 🎉 Bienvenido a VisaCarolina';
+    this.errorMsg = '';
+
+    // Redirige después de 1.5s (opcional)
+    setTimeout(() => {
+      // this.router.navigate(['/mi-cuenta']);
+    }, 1500);
+  },
+  error: (err) => {
+    this.loading = false;
+    this.successMsg = '';
+
+    // Mensajes del backend
+    const details = err?.error?.details;
+    if (Array.isArray(details) && details.length) {
+      this.errorMsg = details.map((d: any) => d.msg).join(' • ');
+      return;
+    }
+
+    this.errorMsg =
+      err?.error?.error ||
+      err?.error?.message ||
+      'No se pudo completar el registro.';
+  }
+});
   }
 }
