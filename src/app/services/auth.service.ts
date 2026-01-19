@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { tap } from 'rxjs/operators';
-
+import { environment } from '../environments/environment';
 type LoginPayload = { email: string; password: string };
 type AuthResponse = {
   ok: boolean;
@@ -25,7 +25,7 @@ type RegisterPayload = {
 })
 export class AuthService {
 
-   private baseUrl = '/api/auth';
+   private baseUrl = `${environment.apiBaseUrl}/api/auth`;
 
   constructor(private http: HttpClient) {}
 
