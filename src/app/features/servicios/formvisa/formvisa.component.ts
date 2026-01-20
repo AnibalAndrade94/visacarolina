@@ -16,11 +16,11 @@ import { finalize, switchMap } from 'rxjs/operators';
 
 declare var grecaptcha: any;
 
-declare global {
+/* declare global {
   interface Window {
     captchaResolved: (token: string) => void;
   }
-}
+} */
 
 type YesNo = boolean | null;
 
@@ -32,9 +32,9 @@ type YesNo = boolean | null;
 export class FormvisaComponent implements OnInit, AfterViewInit {
   visaForm!: FormGroup;
   originalOrder = () => 0;
-
+/* 
   siteKey = '6LeDZuArAAAAAMQIbKtQJ8V60ePbrjz4VTlQP9Oj';
-  captchaToken: string = '';
+  captchaToken: string = ''; */
   isSubmitting = false;
 submitMsg: string | null = null;
 submitOk = false;
@@ -49,9 +49,9 @@ submitOk = false;
   ) {}
 
   ngOnInit(): void {
-    window['captchaResolved'] = (token: string) => {
+/*     window['captchaResolved'] = (token: string) => {
       this.captchaToken = token;
-    };
+    }; */
 
     // =========================
     // FORM BASE
@@ -228,7 +228,7 @@ submitOk = false;
   }
 
   ngAfterViewInit(): void {
-    setTimeout(() => {
+    /* setTimeout(() => {
       if (document.getElementById('captcha-container')) {
         grecaptcha.render('captcha-container', {
           sitekey: this.siteKey,
@@ -237,7 +237,7 @@ submitOk = false;
           }
         });
       }
-    }, 500);
+    }, 500); */
   }
 
   // =========================
@@ -456,7 +456,7 @@ submitOk = false;
   // CAPTCHA
   // =========================
   onCaptchaResolved(token: string) {
-    this.captchaToken = token;
+    /* this.captchaToken = token; */
   }
 
   // =========================
@@ -466,17 +466,11 @@ onSubmit() {
   this.submitMsg = null;
   this.submitOk = false;
 
-  // Evita doble click
   if (this.isSubmitting) return;
 
-  // Marca todo para que salgan errores visibles
   this.visaForm.markAllAsTouched();
 
-  if (!this.captchaToken) {
-    this.submitMsg = 'Por favor, completa el reCAPTCHA.';
-    return;
-  }
-
+  // ✅ Ya no bloquea por captcha
   if (this.visaForm.invalid) {
     this.submitMsg = 'Revisa los campos obligatorios antes de enviar.';
     this.scrollToFirstInvalid();
@@ -490,12 +484,10 @@ onSubmit() {
     _meta: { form: 'ds160_extended', submittedAt: new Date().toISOString() }
   };
 
+  // ✅ Ya no verifica captcha
   this.http
-    .post(`${this.api}/api/verify-recaptcha`, { token: this.captchaToken })
-    .pipe(
-      switchMap(() => this.http.post(`${this.api}/api/form-visa-americana`, payload)),
-      finalize(() => (this.isSubmitting = false))
-    )
+    .post(`${this.api}/api/form-visa-americana`, payload)
+    .pipe(finalize(() => (this.isSubmitting = false)))
     .subscribe({
       next: (res) => {
         console.log('✅ Formulario enviado', res);
@@ -508,10 +500,10 @@ onSubmit() {
         this.visaForm.reset();
         this.applySafeDefaultsAfterReset();
 
-        if (typeof grecaptcha !== 'undefined') grecaptcha.reset();
-        this.captchaToken = '';
+        // ✅ ya no resetea captcha
+        // if (typeof grecaptcha !== 'undefined') grecaptcha.reset();
+        // this.captchaToken = '';
 
-        // Redirige a Home (ajusta la ruta si la tuya no es '/')
         setTimeout(() => this.router.navigate(['/']), 1200);
       },
       error: (err) => {
@@ -520,12 +512,13 @@ onSubmit() {
         this.submitOk = false;
         this.submitMsg = 'Hubo un error al enviar. Intenta más tarde.';
 
-        // opcional: resetea captcha si quieres forzar uno nuevo
-        if (typeof grecaptcha !== 'undefined') grecaptcha.reset();
-        this.captchaToken = '';
+        // ✅ ya no resetea captcha
+        // if (typeof grecaptcha !== 'undefined') grecaptcha.reset();
+        // this.captchaToken = '';
       }
     });
 }
+
 
 private scrollToFirstInvalid() {
   setTimeout(() => {
