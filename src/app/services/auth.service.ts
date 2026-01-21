@@ -3,12 +3,14 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../environments/environment';
 import { Observable, from, switchMap, tap, map } from 'rxjs';
 
+
 import {
   getAuth,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   sendEmailVerification,
   signOut,
+  applyActionCode,
   User
 } from 'firebase/auth';
 
@@ -51,7 +53,10 @@ type LoginPayload = { email: string; password: string };
 @Injectable({ providedIn: 'root' })
 export class AuthService {
   private baseUrl = `${environment.apiBaseUrl}/api/auth`;
-
+confirmEmailFirebase(oobCode: string) {
+  const auth = getAuth();
+  return from(applyActionCode(auth, oobCode));
+}
   constructor(private http: HttpClient) {}
 
   // ✅ helper para headers con Firebase token
