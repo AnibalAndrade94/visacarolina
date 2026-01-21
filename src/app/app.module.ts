@@ -5,7 +5,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FormsModule } from '@angular/forms'; // 👈 Importar esto
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-
+import { initializeApp } from 'firebase/app';
+import { environment } from './environments/environment';
 // Componentes principales
 import { HomeComponent } from './features/home/home.component';
 import { ContactoComponent } from './features/contacto/contacto.component';
@@ -72,4 +73,8 @@ import { AuthInterceptor } from './services/auth.interceptor'; // <-- ajusta rut
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+  constructor() {
+    initializeApp(environment.firebase);
+  }
+ }

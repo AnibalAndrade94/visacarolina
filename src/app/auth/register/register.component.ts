@@ -71,104 +71,113 @@ errorMsg = '';
     });
   }
 
-   submit() {
-    this.submitted = true;
+submit() {
+  this.submitted = true;
 
-    if (this.form.invalid) {
-      this.form.markAllAsTouched();
+  if (this.form.invalid) {
+    this.form.markAllAsTouched();
 
-      // Caso especial: contraseñas no coinciden
-      if (this.form.hasError('passwordMismatch')) {
+    if (this.form.hasError('passwordMismatch')) {
+      Swal.fire({
+        icon: 'warning',
+        title: 'Las contraseñas no coinciden',
+        text: 'Verifica la confirmación de contraseña.',
+        confirmButtonText: 'Ok'
+      });
+      return;
+    }
+
+    this.showMissingFieldsPopup();
+    return;
+  }
+
+  const raw = this.form.getRawValue();
+
+  const payload = {
+    name: (raw.fullName ?? '').trim(),
+    city: (raw.city ?? '').trim(),
+    state: (raw.state ?? '').trim(),
+    whatsapp: this.normalizeWhatsApp(raw.whatsapp || ''),
+    email: (raw.email ?? '').trim().toLowerCase(),
+    password: raw.password ?? '',
+    acceptTerms: !!raw.acceptTerms,
+    source: (raw.source ?? '').trim(),
+    interest: (raw.interest ?? '').trim(),
+  };
+
+  this.loading = true;
+
+  this.auth.register(payload, true).subscribe({
+    next: (_resp: any) => {
+      this.loading = false;
+
+      Swal.fire({
+        icon: 'success',
+        title: 'Registro exitoso',
+        text: 'Te enviamos un correo para confirmar tu cuenta. Revisa tu bandeja y spam.',
+        confirmButtonText: 'Ok'
+      });
+
+      // opcional
+      // this.router.navigate(['/confirmacion-enviada'], { queryParams: { email: payload.email } });
+    },
+
+    error: (err) => {
+      this.loading = false;
+
+      // 🔥 Firebase errors suelen venir así: err.code (ej: auth/email-already-in-use)
+      const code = err?.code || err?.error?.code;
+
+      if (code === 'auth/email-already-in-use') {
         Swal.fire({
-          icon: 'warning',
-          title: 'Las contraseñas no coinciden',
-          text: 'Verifica la confirmación de contraseña.',
+          icon: 'info',
+          title: 'Correo ya registrado',
+          text: 'Ya existe una cuenta con ese correo. Inicia sesión.',
           confirmButtonText: 'Ok'
         });
         return;
       }
 
-      this.showMissingFieldsPopup();
-      return;
-    }
+      if (code === 'auth/invalid-email') {
+        Swal.fire({
+          icon: 'warning',
+          title: 'Correo inválido',
+          text: 'Verifica el correo e intenta de nuevo.',
+          confirmButtonText: 'Ok'
+        });
+        return;
+      }
 
-    const raw = this.form.getRawValue();
+      if (code === 'auth/weak-password') {
+        Swal.fire({
+          icon: 'warning',
+          title: 'Contraseña débil',
+          text: 'Usa una contraseña más fuerte (mínimo 8 caracteres).',
+          confirmButtonText: 'Ok'
+        });
+        return;
+      }
 
-    const payload = {
-      name: (raw.fullName ?? '').trim(),
-      city: (raw.city ?? '').trim(),
-      state: (raw.state ?? '').trim(),
-      whatsapp: this.normalizeWhatsApp(raw.whatsapp || ''),
-      email: (raw.email ?? '').trim().toLowerCase(),
-      password: raw.password ?? '',
-      acceptTerms: !!raw.acceptTerms,
-      source: (raw.source ?? '').trim(),
-      interest: (raw.interest ?? '').trim(),
-    };
+      // Si falla el sync-profile del backend (401/500/etc.)
+      // aquí te conviene mostrar un mensaje específico:
+      if (err?.status === 401) {
+        Swal.fire({
+          icon: 'error',
+          title: 'Sesión no válida',
+          text: 'No se pudo validar tu sesión. Intenta de nuevo.',
+          confirmButtonText: 'Ok'
+        });
+        return;
+      }
 
-    this.loading = true;
-//registro
-    this.auth.register(payload, true).subscribe({
-  next: (resp: any) => {
-    this.loading = false;
-
-    // resp.emailSent viene del backend
-    if (resp?.emailSent) {
       Swal.fire({
-        icon: 'success',
-        title: 'Registro exitoso',
-        text: resp?.message || 'Revisa tu correo para confirmar tu cuenta.',
+        icon: 'error',
+        title: 'Error',
+        text: err?.error?.error || err?.message || 'No se pudo completar el registro.',
         confirmButtonText: 'Ok'
       });
-
-      // opcional: mandar a una pantalla tipo "revisa tu correo"
-      // this.router.navigate(['/confirmacion-enviada'], { queryParams: { email: payload.email } });
-      return;
     }
+  });
+}
 
-    // Si se registró pero NO se pudo mandar correo
-    Swal.fire({
-      icon: 'info',
-      title: 'Cuenta creada',
-      text: resp?.message || 'No se pudo enviar el correo de confirmación. Intenta reenviarlo.',
-      confirmButtonText: 'Ok'
-    });
-
-    // aquí podrías mostrar un botón "Reenviar correo" (paso siguiente)
-  },
-
-  error: (err) => {
-    this.loading = false;
-
-    if (err?.status === 409) {
-      Swal.fire({
-        icon: 'info',
-        title: 'Correo ya registrado',
-        text: 'Ya existe una cuenta con ese correo. Inicia sesión.',
-        confirmButtonText: 'Ok'
-      });
-      return;
-    }
-
-    const details = err?.error?.details;
-    if (Array.isArray(details) && details.length) {
-      Swal.fire({
-        icon: 'warning',
-        title: 'Datos inválidos',
-        text: details.map((d: any) => d.msg).join(' • '),
-        confirmButtonText: 'Ok'
-      });
-      return;
-    }
-
-    Swal.fire({
-      icon: 'error',
-      title: 'Error',
-      text: err?.error?.error || 'No se pudo completar el registro.',
-      confirmButtonText: 'Ok'
-    });
-  }
-});
-
-  }
 }
