@@ -117,17 +117,17 @@ register(payload: RegisterPayload, rememberMe: boolean) {
     const auth = getAuth();
 
     return from(signInWithEmailAndPassword(auth, payload.email, payload.password)).pipe(
-      switchMap(async ({ user }) => {
-        const token = await user.getIdToken(true); // 👈 token real garantizado
-        return token;
-      }),
-      switchMap((token) =>
-        this.http.post<SyncResponse>(
-          `${this.baseUrl}/sync-profile`,
-          {}, // si tu backend lo permite vacío
-          { headers: this.headersWithToken(token) }
-        )
-      ),
+  switchMap(({ user }) =>
+    from(user.getIdToken(true)).pipe(
+      switchMap((token) => {
+        const headers = new HttpHeaders({
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        });
+        return this.http.post<SyncResponse>(`${this.baseUrl}/sync-profile`, {}, { headers });
+      })
+    )
+  ),
       tap((resp) => {
         const storage = rememberMe ? localStorage : sessionStorage;
         storage.setItem('firebase', '1');
