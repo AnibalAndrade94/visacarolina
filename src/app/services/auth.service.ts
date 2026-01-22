@@ -73,89 +73,69 @@ confirmEmailFirebase(oobCode: string) {
     );
   }
 
- register(payload: RegisterPayload, rememberMe: boolean) {
-  const auth = getAuth();
+  
+  private headersWithToken(token: string) {
+    return new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json',
+    });
+  }
 
-  return from(createUserWithEmailAndPassword(auth, payload.email, payload.password)).pipe(
-    switchMap(({ user }) =>
-      from(
-        (async () => {
-          // 1) manda verificación
-          await sendEmailVerification(user);
+register(payload: RegisterPayload, rememberMe: boolean) {
+    const auth = getAuth();
 
-          // 2) token (FORZADO)
-          const token = await user.getIdToken(true);
+    return from(createUserWithEmailAndPassword(auth, payload.email, payload.password)).pipe(
+      switchMap(async ({ user }) => {
+        await sendEmailVerification(user);
+        const token = await user.getIdToken(true); // 👈 token real garantizado
+        return { user, token };
+      }),
+      switchMap(({ token }) =>
+        this.http.post<SyncResponse>(
+          `${this.baseUrl}/sync-profile`,
+          {
+            name: payload.name,
+            whatsapp: payload.whatsapp,
+            city: payload.city,
+            state: payload.state,
+            acceptTerms: payload.acceptTerms,
+            source: payload.source || '',
+            interest: payload.interest || '',
+          },
+          { headers: this.headersWithToken(token) }
+        )
+      ),
+      tap((resp) => {
+        const storage = rememberMe ? localStorage : sessionStorage;
+        storage.setItem('firebase', '1');
+        if (resp?.user) storage.setItem('user', JSON.stringify(resp.user));
+      })
+    );
+  }
 
-          return { user, token };
-        })()
-      )
-    ),
-    switchMap(({ token }) => {
-      const headers = new HttpHeaders({
-        Authorization: `Bearer ${token}`,
-        'Content-Type': 'application/json',
-      });
+  login(payload: LoginPayload, rememberMe: boolean) {
+    const auth = getAuth();
 
-      return this.http.post<SyncResponse>(
-        `${this.baseUrl}/sync-profile`,
-        {
-          name: payload.name,
-          whatsapp: payload.whatsapp,
-          city: payload.city,
-          state: payload.state,
-          acceptTerms: payload.acceptTerms,
-          source: payload.source || '',
-          interest: payload.interest || '',
-        },
-        { headers }
-      );
-    }),
-    tap((resp) => {
-      const storage = rememberMe ? localStorage : sessionStorage;
-      storage.setItem('firebase', '1');
-      if (resp?.user) storage.setItem('user', JSON.stringify(resp.user));
-    })
-  );
-}
-
-
-login(payload: LoginPayload, rememberMe: boolean) {
-  const auth = getAuth();
-
-  return from(signInWithEmailAndPassword(auth, payload.email, payload.password)).pipe(
-    // 1) opcional: bloquear si no verificó email
-    switchMap(({ user }) => {
-      if (!user.emailVerified) {
-        // puedes también reenviar verificación aquí si quieres
-        throw { code: 'auth/email-not-verified' };
-      }
-      return from(user.getIdToken(true)); // token confiable
-    }),
-
-    // 2) sync-profile con token (NO uses currentUser aquí)
-    switchMap((token) => {
-      const headers = new HttpHeaders({
-        Authorization: `Bearer ${token}`,
-        'Content-Type': 'application/json',
-      });
-
-      // 👇 OJO: si tu backend requiere campos, manda mínimo email o algo
-      return this.http.post<SyncResponse>(
-        `${this.baseUrl}/sync-profile`,
-        {}, // si tu endpoint acepta vacío, perfecto
-        { headers }
-      );
-    }),
-
-    tap((resp) => {
-      const storage = rememberMe ? localStorage : sessionStorage;
-      storage.setItem('firebase', '1');
-      if (resp?.user) storage.setItem('user', JSON.stringify(resp.user));
-    })
-  );
-}
-
-  async logout() {
+    return from(signInWithEmailAndPassword(auth, payload.email, payload.password)).pipe(
+      switchMap(async ({ user }) => {
+        const token = await user.getIdToken(true); // 👈 token real garantizado
+        return token;
+      }),
+      switchMap((token) =>
+        this.http.post<SyncResponse>(
+          `${this.baseUrl}/sync-profile`,
+          {}, // si tu backend lo permite vacío
+          { headers: this.headersWithToken(token) }
+        )
+      ),
+      tap((resp) => {
+        const storage = rememberMe ? localStorage : sessionStorage;
+        storage.setItem('firebase', '1');
+        if (resp?.user) storage.setItem('user', JSON.stringify(resp.user));
+      })
+    );
+  }
+   async logout() {
     localStorage.removeItem('firebase');
     localStorage.removeItem('user');
     sessionStorage.removeItem('firebase');
@@ -176,4 +156,6 @@ login(payload: LoginPayload, rememberMe: boolean) {
   isLoggedIn(): boolean {
     return !!getAuth().currentUser;
   }
+
+  
 }
