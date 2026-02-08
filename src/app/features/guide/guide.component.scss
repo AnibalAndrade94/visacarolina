@@ -1,0 +1,233 @@
+.contacto-page {
+    font-family: 'Playfair Display', serif;
+    padding: 2rem 1rem;
+    h1 {
+        font-family: 'Pacifico', cursive;
+        color: #5e6150;
+        margin-bottom: 1rem;
+    }
+    .lead {
+        color: #444;
+        font-size: 1.1rem;
+    }
+    .link-button {
+        display: inline-block;
+        width: 80%;
+        max-width: 400px;
+        padding: 1rem 2rem;
+        border-radius: 2rem;
+        font-size: 1.1rem;
+        font-weight: 600;
+        text-decoration: none;
+        color: white;
+        transition: all 0.2s ease;
+        text-align: center;
+        background-color: #6D5352;
+        &.email {
+            background-color: #5e6150;
+            &:hover {
+                background-color: #3c5a6e;
+            }
+        }
+    }
+}
+
+.menu {
+    background-color: #0E2A47;
+    color: #C8A772;
+    padding-top: 1.5em;
+    padding-left: 1.5em;
+    padding-bottom: 1.5em;
+    border-radius: 1rem;
+    height: fit-content;
+    text-align: center;
+    border-color: #C8A772;
+    border: 3px 0px 0px 0px solid #C8A772;
+}
+
+.bt1,
+.bt2,
+.bt3 {
+    cursor: pointer;
+    transition: all .25s ease;
+}
+
+.bt1.active,
+.bt2.active,
+.bt3.active {
+    background-color: #C8A772;
+    color: #0E2A47;
+    font-weight: 600;
+}
+
+.bt1 {
+    border: 3px solid #C8A772;
+    border-bottom: none;
+    border-top-left-radius: 1rem;
+    border-top-right-radius: 1rem;
+    background-color: #0E2A47;
+    color: #C8A772;
+    padding-top: 1em;
+    padding-left: 1em;
+    padding-bottom: 1em;
+    text-align: center;
+}
+
+.bt1:hover {
+    background-color: #C8A772;
+    color: #0E2A47;
+}
+
+.bt2 {
+    border: 3px solid #C8A772;
+    border-bottom: none;
+    background-color: #0E2A47;
+    color: #C8A772;
+    padding-top: 1em;
+    padding-left: 1em;
+    padding-bottom: 1em;
+    text-align: center;
+}
+
+.bt2:hover {
+    background-color: #C8A772;
+    color: #0E2A47;
+}
+
+.bt3 {
+    border: 3px solid #C8A772;
+    border-bottom-left-radius: 1rem;
+    border-bottom-right-radius: 1rem;
+    background-color: #0E2A47;
+    color: #C8A772;
+    padding-top: 1em;
+    padding-left: 1em;
+    padding-bottom: 1em;
+    text-align: center;
+}
+
+.bt3:hover {
+    background-color: #C8A772;
+    color: #0E2A47;
+}
+
+.cd1 {
+    text-align: center;
+}
+
+.cd1 {
+    background: white;
+    border-radius: .75rem;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, .08);
+    border-top: 4px solid #C8A772;
+    h5 {
+        font-weight: 600;
+        color: #0E2A47;
+    }
+    h6 {
+        margin: .25rem 0;
+    }
+}
+
+.content-panel {
+    background: #F5F5F7;
+    border-radius: 1rem;
+    padding: 1.5rem;
+    min-height: 300px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, .08);
+}
+
+.note {
+    font-size: .85rem;
+    color: #555;
+    margin-top: 1rem;
+}
+
+section {
+    animation: fadeIn .3s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(6px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.checklist-card {
+    background: white;
+    border-radius: 1rem;
+    padding: 1.25rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, .08);
+    border-left: 6px solid #C8A772;
+    h4 {
+        color: #0E2A47;
+        font-weight: 600;
+        margin-bottom: .75rem;
+    }
+    ul {
+        list-style: none;
+        padding-left: 0;
+    }
+    li {
+        padding-left: 1.75rem;
+        position: relative;
+        margin-bottom: .5rem;
+        font-size: .95rem;
+        color: #333;
+    }
+    li::before {
+        content: "✔";
+        position: absolute;
+        left: 0;
+        color: #0E2A47;
+        font-weight: bold;
+    }
+}
+
+::ng-deep .leaflet-popup-content {
+    margin: 0;
+}
+
+::ng-deep .popup {
+    font-family: Arial, sans-serif;
+    font-size: 0.85rem;
+    line-height: 1.4;
+    color: #2E2E2E;
+}
+
+::ng-deep .popup h5 {
+    margin: 0 0 .25rem;
+    font-size: 1rem;
+    color: #0E2A47;
+    font-weight: 600;
+}
+
+::ng-deep .popup-name {
+    font-weight: 600;
+    margin-bottom: .5rem;
+}
+
+::ng-deep .popup p {
+    margin: .25rem 0;
+}
+
+::ng-deep .popup a {
+    color: #C0182C;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+::ng-deep .popup-actions {
+    margin-top: .5rem;
+    display: flex;
+    gap: .75rem;
+    flex-wrap: wrap;
+}

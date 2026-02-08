@@ -9,6 +9,8 @@ import { ReferidosComponent } from './features/referidos/referidos.component';
 import { AdminCodigosComponent } from './features/admin-codigos/admin-codigos.component';
 import { VisaEligibilityWizardComponent } from './features/visa-eligibility-wizard/visa-eligibility-wizard.component';
 import { VisaAppointmentComponent } from './features/visa-appointment/visa-appointment.component';
+import { GuideComponent } from './features/guide/guide.component';
+
 
 const routes: Routes = [
   // 👇 HOME como raíz absoluta
@@ -42,6 +44,7 @@ const routes: Routes = [
   },
     { path: 'recomendaciones-cita-visa', component: VisaAppointmentComponent },
 
+    { path: 'guia', component:  GuideComponent},
 
   // 👇 404 fallback
   { path: '**', redirectTo: '' }

@@ -1,0 +1,78 @@
+<!-- Save as: src/assets/icons/consulate-marker.svg -->
+<svg xmlns="http://www.w3.org/2000/svg" width="26" height="38" viewBox="0 0 60 84">
+  <defs>
+    <!-- Gold gradient for the pin -->
+    <linearGradient id="goldGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#F7E3A6"/>
+      <stop offset="0.45" stop-color="#C8A772"/>
+      <stop offset="1" stop-color="#8F6F2E"/>
+    </linearGradient>
+
+    <!-- Inner bevel gradient -->
+    <linearGradient id="bevelGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#FFF4CE" stop-opacity="0.9"/>
+      <stop offset="0.5" stop-color="#C8A772" stop-opacity="0.55"/>
+      <stop offset="1" stop-color="#6F5523" stop-opacity="0.9"/>
+    </linearGradient>
+
+    <!-- Soft shadow -->
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="160%">
+      <feDropShadow dx="0" dy="3" stdDeviation="2.5" flood-color="#000" flood-opacity="0.25"/>
+    </filter>
+
+    <!-- Clip for the inner circle -->
+    <clipPath id="innerClip">
+      <circle cx="30" cy="28" r="17"/>
+    </clipPath>
+  </defs>
+
+  <!-- Pin body -->
+  <path filter="url(#shadow)"
+        d="M30 2
+           C17.3 2 7 12.3 7 25
+           C7 38.8 18.3 52.2 26.2 62.0
+           L30 66.8
+           L33.8 62.0
+           C41.7 52.2 53 38.8 53 25
+           C53 12.3 42.7 2 30 2 Z"
+        fill="url(#goldGrad)"/>
+
+  <!-- Inner bevel ring -->
+  <circle cx="30" cy="28" r="20" fill="url(#bevelGrad)" opacity="0.9"/>
+  <circle cx="30" cy="28" r="18.5" fill="#0E2A47" opacity="0.15"/>
+  <circle cx="30" cy="28" r="18" fill="#F5F5F7"/>
+
+  <!-- Consulate emblem (classic building) -->
+  <g clip-path="url(#innerClip)">
+    <!-- subtle background -->
+    <rect x="13" y="11" width="34" height="34" fill="#F5F5F7"/>
+    <circle cx="30" cy="28" r="18" fill="#0E2A47" opacity="0.06"/>
+
+    <!-- roof -->
+    <path d="M18 24 L30 17 L42 24 Z" fill="#0E2A47"/>
+
+    <!-- pediment line -->
+    <rect x="18.2" y="24" width="23.6" height="2.2" fill="#0E2A47" opacity="0.85"/>
+
+    <!-- columns -->
+    <g fill="#0E2A47" opacity="0.95">
+      <rect x="20" y="26.4" width="3.2" height="12.2" rx="1"/>
+      <rect x="26.4" y="26.4" width="3.2" height="12.2" rx="1"/>
+      <rect x="32.8" y="26.4" width="3.2" height="12.2" rx="1"/>
+      <rect x="39.2" y="26.4" width="3.2" height="12.2" rx="1"/>
+    </g>
+
+    <!-- base -->
+    <rect x="18.2" y="39.2" width="23.6" height="3.0" fill="#0E2A47"/>
+
+    <!-- small gold accent bar -->
+    <rect x="21" y="43.2" width="18" height="2.2" fill="#C8A772"/>
+  </g>
+
+  <!-- Border -->
+  <circle cx="30" cy="28" r="17" fill="none" stroke="#C8A772" stroke-width="2"/>
+
+  <!-- Small highlight -->
+  <path d="M18 18 C22 10, 34 9, 38 14"
+        fill="none" stroke="#FFFFFF" stroke-opacity="0.45" stroke-width="3" stroke-linecap="round"/>
+</svg>

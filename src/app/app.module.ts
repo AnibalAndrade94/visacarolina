@@ -32,7 +32,8 @@ import { MapaPasaporteComponent } from './info/pages/mapa-pasaporte/mapa-pasapor
 import { FaqComponent } from './info/pages/faq/faq.component';
 import { VisaEligibilityWizardComponent } from './features/visa-eligibility-wizard/visa-eligibility-wizard.component';
 import { VisaAppointmentComponent } from './features/visa-appointment/visa-appointment.component';
-import { AuthInterceptor } from './services/auth.interceptor'; // <-- ajusta ruta
+import { AuthInterceptor } from './services/auth.interceptor';
+import { GuideComponent } from './features/guide/guide.component'; // <-- ajusta ruta
 
 @NgModule({
   declarations: [
@@ -59,6 +60,7 @@ import { AuthInterceptor } from './services/auth.interceptor'; // <-- ajusta rut
     FaqComponent,
     VisaEligibilityWizardComponent,
     VisaAppointmentComponent,
+    GuideComponent,
     
   ],
   imports: [

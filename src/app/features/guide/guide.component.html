@@ -1,0 +1,141 @@
+<div class="container">
+
+    <div class="contacto-page text-center mb-4">
+        <h1 class="tcolor bold600 spacing">Guía para tu visa</h1>
+    </div>
+
+    <div class="row">
+        <h2 *ngIf="toolSelected === 1" class="text-center tcolor boho bold600 fontsize2 spacing mb-3">
+            ¿Qué embajada te queda más cerca?
+        </h2>
+        <h2 *ngIf="toolSelected === 2" class="text-center tcolor boho bold600 fontsize2 spacing mb-3">
+            Precio del trámite
+        </h2>
+        <h2 *ngIf="toolSelected === 3" class="text-center tcolor boho bold600 fontsize2 spacing mb-3">
+            ¿Qué debo llevar?
+        </h2>
+    </div>
+
+    <div class="row">
+        <!-- COLUMNA IZQUIERDA -->
+        <div class="col-12 col-md-4 mb-3">
+            <div class="bt1" [class.active]="toolSelected === 1" (click)="setTool(1)">
+                <h5>Mapa de embajadas</h5>
+            </div>
+
+            <div class="bt2" [class.active]="toolSelected === 2" (click)="setTool(2)">
+                <h5>Precio del trámite hoy</h5>
+            </div>
+
+            <div class="bt3" [class.active]="toolSelected === 3" (click)="setTool(3)">
+                <h5>¿Qué debo llevar?</h5>
+            </div>
+        </div>
+
+        <!-- COLUMNA DERECHA -->
+        <div class="col-12 col-md-8">
+            <div class="content-panel">
+                <section *ngIf="toolSelected === 1">
+                    <app-embassy-map></app-embassy-map>
+                </section>
+                <section *ngIf="toolSelected === 2">
+                    <div class="row">
+                        <div class="cd1 col-md-4 col-sm-12">
+                            <h5>Visa americana</h5>
+                            <h6>$185 U.S. Dollars</h6>
+                            <h6>($3,192.22 pesos)</h6>
+                        </div>
+                        <div class="cd1 col-md-4 col-sm-12">
+                            <h5>Visa canadiense</h5>
+                            <h6>$185 C Dollars</h6>
+                            <h6>($2,338.68 pesos)</h6>
+                        </div>
+                        <div class="cd1 col-md-4 col-sm-12">
+                            <h5>eTA canadiense</h5>
+                            <h6>$7 C Dollars</h6>
+                            <h6>($88.51 pesos)</h6>
+                        </div>
+                    </div>
+                    <br>
+                    <p class="note">
+                        *Los costos son establecidos por las embajadas correspondientes. Dentro de nuestros servicios generamos las fichas de pago.
+                    </p>
+                    <br>
+                    <div class="row">
+                        <div class="cd1 col-md-3 col-sm-12">
+                            <h5>Pasaporte vigencia de un año</h5>
+                            <h6>$920 mxn</h6>
+                            <h6>*con descuento: $460 mxn</h6>
+                        </div>
+                        <div class="cd1 col-md-3 col-sm-12">
+                            <h5>Pasaporte vigencia de tres años</h5>
+                            <h6>$1,795 mxn</h6>
+                            <h6>*con descuento: $900 mxn</h6>
+                        </div>
+                        <div class="cd1 col-md-3 col-sm-12">
+                            <h5>Pasaporte vigencia de seis años</h5>
+                            <h6>$2,440 mxn</h6>
+                            <h6>*con descuento: $1,220 mxn</h6>
+                        </div>
+                        <div class="cd1 col-md-3 col-sm-12">
+                            <h5>Pasaporte vigencia de 10 años</h5>
+                            <h6>$4,280 mxn</h6>
+                            <h6>*con descuento: $2,140 mxn</h6>
+                        </div>
+                    </div>
+                    <br>
+                    <p class="nota">*Beneficio del 50% de descuento a mayores de 60 años de edad, personas con discapacidad (deberá ser comprobada) y tabajadores agrícolas (con Canadá).</p>
+                    <p class="nota">nota: costo de la SRE, dentro de nuestros servicios generamos la ficha de pago</p>
+                </section>
+
+                <section *ngIf="toolSelected === 3">
+                    <div class="checklist-card">
+                        <h4>Visa americana</h4>
+                        <ul>
+                            <li>Pasaporte vigente</li>
+                            <li>Formulario DS-160 completado</li>
+                            <li>Confirmación de pago de la visa</li>
+                            <li>Confirmación de cita (CAS y Embajada)</li>
+                            <li>Fotografía digital reciente (5x5 cm)</li>
+                            <li>Comprobantes de empleo o actividad económica</li>
+                            <li>Comprobantes financieros</li>
+                            <li>Documentos que respalden tu viaje</li>
+                        </ul>
+                    </div>
+
+                    <div class="checklist-card">
+                        <h4>Visa canadiense / eTA</h4>
+                        <ul>
+                            <li>Pasaporte vigente</li>
+                            <li>Formulario de solicitud completo</li>
+                            <li>Pago del trámite</li>
+                            <li>Correo electrónico activo</li>
+                            <li>Documentos laborales o escolares</li>
+                            <li>Comprobantes financieros</li>
+                            <li>Historial de viajes (si aplica)</li>
+                        </ul>
+                    </div>
+
+                    <div class="checklist-card">
+                        <h4>Pasaporte mexicano</h4>
+                        <ul>
+                            <li>Acta de nacimiento certificada</li>
+                            <li>Identificación oficial vigente</li>
+                            <li>CURP</li>
+                            <li>Comprobante de pago (SRE)</li>
+                            <li>Cita agendada</li>
+                        </ul>
+                    </div>
+
+                    <p class="note">
+                        *Los requisitos pueden variar según tu perfil. En VisaCarolina revisamos tu caso y te guiamos paso a paso.
+                    </p>
+                </section>
+            </div>
+
+
+
+        </div>
+    </div>
+
+</div>
