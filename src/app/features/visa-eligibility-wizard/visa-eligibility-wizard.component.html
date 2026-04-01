@@ -300,139 +300,171 @@
 
 <!-- STEP 6: Resumen -->
 <section *ngIf="step === 6" class="card">
-    <h3 class="text-center mb-3">Resumen</h3>
+    <h3 class="text-center mb-3">Antes de ver tu resultado</h3>
 
     <div class="row g-3">
 
-        <!-- COLUMNA RESULTADO -->
-        <div class="col-12 col-lg-12">
-            <div class="border rounded p-3 h-100 text-center">
+        <div class="col-12">
+            <div class="border rounded p-3 h-100">
 
-                <span class="badge bg-secondary mb-2">Resultado estimado</span>
-
-                <div class="display-4 fw-bold">
-                    {{ scoreResult.score }}<small class="fs-5 text-muted">/100</small>
+                <div class="alert alert-warning mb-3">
+                    <b>Importante:</b><br> Para mostrarte tu resultado estimado y dar seguimiento a tu caso, necesitamos procesar la información que capturaste en este formulario.
                 </div>
 
-                <div class="mt-2">
-                    <b>Riesgo:</b>
-                    <span class="badge bg-success ms-1" *ngIf="scoreResult.label === 'BAJO'">
-            Bajo ✅
-          </span>
-                    <span class="badge bg-warning text-dark ms-1" *ngIf="scoreResult.label === 'MEDIO'">
-            Medio ⚠️
-          </span>
-                    <span class="badge bg-danger ms-1" *ngIf="scoreResult.label === 'ALTO'">
-            Alto 🚩
-          </span>
+                <div class="alert alert-light border mb-3">
+                    <b>Uso de la información:</b><br> Tus datos serán utilizados para:
+                    <ul class="mb-2 mt-2">
+                        <li>generar tu evaluación estimada,</li>
+                        <li>contactarte sobre tu caso por correo o WhatsApp,</li>
+                        <li>ofrecerte seguimiento y servicios de asesoría migratoria relacionados con tu solicitud.</li>
+                    </ul>
+
+                    No compartimos tus datos con terceros ajenos a la prestación de nuestros servicios.
                 </div>
 
-                <div class="progress mt-3">
-                    <div class="progress-bar" role="progressbar" [style.width.%]="scoreResult.score">
+                <div class="form-check mb-3">
+                    <input class="form-check-input" type="checkbox" id="privacyConsent" formControlName="privacyConsent" />
+                    <label class="form-check-label" for="privacyConsent">
+            He leído y acepto el
+            <a routerLink="/avisos" target="_blank">Aviso de Privacidad</a>,
+            y autorizo el tratamiento de mis datos para recibir mi evaluación
+            y ser contactado(a) sobre mi trámite.
+          </label>
+                </div>
+
+                <small class="text-danger d-block mb-3" *ngIf="form.controls.privacyConsent.touched && form.controls.privacyConsent.invalid">
+          Debes aceptar el aviso de privacidad para continuar.
+        </small>
+
+                <button type="button" class="btn btn-primary w-100 fw-bold" *ngIf="!consentAccepted" (click)="acceptPrivacyAndShowResult()">
+          Acepto y quiero ver mi resultado
+        </button>
+            </div>
+        </div>
+
+        <ng-container *ngIf="consentAccepted">
+
+            <!-- COLUMNA RESULTADO -->
+            <div class="col-12 col-lg-12">
+                <div class="border rounded p-3 h-100 text-center">
+
+                    <span class="badge bg-secondary mb-2">Resultado estimado</span>
+
+                    <div class="display-4 fw-bold">
+                        {{ scoreResult.score }}<small class="fs-5 text-muted">/100</small>
+                    </div>
+
+                    <div class="mt-2">
+                        <b>Riesgo:</b>
+                        <span class="badge bg-success ms-1" *ngIf="scoreResult.label === 'BAJO'">
+              Bajo ✅
+            </span>
+                        <span class="badge bg-warning text-dark ms-1" *ngIf="scoreResult.label === 'MEDIO'">
+              Medio ⚠️
+            </span>
+                        <span class="badge bg-danger ms-1" *ngIf="scoreResult.label === 'ALTO'">
+              Alto 🚩
+            </span>
+                    </div>
+
+                    <div class="progress mt-3">
+                        <div class="progress-bar" role="progressbar" [style.width.%]="scoreResult.score"></div>
+                    </div>
+
+                    <small class="text-muted d-block mt-2">
+            *Esta evaluación es solo una estimación.*
+          </small>
+                </div>
+            </div>
+
+            <!-- COLUMNA MENSAJE + CTA -->
+            <div class="col-12 col-lg-12">
+                <div class="border rounded p-3 h-120">
+
+                    <h5 class="fw-bold">{{ salesMessage.title }}</h5>
+
+                    <p [innerHTML]="salesMessage.body"></p>
+
+                    <div class="alert alert-light border">
+                        <b>Siguiente paso recomendado:</b><br> Agenda una asesoría personalizada para revisar tu caso y avanzar con estrategia.
+                    </div>
+
+                    <a class="btn btn-success w-100 fw-bold" [href]="whatsappHref" target="_blank" rel="noopener">
+            Hablar con un asesor ahora
+          </a>
+
+                    <br>
+
+                    <button type="button" *ngIf="!resume" class="btn btn-outline-primary w-100 fw-bold mt-3" (click)="toggleResume()">
+            Ver datos
+          </button>
+
+                    <br>
+
+                    <div class="alert alert-warning mt-3 mb-0 text-center">
+                        <b>Importante:</b><br> La decisión final depende del oficial consular.
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- RESUMEN DE DATOS -->
+            <div class="col-12 col-lg-12" *ngIf="resume">
+                <div class="border rounded p-3 h-100">
+                    <div class="summary">
+                        <div><b>Nombre:</b> {{ value.fullName }}</div>
+                        <div><b>Correo:</b> {{ value.email }}</div>
+                        <div><b>WhatsApp:</b> {{ value.whatsapp }}</div>
+                        <div><b>Edad:</b> {{ value.age }}</div>
+                        <div><b>Estado civil:</b> {{ value.civilStatus }}</div>
+
+                        <hr />
+
+                        <div><b>Visa previa:</b> {{ value.visaStatus }}</div>
+                        <div *ngIf="value.visaStatus === 'APPROVED'"><b>Año expiración:</b> {{ value.visaExpiredYear }}</div>
+                        <div *ngIf="value.visaStatus === 'DENIED'"><b>Año negativa:</b> {{ value.visaDeniedYear }}</div>
+
+                        <hr />
+
+                        <div><b>Viajó últimos 5 años:</b> {{ value.traveledLast5Years ? 'Sí' : 'No' }}</div>
+                        <div *ngIf="value.traveledLast5Years"><b>Países:</b> {{ value.countriesVisited }}</div>
+                        <div *ngIf="value.traveledLast5Years"><b>Frecuencia:</b> {{ value.travelFrequency }}</div>
+
+                        <hr />
+
+                        <div><b>Ocupación:</b> {{ value.occupation }}</div>
+                        <div><b>Tiempo empleo:</b> {{ value.employmentTime }}</div>
+                        <div><b>Ingreso:</b> {{ value.incomeRange }}</div>
+                        <div><b>Propiedades:</b> {{ value.hasProperties ? 'Sí' : 'No' }}</div>
+                        <div><b>Dependientes:</b> {{ value.hasDependents ? 'Sí' : 'No' }}</div>
+
+                        <hr />
+
+                        <div><b>Motivo:</b> {{ value.tripPurpose }}</div>
+                        <div><b>Estancia:</b> {{ value.stayDuration }}</div>
+                        <div><b>Familia en EE.UU.:</b> {{ value.hasFamilyInUS ? 'Sí' : 'No' }}</div>
+                        <div *ngIf="value.hasFamilyInUS"><b>Detalle:</b> {{ value.familyInUSDetails }}</div>
+
+                        <hr />
+
+                        <div><b>Ilegal:</b> {{ value.illegalStayOrWork ? 'Sí' : 'No' }}</div>
+                        <div><b>Deportación:</b> {{ value.deported ? 'Sí' : 'No' }}</div>
+                        <div><b>Problemas legales:</b> {{ value.seriousLegalIssues ? 'Sí' : 'No' }}</div>
+
+                        <hr />
+
+                        <div *ngIf="value.extraComments"><b>Comentarios:</b> {{ value.extraComments }}</div>
+
+                        <br>
+
+                        <button type="button" class="btn btn-outline-secondary w-100 fw-bold mt-3" (click)="toggleResume()">
+              Ocultar
+            </button>
                     </div>
                 </div>
-
-                <small class="text-muted d-block mt-2">
-          *Esta evaluación es solo una estimación.*
-        </small>
-            </div>
-        </div>
-
-        <!-- COLUMNA MENSAJE + CTA -->
-        <div class="col-12 col-lg-12">
-            <div class="border rounded p-3 h-120">
-
-                <h5 class="fw-bold">{{ salesMessage.title }}</h5>
-
-                <p [innerHTML]="salesMessage.body"></p>
-
-                <div class="alert alert-light border">
-                    <b>Siguiente paso recomendado:</b><br> Agenda una asesoría personalizada para revisar tu caso y avanzar con estrategia.
-                </div>
-
-                <a class="btn btn-success w-100 fw-bold" [href]="whatsappHref" target="_blank" rel="noopener">
-           Hablar con un asesor ahora
-        </a>
-                <br>
-                <button type="button" *ngIf="!resume" class="btn btn-outline-primary w-100 fw-bold mt-3" (click)="toggleResume()">
-  Ver datos
-</button>
-                <br>
-
-                <div class="alert alert-warning mt-3 mb-0 text-center">
-                    <b>Importante:</b><br> La decisión final depende del oficial consular.
-                    <br>
-                    <br>
-                    <b>Uso de la información:</b><br> La información proporcionada será utilizada únicamente para contactarte y ofrecerte nuestros servicios de asesoría migratoria. No compartimos tus datos con terceros.
-                </div>
-                <br>
-                <small class="text-muted d-block mt-2 text-center">
-  Al enviar este formulario aceptas nuestro
-  <a routerLink="/avisos">Aviso de Privacidad</a>.
-</small>
-
             </div>
 
-
-        </div>
-
-        <div class="col-12 col-lg-12" *ngIf="resume">
-            <div class="border rounded p-3 h-100">
-                <div class="summary">
-                    <div><b>Nombre:</b> {{ value.fullName }}</div>
-                    <div><b>Correo:</b> {{ value.email }}</div>
-                    <div><b>WhatsApp:</b> {{ value.whatsapp }}</div>
-                    <div><b>Edad:</b> {{ value.age }}</div>
-                    <div><b>Estado civil:</b> {{ value.civilStatus }}</div>
-
-                    <hr />
-
-                    <div><b>Visa previa:</b> {{ value.visaStatus }}</div>
-                    <div *ngIf="value.visaStatus === 'APPROVED'"><b>Año expiración:</b> {{ value.visaExpiredYear }}</div>
-                    <div *ngIf="value.visaStatus === 'DENIED'"><b>Año negativa:</b> {{ value.visaDeniedYear }}</div>
-
-                    <hr />
-
-                    <div><b>Viajó últimos 5 años:</b> {{ value.traveledLast5Years ? 'Sí' : 'No' }}</div>
-                    <div *ngIf="value.traveledLast5Years"><b>Países:</b> {{ value.countriesVisited }}</div>
-                    <div *ngIf="value.traveledLast5Years"><b>Frecuencia:</b> {{ value.travelFrequency }}</div>
-
-                    <hr />
-
-                    <div><b>Ocupación:</b> {{ value.occupation }}</div>
-                    <div><b>Tiempo empleo:</b> {{ value.employmentTime }}</div>
-                    <div><b>Ingreso:</b> {{ value.incomeRange }}</div>
-                    <div><b>Propiedades:</b> {{ value.hasProperties ? 'Sí' : 'No' }}</div>
-                    <div><b>Dependientes:</b> {{ value.hasDependents ? 'Sí' : 'No' }}</div>
-
-                    <hr />
-
-                    <div><b>Motivo:</b> {{ value.tripPurpose }}</div>
-                    <div><b>Estancia:</b> {{ value.stayDuration }}</div>
-                    <div><b>Familia en EE.UU.:</b> {{ value.hasFamilyInUS ? 'Sí' : 'No' }}</div>
-                    <div *ngIf="value.hasFamilyInUS"><b>Detalle:</b> {{ value.familyInUSDetails }}</div>
-
-                    <hr />
-
-                    <div><b>Ilegal:</b> {{ value.illegalStayOrWork ? 'Sí' : 'No' }}</div>
-                    <div><b>Deportación:</b> {{ value.deported ? 'Sí' : 'No' }}</div>
-                    <div><b>Problemas legales:</b> {{ value.seriousLegalIssues ? 'Sí' : 'No' }}</div>
-
-                    <hr />
-
-                    <div *ngIf="value.extraComments"><b>Comentarios:</b> {{ value.extraComments }}</div>
-                    <br>
-                    <button type="button" class="btn btn-outline-secondary w-100 fw-bold mt-3" (click)="toggleResume()">
-    Ocultar
-  </button>
-                    <br>
-
-
-                </div>
-            </div>
-        </div>
-
-
+        </ng-container>
 
     </div>
 </section>
@@ -446,7 +478,9 @@
     <button type="button" class="btn" (click)="next()" *ngIf="step < steps.length - 1">
         Siguiente
       </button>
-
+    <button type="submit" class="btn" *ngIf="step === steps.length - 1" [disabled]="!consentAccepted">
+  Enviar mis datos y continuar
+</button>
     <button type="submit" class="btn" *ngIf="step === steps.length - 1">
         Enviar evaluación
       </button>

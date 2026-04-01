@@ -15,7 +15,7 @@ export class VisaEligibilityWizardComponent {
  step = 0;
    private api = environment.apiBaseUrl;
    resume: boolean = false;
-
+consentAccepted = false;
 
   steps = [
     'Datos personales',
@@ -65,6 +65,7 @@ export class VisaEligibilityWizardComponent {
 
     // Extras
     extraComments: [''],
+    privacyConsent: [false, Validators.requiredTrue],
   });
 
   constructor(private fb: FormBuilder,private http: HttpClient) {}
@@ -75,23 +76,26 @@ export class VisaEligibilityWizardComponent {
   }
 
   next(): void {
-    if(this.step==5){
-      console.log("enviar formulario");
-    }
-    if (!this.canGoNext()) return;
+  if (!this.canGoNext()) return;
 
-    this.applyStepSideEffects();
+  this.applyStepSideEffects();
+  this.resume = false;
 
-    this.resume = false; 
+  if (this.step < this.steps.length - 1) this.step++;
 
-    if (this.step < this.steps.length - 1) this.step++;
-    
+  if (this.step !== 6) {
+    this.consentAccepted = false;
   }
+}
 
   prev(): void {
-    if (this.step > 0) this.step--;
-    this.resume = false;  
+  if (this.step > 0) this.step--;
+  this.resume = false;
+
+  if (this.step < 6) {
+    this.consentAccepted = false;
   }
+}
   private clamp(n: number, min = 0, max = 100) {
   return Math.max(min, Math.min(max, n));
 }
@@ -248,6 +252,14 @@ get whatsappHref(): string {
   const name = this.value.fullName || '';
   const msg = `Hola, quiero una asesoría para mi evaluación de visa. Mi nombre es ${name}`;
   return `https://wa.me/5214448017241?text=${encodeURIComponent(msg)}`;
+}
+acceptPrivacyAndShowResult(): void {
+  const control = this.form.controls.privacyConsent;
+  control.markAsTouched();
+
+  if (control.invalid) return;
+
+  this.consentAccepted = true;
 }
 
  submit(): void {
