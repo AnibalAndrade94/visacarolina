@@ -75,6 +75,9 @@ export class VisaEligibilityWizardComponent {
   }
 
   next(): void {
+    if(this.step==5){
+      console.log("enviar formulario");
+    }
     if (!this.canGoNext()) return;
 
     this.applyStepSideEffects();
@@ -82,6 +85,7 @@ export class VisaEligibilityWizardComponent {
     this.resume = false; 
 
     if (this.step < this.steps.length - 1) this.step++;
+    
   }
 
   prev(): void {
