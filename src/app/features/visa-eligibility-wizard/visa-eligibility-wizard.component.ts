@@ -243,7 +243,7 @@ get scoreResult() {
 get whatsappHref(): string {
   const name = this.value.fullName || '';
   const msg = `Hola, quiero una asesoría para mi evaluación de visa. Mi nombre es ${name}`;
-  return `https://wa.me/521XXXXXXXXXX?text=${encodeURIComponent(msg)}`;
+  return `https://wa.me/5214448017241?text=${encodeURIComponent(msg)}`;
 }
 
  submit(): void {
@@ -262,7 +262,12 @@ get whatsappHref(): string {
   this.http.post(`${this.api}/api/evaluacion-visa`, payload)
     .subscribe({
       next: () => alert('Enviado ✅'),
-      error: () => alert('Error al enviar ❌')
+      error: (err) => {
+  console.error('Error completo:', err);
+  console.error('Status:', err.status);
+  console.error('Body:', err.error);
+  alert(err?.error?.message || 'Error al enviar ❌');
+}
     });
 }
 
