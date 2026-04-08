@@ -470,7 +470,6 @@ onSubmit() {
 
   this.visaForm.markAllAsTouched();
 
-  // ✅ Ya no bloquea por captcha
   if (this.visaForm.invalid) {
     this.submitMsg = 'Revisa los campos obligatorios antes de enviar.';
     this.scrollToFirstInvalid();
@@ -484,9 +483,8 @@ onSubmit() {
     _meta: { form: 'ds160_extended', submittedAt: new Date().toISOString() }
   };
 
-  // ✅ Ya no verifica captcha
   this.http
-    .post(`${this.api}/api/form-visa-americana`, payload)
+    .post<any>(`${this.api}/api/form-visa-americana`, payload)
     .pipe(finalize(() => (this.isSubmitting = false)))
     .subscribe({
       next: (res) => {
@@ -500,21 +498,34 @@ onSubmit() {
         this.visaForm.reset();
         this.applySafeDefaultsAfterReset();
 
-        // ✅ ya no resetea captcha
-        // if (typeof grecaptcha !== 'undefined') grecaptcha.reset();
-        // this.captchaToken = '';
-
         setTimeout(() => this.router.navigate(['/']), 1200);
       },
       error: (err) => {
         console.error('❌ Error al enviar', err);
 
         this.submitOk = false;
-        this.submitMsg = 'Hubo un error al enviar. Intenta más tarde.';
 
-        // ✅ ya no resetea captcha
-        // if (typeof grecaptcha !== 'undefined') grecaptcha.reset();
-        // this.captchaToken = '';
+        const backendError = err?.error;
+
+        const detail =
+          backendError?.detail ||
+          backendError?.message ||
+          err?.message ||
+          'Hubo un error al enviar. Intenta más tarde.';
+
+        const code =
+          backendError?.code ||
+          err?.status ||
+          'UNKNOWN_ERROR';
+
+        this.submitMsg = `Error: ${detail} (Código: ${code})`;
+
+        this.analytics.logEvent('form_submit', {
+          form: 'visa',
+          status: 'error',
+          error_code: String(code),
+          error_detail: String(detail)
+        });
       }
     });
 }
