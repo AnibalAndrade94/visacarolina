@@ -20,19 +20,17 @@ export class ConfirmarCorreoComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    // Firebase manda algo como:
-    // ?mode=verifyEmail&oobCode=XXXX&apiKey=...&continueUrl=...
-    const mode = this.route.snapshot.queryParamMap.get('mode') || '';
-    const oobCode = this.route.snapshot.queryParamMap.get('oobCode') || '';
+    const token = this.route.snapshot.queryParamMap.get('token') || '';
+    const email = this.route.snapshot.queryParamMap.get('email') || '';
 
-    if (mode !== 'verifyEmail' || !oobCode) {
+    if (!token || !email) {
       this.loading = false;
       this.status = 'missing';
       this.message = 'El enlace de confirmación es inválido o está incompleto.';
       return;
     }
 
-    this.auth.confirmEmailFirebase(oobCode).subscribe({
+    this.auth.verifyEmail(token, email).subscribe({
       next: () => {
         this.loading = false;
         this.status = 'success';
@@ -51,12 +49,11 @@ export class ConfirmarCorreoComponent implements OnInit {
         this.loading = false;
         this.status = 'error';
 
-        // Firebase errores típicos: auth/invalid-action-code, auth/expired-action-code
-        const code = err?.code || err?.error?.code;
+        const backendMsg = err?.error?.error || err?.error?.message || '';
 
-        if (code === 'auth/expired-action-code') {
-          this.message = 'El enlace expiró. Solicita uno nuevo desde el login.';
-        } else if (code === 'auth/invalid-action-code') {
+        if (backendMsg.toLowerCase().includes('expirado')) {
+          this.message = 'El enlace expiró. Solicita uno nuevo.';
+        } else if (backendMsg.toLowerCase().includes('inválido')) {
           this.message = 'El enlace es inválido o ya fue usado.';
         } else {
           this.message = 'No se pudo confirmar el correo. Intenta de nuevo.';
