@@ -3,15 +3,13 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../environments/environment';
 import { Observable, from, switchMap, tap, map } from 'rxjs';
 
-
 import {
   getAuth,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   sendEmailVerification,
   signOut,
-  applyActionCode,
-  User
+  applyActionCode
 } from 'firebase/auth';
 
 type UserDTO = {
@@ -42,7 +40,7 @@ type RegisterPayload = {
   state: string;
   whatsapp: string;
   email: string;
-  password: string;       // SOLO para Firebase
+  password: string;
   acceptTerms: boolean;
   source?: string;
   interest?: string;
@@ -52,14 +50,22 @@ type LoginPayload = { email: string; password: string };
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
+  api = 'https://visaback-production-3ac4.up.railway.app';
   private baseUrl = `${environment.apiBaseUrl}/api/auth`;
-confirmEmailFirebase(oobCode: string) {
-  const auth = getAuth();
-  return from(applyActionCode(auth, oobCode));
-}
+
   constructor(private http: HttpClient) {}
 
-  // ✅ helper para headers con Firebase token
+  confirmEmailFirebase(oobCode: string) {
+    const auth = getAuth();
+    return from(applyActionCode(auth, oobCode));
+  }
+
+  verifyEmail(token: string, email: string) {
+    return this.http.get(`${this.api}/api/auth/verify-email`, {
+      params: { token, email }
+    });
+  }
+
   private withFirebaseAuthHeaders(): Observable<HttpHeaders> {
     const auth = getAuth();
     return from(auth.currentUser?.getIdToken() ?? Promise.resolve(null)).pipe(
@@ -73,7 +79,6 @@ confirmEmailFirebase(oobCode: string) {
     );
   }
 
-  
   private headersWithToken(token: string) {
     return new HttpHeaders({
       Authorization: `Bearer ${token}`,
@@ -81,13 +86,13 @@ confirmEmailFirebase(oobCode: string) {
     });
   }
 
-register(payload: RegisterPayload, rememberMe: boolean) {
+  register(payload: RegisterPayload, rememberMe: boolean) {
     const auth = getAuth();
 
     return from(createUserWithEmailAndPassword(auth, payload.email, payload.password)).pipe(
       switchMap(async ({ user }) => {
         await sendEmailVerification(user);
-        const token = await user.getIdToken(true); // 👈 token real garantizado
+        const token = await user.getIdToken(true);
         return { user, token };
       }),
       switchMap(({ token }) =>
@@ -117,17 +122,17 @@ register(payload: RegisterPayload, rememberMe: boolean) {
     const auth = getAuth();
 
     return from(signInWithEmailAndPassword(auth, payload.email, payload.password)).pipe(
-  switchMap(({ user }) =>
-    from(user.getIdToken(true)).pipe(
-      switchMap((token) => {
-        const headers = new HttpHeaders({
-          Authorization: `Bearer ${token}`,
-          'Content-Type': 'application/json',
-        });
-        return this.http.post<SyncResponse>(`${this.baseUrl}/sync-profile`, {}, { headers });
-      })
-    )
-  ),
+      switchMap(({ user }) =>
+        from(user.getIdToken(true)).pipe(
+          switchMap((token) => {
+            const headers = new HttpHeaders({
+              Authorization: `Bearer ${token}`,
+              'Content-Type': 'application/json',
+            });
+            return this.http.post<SyncResponse>(`${this.baseUrl}/sync-profile`, {}, { headers });
+          })
+        )
+      ),
       tap((resp) => {
         const storage = rememberMe ? localStorage : sessionStorage;
         storage.setItem('firebase', '1');
@@ -135,7 +140,8 @@ register(payload: RegisterPayload, rememberMe: boolean) {
       })
     );
   }
-   async logout() {
+
+  async logout() {
     localStorage.removeItem('firebase');
     localStorage.removeItem('user');
     sessionStorage.removeItem('firebase');
@@ -143,7 +149,6 @@ register(payload: RegisterPayload, rememberMe: boolean) {
     await signOut(getAuth());
   }
 
-  // ✅ para tu interceptor (si lo quieres)
   getFirebaseUser() {
     return getAuth().currentUser;
   }
@@ -156,6 +161,4 @@ register(payload: RegisterPayload, rememberMe: boolean) {
   isLoggedIn(): boolean {
     return !!getAuth().currentUser;
   }
-
-  
 }
