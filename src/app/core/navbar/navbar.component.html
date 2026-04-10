@@ -5,30 +5,64 @@
         </a>
 
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-        <span class="navbar-toggler-icon"></span>
-      </button>
+      <span class="navbar-toggler-icon"></span>
+    </button>
 
         <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ms-auto">
+            <ul class="navbar-nav ms-auto align-items-lg-center">
                 <li class="nav-item" routerLinkActive="active">
                     <a class="nav-link" routerLink="/home">Inicio</a>
                 </li>
+
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                      Servicios
-                    </a>
+            Servicios
+          </a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="/servicios/visas">Visa Americana</a></li>
-                        <li><a class="dropdown-item" href="/servicios/pasapport">Pasaporte Mexicano</a></li>
-                        <li><a class="dropdown-item" href="/servicios/pasaporte_americano">Pasaporte Americano</a></li>
-                        <li><a class="dropdown-item" href="/servicios/etacanada">eTA Canadiense</a></li>
-                        <li><a class="dropdown-item" href="/servicios/etabritanica">eTA Británica</a></li>
-
+                        <li><a class="dropdown-item" routerLink="/servicios/visas">Visa Americana</a></li>
+                        <li><a class="dropdown-item" routerLink="/servicios/pasapport">Pasaporte Mexicano</a></li>
+                        <li><a class="dropdown-item" routerLink="/servicios/pasaporte_americano">Pasaporte Americano</a></li>
+                        <li><a class="dropdown-item" routerLink="/servicios/etacanada">eTA Canadiense</a></li>
+                        <li><a class="dropdown-item" routerLink="/servicios/etabritanica">eTA Británica</a></li>
                     </ul>
                 </li>
+
                 <li class="nav-item" routerLinkActive="active">
                     <a class="nav-link" routerLink="/contacto">Contacto</a>
                 </li>
+
+                <!-- Visitante -->
+                <ng-container *ngIf="!isLoggedIn">
+                    <li class="nav-item" routerLinkActive="active">
+                        <a class="nav-link" routerLink="/cursos/login">Login</a>
+                    </li>
+                    <li class="nav-item" routerLinkActive="active">
+                        <a class="nav-link" routerLink="/cursos/registro">Registro</a>
+                    </li>
+                </ng-container>
+
+                <!-- Usuario logeado -->
+                <ng-container *ngIf="isLoggedIn">
+                    <li class="nav-item" routerLinkActive="active">
+                        <a class="nav-link" routerLink="/cursos/mis-cursos">Mis cursos</a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              {{ currentUser?.name || 'Mi cuenta' }}
+            </a>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li>
+                                <a class="dropdown-item" routerLink="/cursos/mis-cursos">Dashboard</a>
+                            </li>
+                            <li>
+                                <button class="dropdown-item" type="button" (click)="logout()">
+                  Cerrar sesión
+                </button>
+                            </li>
+                        </ul>
+                    </li>
+                </ng-container>
             </ul>
         </div>
     </div>

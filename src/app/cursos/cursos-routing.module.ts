@@ -8,31 +8,43 @@ import { CursoPlayerComponent } from './curso-player/curso-player.component';
 import { DashboardAlumnoComponent } from './dashboard-alumno/dashboard-alumno.component';
 import { LoginComponent } from '../auth/login/login.component';
 import { RegisterComponent } from '../auth/register/register.component';
-import { registerLocaleData } from '@angular/common';
 import { ConfirmarCorreoComponent } from './confirmar-correo/confirmar-correo.component';
+import { AuthGuard } from '../guard/auth.guard';
 
 const routes: Routes = [
   {
     path: '',
-    component: LandingCursosComponent, // /cursos
+    component: LandingCursosComponent,
   },
   {
     path: 'lista',
-    component: CusoListComponent, // /cursos/lista
+    component: CusoListComponent,
   },
   {
-    path: 'confirmar-correo', component:ConfirmarCorreoComponent
+    path: 'confirmar-correo',
+    component: ConfirmarCorreoComponent
   },
-  { path:'login',component: LoginComponent},
-  { path:'registro',component:RegisterComponent},
-  { path: 'mis-cursos', component: DashboardAlumnoComponent },
+  {
+    path: 'login',
+    component: LoginComponent
+  },
+  {
+    path: 'registro',
+    component: RegisterComponent
+  },
+  {
+    path: 'mis-cursos',
+    component: DashboardAlumnoComponent,
+    canActivate: [AuthGuard]
+  },
   {
     path: ':slug',
-    component: CursoDetalleComponent, // /cursos/visa-americana
+    component: CursoDetalleComponent,
   },
   {
     path: ':slug/ver',
-    component: CursoPlayerComponent, // /cursos/visa-americana/ver
+    component: CursoPlayerComponent,
+    canActivate: [AuthGuard]
   },
 ];
 

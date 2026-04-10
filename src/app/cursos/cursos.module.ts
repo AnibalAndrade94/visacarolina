@@ -12,6 +12,7 @@ import { CursoPlayerComponent } from './curso-player/curso-player.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DashboardAlumnoComponent } from './dashboard-alumno/dashboard-alumno.component';
 import { ConfirmarCorreoComponent } from './confirmar-correo/confirmar-correo.component';
+import { LogoutComponent } from './logout/logout.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { ConfirmarCorreoComponent } from './confirmar-correo/confirmar-correo.co
     CursoDetalleComponent,
     CursoPlayerComponent,
     DashboardAlumnoComponent,
-    ConfirmarCorreoComponent
+    ConfirmarCorreoComponent,
+    LogoutComponent
   ],
   imports: [
     CommonModule,

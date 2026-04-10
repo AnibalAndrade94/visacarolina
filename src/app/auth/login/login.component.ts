@@ -2,6 +2,8 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 import { Component } from '@angular/core';
 import Swal from 'sweetalert2';
+import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -18,9 +20,15 @@ export class LoginComponent {
     rememberMe: [true],
   });
 
-  constructor(private fb: FormBuilder, private auth: AuthService) {}
+  constructor(
+    private fb: FormBuilder,
+    private auth: AuthService,
+    private router: Router
+  ) {}
 
-  get f() { return this.form.controls; }
+  get f() {
+    return this.form.controls;
+  }
 
   submit() {
     this.submitted = true;
@@ -47,7 +55,7 @@ export class LoginComponent {
     this.loading = true;
 
     this.auth.login(payload, raw.rememberMe ?? true).subscribe({
-      next: (_resp: any) => {
+      next: (_resp) => {
         this.loading = false;
 
         Swal.fire({
@@ -55,49 +63,32 @@ export class LoginComponent {
           title: 'Bienvenido',
           text: 'Sesión iniciada correctamente.',
           confirmButtonText: 'Ok'
+        }).then(() => {
+          this.router.navigate(['/cursos']);
         });
-
-        // Aquí ya puedes navegar:
-        // this.router.navigate(['/mi-cuenta']);
       },
       error: (err) => {
         this.loading = false;
 
-        const code = err?.code || err?.error?.code;
-
-        // Firebase Auth errores comunes
-        if (code === 'auth/user-not-found') {
-          this.errorMsg = 'No existe una cuenta con ese correo.';
-          return;
-        }
-
-        if (code === 'auth/wrong-password' || code === 'auth/invalid-credential') {
+        if (err?.status === 401) {
           this.errorMsg = 'Correo o contraseña incorrectos.';
           return;
         }
 
-        if (code === 'auth/too-many-requests') {
-          this.errorMsg = 'Demasiados intentos. Intenta de nuevo más tarde.';
+        if (err?.status === 403) {
+          this.errorMsg = 'Primero confirma tu correo. Revisa tu bandeja y spam.';
           return;
         }
 
-        if (code === 'auth/invalid-email') {
-          this.errorMsg = 'Correo inválido.';
+        if (err?.status === 404) {
+          this.errorMsg = 'No se encontró la cuenta.';
           return;
         }
 
-        // Si falla el sync-profile (backend)
-        if (err?.status === 401) {
-          this.errorMsg = 'No se pudo validar tu sesión. Intenta de nuevo.';
-          return;
-        }
-        if (code === 'auth/email-not-verified') {
-  this.errorMsg = 'Primero confirma tu correo. Revisa tu bandeja y spam.';
-  return;
-}
-
-
-        this.errorMsg = err?.message || 'Ocurrió un error al iniciar sesión.';
+        this.errorMsg =
+          err?.error?.error ||
+          err?.error?.message ||
+          'Ocurrió un error al iniciar sesión.';
       }
     });
   }

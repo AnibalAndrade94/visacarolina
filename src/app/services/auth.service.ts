@@ -1,16 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { environment } from '../environments/environment';
-import { Observable, from, switchMap, tap, map } from 'rxjs';
-
-import {
-  getAuth,
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-  sendEmailVerification,
-  signOut,
-  applyActionCode
-} from 'firebase/auth';
+import { Observable, tap } from 'rxjs';
 
 type UserDTO = {
   id: string;
@@ -26,14 +16,6 @@ type UserDTO = {
   emailVerified?: boolean;
 };
 
-type SyncResponse = {
-  ok: boolean;
-  user?: UserDTO;
-  message?: string;
-  emailSent?: boolean;
-  error?: string;
-};
-
 type RegisterPayload = {
   name: string;
   city: string;
@@ -46,119 +28,105 @@ type RegisterPayload = {
   interest?: string;
 };
 
-type LoginPayload = { email: string; password: string };
+type LoginPayload = {
+  email: string;
+  password: string;
+};
+
+type RegisterResponse = {
+  ok: boolean;
+  emailSent: boolean;
+  message: string;
+  user: UserDTO;
+};
+
+type LoginResponse = {
+  ok: boolean;
+  token: string;
+  user: UserDTO;
+};
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
-  api = 'https://visaback-production-3ac4.up.railway.app';
-  private baseUrl = `${environment.apiBaseUrl}/api/auth`;
+  private api = 'https://visaback-production-3ac4.up.railway.app/api/auth';
 
   constructor(private http: HttpClient) {}
 
-  confirmEmailFirebase(oobCode: string) {
-    const auth = getAuth();
-    return from(applyActionCode(auth, oobCode));
+  register(payload: RegisterPayload, rememberMe: boolean): Observable<RegisterResponse> {
+    return this.http.post<RegisterResponse>(`${this.api}/register`, payload).pipe(
+      tap((resp) => {
+        const storage = rememberMe ? localStorage : sessionStorage;
+        storage.removeItem('token');
+        storage.removeItem('user');
+
+        if (resp?.user) {
+          storage.setItem('user', JSON.stringify(resp.user));
+        }
+      })
+    );
+  }
+
+  login(payload: LoginPayload, rememberMe: boolean): Observable<LoginResponse> {
+    return this.http.post<LoginResponse>(`${this.api}/login`, payload).pipe(
+      tap((resp) => {
+        const storage = rememberMe ? localStorage : sessionStorage;
+
+        storage.setItem('token', resp.token);
+        storage.setItem('user', JSON.stringify(resp.user));
+      })
+    );
   }
 
   verifyEmail(token: string, email: string) {
-    return this.http.get(`${this.api}/api/auth/verify-email`, {
+    return this.http.get(`${this.api}/verify-email`, {
       params: { token, email }
     });
   }
 
-  private withFirebaseAuthHeaders(): Observable<HttpHeaders> {
-    const auth = getAuth();
-    return from(auth.currentUser?.getIdToken() ?? Promise.resolve(null)).pipe(
-      map((token) => {
-        if (!token) throw new Error('No hay sesión activa en Firebase');
-        return new HttpHeaders({
-          Authorization: `Bearer ${token}`,
-          'Content-Type': 'application/json',
-        });
-      })
+  me() {
+    return this.http.get<UserDTO>(`${this.api}/me`, {
+      headers: this.authHeaders()
+    }).pipe(
+      tap((user) => this.setUser(user))
     );
   }
 
-  private headersWithToken(token: string) {
-    return new HttpHeaders({
-      Authorization: `Bearer ${token}`,
-      'Content-Type': 'application/json',
-    });
-  }
-
-  register(payload: RegisterPayload, rememberMe: boolean) {
-    const auth = getAuth();
-
-    return from(createUserWithEmailAndPassword(auth, payload.email, payload.password)).pipe(
-      switchMap(async ({ user }) => {
-        await sendEmailVerification(user);
-        const token = await user.getIdToken(true);
-        return { user, token };
-      }),
-      switchMap(({ token }) =>
-        this.http.post<SyncResponse>(
-          `${this.baseUrl}/sync-profile`,
-          {
-            name: payload.name,
-            whatsapp: payload.whatsapp,
-            city: payload.city,
-            state: payload.state,
-            acceptTerms: payload.acceptTerms,
-            source: payload.source || '',
-            interest: payload.interest || '',
-          },
-          { headers: this.headersWithToken(token) }
-        )
-      ),
-      tap((resp) => {
-        const storage = rememberMe ? localStorage : sessionStorage;
-        storage.setItem('firebase', '1');
-        if (resp?.user) storage.setItem('user', JSON.stringify(resp.user));
-      })
-    );
-  }
-
-  login(payload: LoginPayload, rememberMe: boolean) {
-    const auth = getAuth();
-
-    return from(signInWithEmailAndPassword(auth, payload.email, payload.password)).pipe(
-      switchMap(({ user }) =>
-        from(user.getIdToken(true)).pipe(
-          switchMap((token) => {
-            const headers = new HttpHeaders({
-              Authorization: `Bearer ${token}`,
-              'Content-Type': 'application/json',
-            });
-            return this.http.post<SyncResponse>(`${this.baseUrl}/sync-profile`, {}, { headers });
-          })
-        )
-      ),
-      tap((resp) => {
-        const storage = rememberMe ? localStorage : sessionStorage;
-        storage.setItem('firebase', '1');
-        if (resp?.user) storage.setItem('user', JSON.stringify(resp.user));
-      })
-    );
-  }
-
-  async logout() {
-    localStorage.removeItem('firebase');
+  logout() {
+    localStorage.removeItem('token');
     localStorage.removeItem('user');
-    sessionStorage.removeItem('firebase');
+    sessionStorage.removeItem('token');
     sessionStorage.removeItem('user');
-    await signOut(getAuth());
   }
 
-  getFirebaseUser() {
-    return getAuth().currentUser;
+  getToken(): string | null {
+    return localStorage.getItem('token') || sessionStorage.getItem('token');
   }
 
-  getUser(): any | null {
+  getUser(): UserDTO | null {
     const raw = localStorage.getItem('user') || sessionStorage.getItem('user');
     return raw ? JSON.parse(raw) : null;
   }
 
+  setUser(user: UserDTO) {
+    if (localStorage.getItem('token')) {
+      localStorage.setItem('user', JSON.stringify(user));
+      return;
+    }
+
+    if (sessionStorage.getItem('token')) {
+      sessionStorage.setItem('user', JSON.stringify(user));
+    }
+  }
+
   isLoggedIn(): boolean {
-    return !!getAuth().currentUser;
+    return !!this.getToken();
+  }
+
+  private authHeaders(): HttpHeaders {
+    const token = this.getToken();
+    return new HttpHeaders({
+      Authorization: `Bearer ${token || ''}`,
+      'Content-Type': 'application/json'
+    });
   }
 }
