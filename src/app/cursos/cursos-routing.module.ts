@@ -10,6 +10,7 @@ import { LoginComponent } from '../auth/login/login.component';
 import { RegisterComponent } from '../auth/register/register.component';
 import { ConfirmarCorreoComponent } from './confirmar-correo/confirmar-correo.component';
 import { AuthGuard } from '../guard/auth.guard';
+import { Landing2Component } from './landing2/landing2.component';
 
 const routes: Routes = [
   {
@@ -19,6 +20,10 @@ const routes: Routes = [
   {
     path: 'lista',
     component: CusoListComponent,
+  },
+  {
+    path: 'landing',
+    component: Landing2Component,
   },
   {
     path: 'confirmar-correo',

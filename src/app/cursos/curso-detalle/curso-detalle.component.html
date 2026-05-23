@@ -4,6 +4,14 @@
         <!-- Título y descripción -->
         <div class="row align-items-center mb-5">
             <div class="col-md-7">
+                <span *ngIf="curso.comprado" class="estado-curso estado-curso--comprado mb-3">
+  Ya lo tienes
+</span>
+
+                <span *ngIf="!curso.comprado" class="estado-curso estado-curso--disponible mb-3">
+  Disponible
+</span>
+
                 <h1 class="brittany my-2 tcolor">
                     {{ curso.titulo }}
                 </h1>
@@ -25,13 +33,13 @@
 
                 <!-- Botones de acción -->
                 <div class="mt-4 d-flex flex-wrap gap-3">
-                    <button class="btn btn-success" (click)="onComprar()">
-            Comprar curso
-          </button>
+                    <button *ngIf="!curso.comprado" class="btn btn-success" (click)="onComprar()">
+    Comprar curso
+  </button>
 
                     <a *ngIf="curso.comprado" [routerLink]="['/cursos', curso.slug, 'ver']" class="btn btn-outline-success">
-            Ir al curso (ya lo tienes)
-          </a>
+    Ir al curso
+  </a>
                 </div>
             </div>
 

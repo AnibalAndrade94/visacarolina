@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CursoService } from '../curso.service';
+import { Course } from '../models/cursos.model';
 
 @Component({
   selector: 'app-curso-detalle',
@@ -8,7 +9,7 @@ import { CursoService } from '../curso.service';
   styleUrls: ['./curso-detalle.component.scss']
 })
 export class CursoDetalleComponent implements OnInit {
-curso: any = null;
+  curso: Course | null = null;
 
   constructor(
     private route: ActivatedRoute,
@@ -22,15 +23,12 @@ curso: any = null;
       this.curso = this.cursoService.getCurso(slug);
     }
 
-    // Si no existe el curso, regresamos a la lista
     if (!this.curso) {
       this.router.navigate(['/cursos/lista']);
     }
   }
 
-  // MVP: aquí en el futuro irá la lógica de compra (Stripe / backend)
   onComprar(): void {
     console.log('Comprar curso:', this.curso?.slug);
-    // aquí luego rediriges a checkout
   }
 }

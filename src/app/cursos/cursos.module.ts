@@ -13,6 +13,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DashboardAlumnoComponent } from './dashboard-alumno/dashboard-alumno.component';
 import { ConfirmarCorreoComponent } from './confirmar-correo/confirmar-correo.component';
 import { LogoutComponent } from './logout/logout.component';
+import { Landing2Component } from './landing2/landing2.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { LogoutComponent } from './logout/logout.component';
     CursoPlayerComponent,
     DashboardAlumnoComponent,
     ConfirmarCorreoComponent,
-    LogoutComponent
+    LogoutComponent,
+    Landing2Component
   ],
   imports: [
     CommonModule,

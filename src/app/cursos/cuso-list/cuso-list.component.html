@@ -17,6 +17,14 @@
 
                     <div class="card-body text-center">
 
+                        <span *ngIf="curso.comprado" class="badge bg-success mb-2">
+        Ya lo tienes
+      </span>
+
+                        <span *ngIf="!curso.comprado" class="badge bg-secondary mb-2">
+        Disponible
+      </span>
+
                         <h3 class="boho bold700 spacing subcolor mb-2">
                             {{ curso.titulo }}
                         </h3>
@@ -26,17 +34,17 @@
                         </p>
 
                         <span class="badge-precio mayor d-inline-block my-3">
-              ${{ curso.precio }} MXN
-            </span>
+        ${{ curso.precio }} MXN
+      </span>
 
                         <div class="d-flex flex-column gap-2">
                             <a [routerLink]="['/cursos', curso.slug]" class="btn btn-success">
-                Ver detalles
-              </a>
+          Ver detalles
+        </a>
 
                             <a [routerLink]="['/cursos', curso.slug, 'ver']" class="btn btn-outline-success" *ngIf="curso.comprado">
-                Ir al curso
-              </a>
+          Ir al curso
+        </a>
                         </div>
 
                     </div>

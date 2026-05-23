@@ -1,190 +1,107 @@
 import { Injectable } from '@angular/core';
+import { AuthService } from '../services/auth.service';
+import { Course } from './models/cursos.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CursoService {
+  constructor(private auth: AuthService) {}
 
-  // --------------------------------------------------------
-  //  LISTA DE CURSOS (MVP – luego vendrá desde el backend)
-  // --------------------------------------------------------
-  private cursos = [
+  private cursosBase: Course[] = [
     {
       slug: 'visa-americana',
-      titulo: 'Curso completo: Visa Americana B1/B2 paso a paso',
-      descripcion: 'Aprende a llenar el DS-160, agendar citas, prepararte para la entrevista y evitar los errores más comunes.',
-      precio: 799,
-      imagen: '/assets/cursos/visa-americana.png',
-
-      // MVP: cambiar a true/false según pruebas
-      comprado: true,
-
+      titulo: 'Curso Visa Americana',
+      descripcion: 'Aprende a llenar tu proceso paso a paso.',
+      precio: 999,
+      imagen: 'assets/cursos/visa-americana.png',
+      publicado: true,
       modulos: [
         {
-          titulo: 'Introducción',
+          titulo: 'Módulo 1: Introducción',
           lecciones: [
-            {
-              id: 'intro',
-              titulo: 'Cómo funciona el proceso de visa americana',
-              videoUrl: 'https://www.youtube.com/embed/qh3BUYK2k0E'
-            }
+            { titulo: 'Bienvenida' },
+            { titulo: 'Cómo funciona el trámite' }
           ]
         },
         {
-          titulo: 'Formulario DS-160',
+          titulo: 'Módulo 2: DS-160',
           lecciones: [
-            {
-              id: 'ds160-1',
-              titulo: 'Crear tu cuenta DS-160',
-              videoUrl: 'https://www.youtube.com/embed/qh3BUYK2k0E'
-            },
-            {
-              id: 'ds160-2',
-              titulo: 'Llenado profesional del DS-160',
-              videoUrl: 'https://www.youtube.com/embed/qh3BUYK2k0E'
-            }
-          ]
-        },
-        {
-          titulo: 'Citas y entrevista',
-          lecciones: [
-            {
-              id: 'citas-1',
-              titulo: 'Agendar VAC y Consulado',
-              videoUrl: 'https://www.youtube.com/embed/qh3BUYK2k0E'
-            },
-            {
-              id: 'citas-2',
-              titulo: 'Preguntas más comunes en la entrevista',
-              videoUrl: 'https://www.youtube.com/embed/qh3BUYK2k0E'
-            }
+            { titulo: 'Datos personales' },
+            { titulo: 'Errores comunes' }
           ]
         }
       ]
     },
-
-    // --------------------------------------------------------
-    //  CURSO 2 — VISA CANADIENSE
-    // --------------------------------------------------------
     {
       slug: 'visa-canadiense',
-      titulo: 'Curso completo: Visa Canadiense TRV',
-      descripcion: 'Todo el proceso: portal IRCC, biométricos, evidencia económica, cuestionario y armado del expediente.',
+      titulo: 'Curso Visa Canadiense',
+      descripcion: 'Entiende requisitos, documentos y pasos.',
       precio: 899,
-      imagen: '/assets/cursos/visa-canadiense.png',
-
-      comprado: false,
-
+      imagen: 'assets/cursos/visa-canadiense.png',
+      publicado: true,
       modulos: [
         {
-          titulo: 'Introducción al TRV',
+          titulo: 'Módulo 1: Base del trámite',
           lecciones: [
-            {
-              id: 'trv-intro',
-              titulo: 'Cómo funciona IRCC y qué revisan los oficiales',
-              videoUrl: 'https://www.youtube.com/embed/qh3BUYK2k0E'
-            }
-          ]
-        },
-        {
-          titulo: 'Llenado del IMM5257',
-          lecciones: [
-            {
-              id: 'imm-1',
-              titulo: 'Cuestionario para determinar elegibilidad',
-              videoUrl: 'https://www.youtube.com/embed/qh3BUYK2k0E'
-            },
-            {
-              id: 'imm-2',
-              titulo: 'Cómo llenar el formulario IMM5257 correctamente',
-              videoUrl: 'https://www.youtube.com/embed/qh3BUYK2k0E'
-            }
-          ]
-        },
-        {
-          titulo: 'Biométricos y resultados',
-          lecciones: [
-            {
-              id: 'bio-1',
-              titulo: 'Qué hacer después de enviar tu solicitud',
-              videoUrl: 'https://www.youtube.com/embed/qh3BUYK2k0E'
-            },
-            {
-              id: 'bio-2',
-              titulo: 'Carta de aprobación, passport request y tiempos',
-              videoUrl: 'https://www.youtube.com/embed/qh3BUYK2k0E'
-            }
+            { titulo: 'Qué necesitas' },
+            { titulo: 'Cómo evitar errores' }
           ]
         }
       ]
     },
-
-    // --------------------------------------------------------
-    //  CURSO 3 — eTA CANADIENSE
-    // --------------------------------------------------------
     {
-      slug: 'eta-canadiense',
-      titulo: 'Curso express: eTA Canadiense sin errores',
-      descripcion: 'Aprende a llenar la eTA correctamente, qué datos revisar del pasaporte y qué hacer si entra en revisión o la rechazan.',
-      precio: 399,
-      imagen: '/assets/cursos/eta-canadiense.png',
-
-      comprado: true,
-
+      slug: 'eta-canada',
+      titulo: 'Curso eTA Canadá',
+      descripcion: 'Haz tu eTA sin depender de terceros.',
+      precio: 499,
+      imagen: 'assets/cursos/eta-canada.png',
+      publicado: true,
       modulos: [
         {
-          titulo: 'Introducción a la eTA',
+          titulo: 'Módulo único',
           lecciones: [
-            {
-              id: 'eta-1',
-              titulo: 'Qué es la eTA y cómo funciona',
-              videoUrl: 'https://www.youtube.com/embed/qh3BUYK2k0E'
-            }
-          ]
-        },
-        {
-          titulo: 'Formulario eTA',
-          lecciones: [
-            {
-              id: 'eta-2',
-              titulo: 'Llenado paso a paso',
-              videoUrl: 'https://www.youtube.com/embed/qh3BUYK2k0E'
-            },
-            {
-              id: 'eta-3',
-              titulo: 'Errores comunes del pasaporte que causan rechazo',
-              videoUrl: 'https://www.youtube.com/embed/qh3BUYK2k0E'
-            }
-          ]
-        },
-        {
-          titulo: 'Revisión y respuesta',
-          lecciones: [
-            {
-              id: 'eta-4',
-              titulo: 'Qué hacer si se va a revisión o es rechazada',
-              videoUrl: 'https://www.youtube.com/embed/qh3BUYK2k0E'
-            }
+            { titulo: 'Paso a paso' },
+            { titulo: 'Errores frecuentes' }
           ]
         }
       ]
     }
   ];
 
-  // -------------------------------------------------------
-  //   MÉTODOS PÚBLICOS
-  // -------------------------------------------------------
+  private withOwnership(course: Course): Course {
+    const user = this.auth.getUser();
+    const owned = user?.coursesOwned || [];
 
-  getCursos() {
-    return this.cursos;
+    return {
+      ...course,
+      comprado: owned.includes(course.slug)
+    };
   }
 
-  getCurso(slug: string) {
-    return this.cursos.find(c => c.slug === slug);
+  getCursos(): Course[] {
+    return this.cursosBase
+      .filter(c => c.publicado)
+      .map(c => this.withOwnership(c));
+  }
+  getCursosComprados(): Course[] {
+  const user = this.auth.getUser();
+  const owned = user?.coursesOwned || [];
+
+  return this.cursosBase
+    .filter(c => c.publicado && owned.includes(c.slug))
+    .map(c => this.withOwnership(c));
+}
+
+  getCurso(slug: string): Course | null {
+    const found = this.cursosBase.find(c => c.slug === slug);
+    return found ? this.withOwnership(found) : null;
   }
 
-  // MVP: simula cursos comprados hasta que tengamos login real
-  getCursosComprados() {
-    return this.cursos.filter(c => c.comprado);
+  hasAccess(slug: string): boolean {
+    const user = this.auth.getUser();
+    const owned = user?.coursesOwned || [];
+    return owned.includes(slug);
   }
+  
 }
