@@ -8,12 +8,41 @@ import { Component } from '@angular/core';
 export class GuideComponent {
 
 
-  constructor(){}
+  guideSelected: 'pasaporte' | 'usa' | 'canada' = 'usa';
+toolSelected = 1;
 
-  toolSelected = 2; // por defecto muestra el mapa
-
-setTool(value: number) {
-  this.toolSelected = value;
+setGuide(guide: 'pasaporte' | 'usa' | 'canada') {
+  this.guideSelected = guide;
+  this.toolSelected = 1;
 }
 
+setTool(tool: number) {
+  this.toolSelected = tool;
+}
+
+getGuideTitle(): string {
+  switch (this.guideSelected) {
+    case 'pasaporte':
+      return 'Guía para pasaporte mexicano';
+    case 'usa':
+      return 'Guía para visa americana';
+    case 'canada':
+      return 'Guía para visa canadiense';
+    default:
+      return 'Guías para tus trámites';
+  }
+}
+
+getThirdToolTitle(): string {
+  switch (this.guideSelected) {
+    case 'pasaporte':
+      return 'Recomendaciones para tu cita';
+    case 'usa':
+      return 'Mapa de embajadas y consulados';
+    case 'canada':
+      return 'Recomendaciones para el trámite';
+    default:
+      return 'Información adicional';
+  }
+}
 }

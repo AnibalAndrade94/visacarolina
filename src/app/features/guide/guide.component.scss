@@ -1,6 +1,18 @@
+.guia-page {
+    width: 100%;
+    max-width: 100%;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    padding-bottom: 3rem;
+}
+
+.content-panel {
+    width: 100%;
+}
+
 .contacto-page {
     font-family: 'Playfair Display', serif;
-    padding: 2rem 1rem;
+    padding: 2rem 1rem 0;
     h1 {
         font-family: 'Pacifico', cursive;
         color: #5e6150;
@@ -10,116 +22,80 @@
         color: #444;
         font-size: 1.1rem;
     }
-    .link-button {
-        display: inline-block;
-        width: 80%;
-        max-width: 400px;
-        padding: 1rem 2rem;
-        border-radius: 2rem;
-        font-size: 1.1rem;
-        font-weight: 600;
-        text-decoration: none;
-        color: white;
-        transition: all 0.2s ease;
-        text-align: center;
-        background-color: #6D5352;
-        &.email {
-            background-color: #5e6150;
-            &:hover {
-                background-color: #3c5a6e;
-            }
-        }
+}
+
+
+/* MENÚ SUPERIOR */
+
+.guide-tabs {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    background: #F5F5F7;
+    /*  padding: 1rem; */
+    border-radius: 1.25rem;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, .08);
+    padding-bottom: 1em
+}
+
+.guide-tab {
+    border: 2px solid #C8A772;
+    background: #0E2A47;
+    color: #C8A772;
+    padding: .85rem 1.25rem;
+    border-radius: 2rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all .25s ease;
+    min-width: 220px;
+    text-align: center;
+    &:hover,
+    &.active {
+        background: #C8A772;
+        color: #0E2A47;
+        transform: translateY(-2px);
     }
 }
 
-.menu {
+
+/* MENÚ LATERAL */
+
+.side-menu {
     background-color: #0E2A47;
-    color: #C8A772;
-    padding-top: 1.5em;
-    padding-left: 1.5em;
-    padding-bottom: 1.5em;
+    border: 3px solid #C8A772;
     border-radius: 1rem;
-    height: fit-content;
-    text-align: center;
-    border-color: #C8A772;
-    border: 3px 0px 0px 0px solid #C8A772;
+    overflow: hidden;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, .12);
 }
 
-.bt1,
-.bt2,
-.bt3 {
+.menu-item {
     cursor: pointer;
     transition: all .25s ease;
-}
-
-.bt1.active,
-.bt2.active,
-.bt3.active {
-    background-color: #C8A772;
-    color: #0E2A47;
-    font-weight: 600;
-}
-
-.bt1 {
-    border: 3px solid #C8A772;
-    border-bottom: none;
-    border-top-left-radius: 1rem;
-    border-top-right-radius: 1rem;
     background-color: #0E2A47;
     color: #C8A772;
-    padding-top: 1em;
-    padding-left: 1em;
-    padding-bottom: 1em;
+    padding: 1rem;
     text-align: center;
-}
-
-.bt1:hover {
-    background-color: #C8A772;
-    color: #0E2A47;
-}
-
-.bt2 {
-    border: 3px solid #C8A772;
-    border-bottom: none;
-    background-color: #0E2A47;
-    color: #C8A772;
-    padding-top: 1em;
-    padding-left: 1em;
-    padding-bottom: 1em;
-    text-align: center;
-}
-
-.bt2:hover {
-    background-color: #C8A772;
-    color: #0E2A47;
-}
-
-.bt3 {
-    border: 3px solid #C8A772;
-    border-bottom-left-radius: 1rem;
-    border-bottom-right-radius: 1rem;
-    background-color: #0E2A47;
-    color: #C8A772;
-    padding-top: 1em;
-    padding-left: 1em;
-    padding-bottom: 1em;
-    text-align: center;
-}
-
-.bt3:hover {
-    background-color: #C8A772;
-    color: #0E2A47;
+    border-bottom: 2px solid #C8A772;
+    h5 {
+        margin: 0;
+        font-size: 1rem;
+    }
+    &:last-child {
+        border-bottom: none;
+    }
+    &:hover,
+    &.active {
+        background-color: #C8A772;
+        color: #0E2A47;
+        font-weight: 600;
+    }
 }
 
 .cd1 {
     text-align: center;
-}
-
-.cd1 {
     background: white;
     border-radius: .75rem;
     padding: 1rem;
-    margin-bottom: 1rem;
     box-shadow: 0 4px 12px rgba(0, 0, 0, .08);
     border-top: 4px solid #C8A772;
     h5 {
@@ -139,7 +115,8 @@
     box-shadow: 0 8px 20px rgba(0, 0, 0, .08);
 }
 
-.note {
+.note,
+.nota {
     font-size: .85rem;
     color: #555;
     margin-top: 1rem;
@@ -192,6 +169,9 @@ section {
     }
 }
 
+
+/* Leaflet popup */
+
 ::ng-deep .leaflet-popup-content {
     margin: 0;
 }
@@ -230,4 +210,54 @@ section {
     display: flex;
     gap: .75rem;
     flex-wrap: wrap;
+}
+
+
+/* RESPONSIVE */
+
+@media (max-width: 768px) {
+    .guide-tabs {
+        gap: .75rem;
+    }
+    .guide-tab {
+        width: 100%;
+        min-width: unset;
+    }
+    .content-panel {
+        padding: 1rem;
+    }
+    .menu-item {
+        padding: .85rem;
+    }
+}
+
+.disclaimer-card {
+    background: #fff8e8;
+    border: 2px solid #C8A772;
+    border-left: 7px solid #C0182C;
+    border-radius: 1rem;
+    padding: 1.25rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, .08);
+    h4 {
+        color: #0E2A47;
+        font-weight: 700;
+        margin-bottom: .75rem;
+    }
+    p {
+        color: #333;
+        line-height: 1.6;
+        margin-bottom: .65rem;
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+}
+
+.intro-guides {
+    margin-bottom: 18px;
+}
+
+.intro-guides .lead {
+    margin-bottom: 0;
 }
