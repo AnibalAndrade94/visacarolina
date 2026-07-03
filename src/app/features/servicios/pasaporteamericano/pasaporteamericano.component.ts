@@ -14,7 +14,7 @@ export class PasaporteamericanoComponent {
   readonly tipos: TipoPasaporte[] = ['DS-11', 'DS-82'];
 
   // Teléfono y mensajes (edítalos si cambia el número o texto)
-  private readonly whatsappBase = 'https://wa.me/5214441776693';
+  private readonly whatsappBase = 'https://wa.me/524448017241';
   private readonly mensajeWA = 'Hola VisaCarolina, quiero asesoría para pasaporte';
 
   constructor(private route: ActivatedRoute) {}

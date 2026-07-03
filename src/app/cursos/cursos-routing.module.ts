@@ -11,6 +11,7 @@ import { RegisterComponent } from '../auth/register/register.component';
 import { ConfirmarCorreoComponent } from './confirmar-correo/confirmar-correo.component';
 import { AuthGuard } from '../guard/auth.guard';
 import { Landing2Component } from './landing2/landing2.component';
+import { CursoVisaEnvivoComponent } from './curso-visa-envivo/curso-visa-envivo.component';
 
 const routes: Routes = [
   {
@@ -36,6 +37,10 @@ const routes: Routes = [
   {
     path: 'registro',
     component: RegisterComponent
+  },
+  {
+    path: 'curso-envivo',
+    component: CursoVisaEnvivoComponent
   },
   {
     path: 'mis-cursos',

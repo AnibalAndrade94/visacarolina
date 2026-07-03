@@ -14,6 +14,7 @@ import { DashboardAlumnoComponent } from './dashboard-alumno/dashboard-alumno.co
 import { ConfirmarCorreoComponent } from './confirmar-correo/confirmar-correo.component';
 import { LogoutComponent } from './logout/logout.component';
 import { Landing2Component } from './landing2/landing2.component';
+import { CursoVisaEnvivoComponent } from './curso-visa-envivo/curso-visa-envivo.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { Landing2Component } from './landing2/landing2.component';
     DashboardAlumnoComponent,
     ConfirmarCorreoComponent,
     LogoutComponent,
-    Landing2Component
+    Landing2Component,
+    CursoVisaEnvivoComponent
   ],
   imports: [
     CommonModule,

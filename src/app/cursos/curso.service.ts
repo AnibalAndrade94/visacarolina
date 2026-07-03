@@ -11,58 +11,77 @@ export class CursoService {
   private cursosBase: Course[] = [
     {
       slug: 'visa-americana',
-      titulo: 'Curso Visa Americana',
-      descripcion: 'Aprende a llenar tu proceso paso a paso.',
-      precio: 999,
+      titulo: 'Curso Visa Turista B1/B2',
+      descripcion: 'Aprende paso a paso cómo evaluar tu perfil, llenar el DS-160, preparar documentos y llegar listo a tu entrevista consular.',
+      precio: 3500,
       imagen: 'assets/cursos/visa-americana.png',
       publicado: true,
       modulos: [
         {
-          titulo: 'Módulo 1: Introducción',
+          titulo: 'Módulo 1: Introducción al trámite',
           lecciones: [
             { titulo: 'Bienvenida' },
-            { titulo: 'Cómo funciona el trámite' }
+            { titulo: 'Cómo funciona el proceso general' }
           ]
         },
         {
-          titulo: 'Módulo 2: DS-160',
+          titulo: 'Módulo 2: Evaluación del perfil',
           lecciones: [
-            { titulo: 'Datos personales' },
-            { titulo: 'Errores comunes' }
+            { titulo: 'Qué revisa un oficial consular' },
+            { titulo: 'Perfil fuerte, medio o de riesgo' }
           ]
-        }
-      ]
-    },
-    {
-      slug: 'visa-canadiense',
-      titulo: 'Curso Visa Canadiense',
-      descripcion: 'Entiende requisitos, documentos y pasos.',
-      precio: 899,
-      imagen: 'assets/cursos/visa-canadiense.png',
-      publicado: true,
-      modulos: [
+        },
         {
-          titulo: 'Módulo 1: Base del trámite',
+          titulo: 'Módulo 3: Documentos necesarios',
           lecciones: [
-            { titulo: 'Qué necesitas' },
-            { titulo: 'Cómo evitar errores' }
+            { titulo: 'Documentos básicos y laborales' },
+            { titulo: 'Errores que no debes cometer' }
           ]
-        }
-      ]
-    },
-    {
-      slug: 'eta-canada',
-      titulo: 'Curso eTA Canadá',
-      descripcion: 'Haz tu eTA sin depender de terceros.',
-      precio: 499,
-      imagen: 'assets/cursos/eta-canada.png',
-      publicado: true,
-      modulos: [
+        },
         {
-          titulo: 'Módulo único',
+          titulo: 'Módulo 4: DS-160 paso a paso',
           lecciones: [
-            { titulo: 'Paso a paso' },
+            { titulo: 'Cómo llenarlo correctamente' },
+            { titulo: 'Cómo evitar inconsistencias' }
+          ]
+        },
+        {
+          titulo: 'Módulo 5: Pago y sistema de citas',
+          lecciones: [
+            { titulo: 'Perfil y pago consular' },
+            { titulo: 'Agenda de CAS y entrevista' }
+          ]
+        },
+        {
+          titulo: 'Módulo 6: Preparación para la cita CAS',
+          lecciones: [
+            { titulo: 'Qué llevar y qué pasa durante la cita' }
+          ]
+        },
+        {
+          titulo: 'Módulo 7: Preparación para la entrevista',
+          lecciones: [
+            { titulo: 'Preguntas frecuentes' },
+            { titulo: 'Casos especiales' }
+          ]
+        },
+        {
+          titulo: 'Módulo 8: Resultados de la entrevista',
+          lecciones: [
+            { titulo: 'Aprobación, negativa y proceso administrativo' }
+          ]
+        },
+        {
+          titulo: 'Módulo 9: Renovación de visa',
+          lecciones: [
+            { titulo: 'Qué cambia en renovación' },
             { titulo: 'Errores frecuentes' }
+          ]
+        },
+        {
+          titulo: 'Módulo 10: Ética y responsabilidad del asesor',
+          lecciones: [
+            { titulo: 'Buenas prácticas y atención al cliente' }
           ]
         }
       ]

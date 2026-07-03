@@ -1,0 +1,233 @@
+.curso-live-hero {
+    background: #0E2A47;
+    padding: 5rem 2rem;
+    text-align: center;
+    color: #fff;
+    h1 {
+        font-size: clamp(2.2rem, 5vw, 3.2rem);
+        margin: 1rem 0;
+        .subcolor {
+            color: #C0182C;
+        }
+    }
+    .hero-sub {
+        font-size: 1.15rem;
+        color: rgba(255, 255, 255, 0.85);
+        max-width: 600px;
+        margin: 0 auto;
+        strong {
+            color: #C8A772;
+        }
+    }
+}
+
+.badge-b1b2 {
+    display: inline-block;
+    border: 2px solid #C8A772;
+    color: #C8A772;
+    font-family: 'Boho';
+    font-size: 1.5rem;
+    letter-spacing: 0.1rem;
+    border-radius: 999px;
+    padding: 0.4rem 2rem;
+    margin: 0.5rem 0;
+}
+
+// PROGRAMA
+.programa-card {
+    background: #fff;
+    border-radius: 1.25rem;
+    box-shadow: 0 20px 50px rgba(14, 42, 71, 0.1);
+    overflow: hidden;
+}
+
+.programa-header {
+    background: #0E2A47;
+    color: #fff;
+    font-family: 'Boho';
+    letter-spacing: 0.05rem;
+    padding: 1.25rem 2rem;
+    font-size: 1.2rem;
+}
+
+.programa-lista {
+    list-style: none;
+    margin: 0;
+    padding: 1rem 2rem;
+    li {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        padding: 0.85rem 0;
+        border-bottom: 1px dashed #e0e0e0;
+        &:last-child {
+            border-bottom: none;
+        }
+    }
+    .paso-num-sm {
+        flex: 0 0 auto;
+        width: 2.2rem;
+        height: 2.2rem;
+        border-radius: 50%;
+        background: #0E2A47;
+        color: #C8A772;
+        font-weight: 700;
+        font-size: 0.85rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}
+
+// SABADOS
+.sabado-card {
+    position: relative;
+    border-radius: 1.25rem;
+    padding: 2rem;
+    height: 100%;
+    color: #fff;
+    box-shadow: 0 20px 50px rgba(14, 42, 71, 0.15);
+    &.sabado-teoria {
+        background: #0E2A47;
+    }
+    &.sabado-practica {
+        background: #C0182C;
+    }
+    .sabado-num {
+        width: 2.5rem;
+        height: 2.5rem;
+        border-radius: 50%;
+        background: #C8A772;
+        color: #0E2A47;
+        font-weight: 700;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 0.75rem;
+    }
+    .sabado-fecha {
+        font-family: 'Boho';
+        font-size: 1.4rem;
+        margin-bottom: 1rem;
+    }
+    h4 {
+        margin-bottom: 1rem;
+    }
+}
+
+.check-lista {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    li {
+        display: flex;
+        align-items: flex-start;
+        gap: 0.6rem;
+        padding: 0.4rem 0;
+        font-size: 0.95rem;
+        i {
+            color: #C8A772;
+            margin-top: 0.15rem;
+        }
+    }
+}
+
+.fecha-horario-banner {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    background: #fff;
+    border: 1px solid #C8A772;
+    border-radius: 1rem;
+    padding: 1.25rem 1.5rem;
+    box-shadow: 0 10px 30px rgba(14, 42, 71, 0.08);
+    i {
+        font-size: 1.8rem;
+        color: #C0182C;
+    }
+    div {
+        display: flex;
+        flex-direction: column;
+    }
+    strong {
+        color: #0E2A47;
+        font-size: 1.1rem;
+    }
+    span {
+        color: #666;
+        font-size: 0.9rem;
+    }
+}
+
+// INVERSION
+.inversion-card,
+.info-card {
+    background: #fff;
+    border-radius: 1.25rem;
+    padding: 2rem;
+    height: 100%;
+    box-shadow: 0 15px 40px rgba(14, 42, 71, 0.1);
+    position: relative;
+    overflow: hidden;
+    &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+        background: linear-gradient(90deg, #C8A772, #C0182C);
+    }
+}
+
+.inversion-card {
+    text-align: center;
+    span {
+        color: #666;
+        font-size: 0.9rem;
+        text-transform: uppercase;
+        letter-spacing: 0.05rem;
+    }
+    .precio {
+        font-size: 2.8rem;
+        font-weight: 700;
+        color: #C0182C;
+        margin: 0.5rem 0;
+        small {
+            font-size: 1rem;
+            color: #888;
+        }
+    }
+    .anticipo {
+        color: #0E2A47;
+        font-weight: 600;
+        font-size: 0.95rem;
+    }
+}
+
+.cta-final {
+    background: #0E2A47;
+    padding: 1.5rem 2rem;
+    color: #fff;
+}
+
+.cta-final-whatsapp {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    i {
+        color: #25D366;
+        font-size: 1.3rem;
+    }
+    &:hover {
+        color: #C8A772;
+    }
+}
+
+.cta-final-frase {
+    color: #C8A772;
+    margin: 0;
+}

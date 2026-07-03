@@ -4,6 +4,7 @@
     border-radius: 1rem;
     padding-top: 3rem;
     padding-bottom: 3rem;
+    width: 85%;
     blockquote {
         font-family: 'Playfair Display', serif;
         font-size: 1.1rem;
@@ -21,7 +22,7 @@
     padding: 2rem;
     color: white;
     /* fondo con imagen */
-    background: url('assets/img/hero.jpg') center center / cover no-repeat;
+    background: url('assets/img/visamericana.jpg') center center / cover no-repeat;
     .overlay {
         position: absolute;
         top: 0;
@@ -29,6 +30,30 @@
         height: 100%;
         width: 100%;
         z-index: 0;
+    }
+    .z-1 {
+        position: relative;
+        z-index: 1;
+    }
+    p {
+        font-family: 'boho', serif;
+    }
+}
+
+.curso {
+    position: relative;
+    min-height: 80vh;
+    padding: 2rem;
+    color: white;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    .overlay {
+        position: absolute;
+        inset: 0;
+        background: rgba(14, 42, 71, 0.45);
+        z-index: 0;
+        pointer-events: none;
     }
     .z-1 {
         position: relative;
@@ -60,7 +85,7 @@
     /* Sombra suave */
     color: #6D5352;
     /* Color de texto de tu paleta */
-    max-width: 800px;
+    max-width: 500px;
     margin: 1rem auto;
     text-align: center;
 }
@@ -68,4 +93,144 @@
 .hero-logo {
     height: 300px;
     filter: drop-shadow(0 0 5px rgba(0, 0, 0, 0.3));
+}
+
+.cursos-banner {
+    position: relative;
+    background: #0E2A47;
+    overflow: hidden;
+    &::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: url('/assets/img/hero.jpg') center / cover no-repeat;
+        opacity: 0.1;
+        z-index: 0;
+    }
+}
+
+.cursos-banner-inner {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    min-height: 500px;
+    @media (max-width: 900px) {
+        flex-direction: column;
+        padding: 3rem 1.5rem;
+    }
+}
+
+.cursos-banner-text {
+    flex: 1;
+    padding: 4rem 3rem 4rem 6%;
+    color: #fff;
+    .cursos-eyebrow {
+        display: inline-block;
+        background: rgba(200, 167, 114, 0.25);
+        color: #C8A772;
+        border: 1px solid #C8A772;
+        border-radius: 999px;
+        padding: 0.35rem 1rem;
+        font-size: 0.85rem;
+        font-weight: 700;
+        letter-spacing: 0.05rem;
+        margin-bottom: 1.25rem;
+    }
+    h2 {
+        font-size: clamp(2rem, 4vw, 3rem);
+        color: #fff;
+        line-height: 1.15;
+        margin-bottom: 1rem;
+    }
+    p {
+        color: rgba(255, 255, 255, 0.78);
+        font-size: 1.1rem;
+        line-height: 1.7;
+        max-width: 520px;
+    }
+}
+
+.cursos-lista {
+    list-style: none;
+    padding: 0;
+    margin-top: 1.5rem;
+    li {
+        color: rgba(255, 255, 255, 0.85);
+        padding: 0.45rem 0;
+        font-size: 1rem;
+        line-height: 1.5;
+        &::before {
+            content: '✓';
+            color: #C8A772;
+            font-weight: 700;
+            margin-right: 0.6rem;
+        }
+    }
+}
+
+.cursos-banner-card {
+    flex: 0 0 380px;
+    margin: 3rem 6% 3rem 2rem;
+    background: #fff;
+    border-radius: 1.5rem;
+    padding: 2.5rem 2rem;
+    box-shadow: 0 24px 64px rgba(0, 0, 0, 0.4);
+    text-align: center;
+    h3 {
+        color: #0E2A47;
+        font-size: 1.4rem;
+        margin-bottom: 0.75rem;
+    }
+    p {
+        color: #555;
+        font-size: 0.95rem;
+        line-height: 1.6;
+        margin-bottom: 1.5rem;
+    }
+    @media (max-width: 900px) {
+        flex: unset;
+        width: 100%;
+        max-width: 480px;
+        margin: 0 auto 2rem;
+    }
+}
+
+.curso-badge {
+    display: inline-block;
+    background: #0E2A47;
+    color: #fff;
+    font-size: 0.75rem;
+    font-weight: 700;
+    border-radius: 999px;
+    padding: 0.3rem 0.9rem;
+    margin-bottom: 1rem;
+    letter-spacing: 0.05rem;
+}
+
+.curso-price {
+    font-size: 3rem;
+    font-weight: 700;
+    color: #C0182C;
+    font-family: 'Boho', serif;
+    line-height: 1;
+    margin-bottom: 1.5rem;
+    span {
+        font-size: 1.1rem;
+        font-weight: 600;
+        color: #888;
+    }
+}
+
+.btn-whatsapp {
+    background-color: #fff;
+    color: #25D366;
+    border: 2px solid #25D366;
+    font-weight: 700;
+    border-radius: 999px;
+    transition: all 0.25s ease;
+    &:hover {
+        background-color: #25D366;
+        color: #fff;
+    }
 }

@@ -12,7 +12,7 @@ export class VisaAppointmentComponent {
   brandName = 'VisaCarolina';
   supportCtaText = '¿Tienes dudas? Escríbenos por WhatsApp';
   // TODO: pon tu link real
-  whatsappLink = 'https://wa.me/5214448017241?text=Hola%20quiero%20ayuda%20para%20mi%20cita%20de%20visa';
+  whatsappLink = 'https://wa.me/524448017241?text=Hola%20quiero%20ayuda%20para%20mi%20cita%20de%20visa';
 
   // Listas para render
   beforeList = [

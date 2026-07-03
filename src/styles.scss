@@ -249,6 +249,14 @@ html {
     }
 }
 
+.curso {
+    position: relative;
+    height: 80vh;
+    padding: 2rem;
+    color: #ffffff;
+    background: url('assets/fondocursos2.png') center center / cover no-repeat;
+}
+
 .hero {
     position: relative;
     height: 80vh;
@@ -285,13 +293,310 @@ html {
 }
 
 .testimonios .card-blur {
+    position: relative;
+    overflow: hidden;
     background: rgba(255, 255, 255, 0.85);
-    border-radius: 1rem;
-    padding-top: 2rem;
-    padding-bottom: 2rem;
+    &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+        background: linear-gradient(90deg, #C8A772, #C0182C);
+    }
 }
 
 .testimonios .txtcolor,
 .testimonios .blockquote-footer {
     color: #000000;
+}
+
+.cursos-promo {
+    position: relative;
+    overflow: hidden;
+    min-height: 80vh;
+    padding: 4rem 2rem;
+    background: url('assets/fondocursos2.png') center center / cover no-repeat;
+    .cursos-promo-overlay {
+        position: absolute;
+        inset: 0;
+        background: rgba(14, 42, 71, 0.72); // navy translúcido para que el texto sea legible sobre la foto
+        z-index: 0;
+    }
+}
+
+.cursos-promo-inner {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 3rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    @media (max-width: 900px) {
+        flex-direction: column;
+    }
+}
+
+.cursos-promo-text {
+    flex: 1;
+    color: #fff;
+    text-align: left;
+    .cursos-eyebrow {
+        display: inline-block;
+        background: rgba(200, 167, 114, 0.15);
+        color: #C8A772;
+        border: 1px solid #C8A772;
+        border-radius: 999px;
+        padding: 0.4rem 1.1rem;
+        font-size: 0.85rem;
+        font-weight: 700;
+        letter-spacing: 0.08rem;
+        text-transform: uppercase;
+        margin-bottom: 1.5rem;
+    }
+    h2 {
+        font-size: clamp(2rem, 4vw, 2.75rem);
+        color: #fff;
+        line-height: 1.2;
+        margin-bottom: 1rem;
+    }
+    >p {
+        color: rgba(255, 255, 255, 0.85);
+        font-size: 1.1rem;
+        line-height: 1.7;
+        max-width: 520px;
+        margin-bottom: 2rem;
+        font-family: 'Playfair Display', serif;
+    }
+}
+
+.cursos-pasos {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 2rem;
+    li {
+        display: flex;
+        align-items: flex-start;
+        gap: 1.1rem;
+        padding: 1rem 0;
+        border-top: 1px solid rgba(255, 255, 255, 0.18);
+        text-align: left;
+        &:first-child {
+            border-top: none;
+        }
+        .paso-num {
+            flex: 0 0 auto;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #C8A772;
+            border: 1.5px solid #C8A772;
+            border-radius: 50%;
+            width: 2.75rem;
+            height: 2.75rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        h4 {
+            color: #fff;
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin: 0 0 0.25rem;
+        }
+        p {
+            color: rgba(255, 255, 255, 0.75);
+            font-size: 0.92rem;
+            line-height: 1.5;
+            margin: 0;
+        }
+    }
+}
+
+.cursos-promo-card {
+    flex: 0 0 380px;
+    background: #fff;
+    border-radius: 1.25rem;
+    padding: 2.5rem 2.25rem 2.25rem;
+    box-shadow: 0 30px 70px rgba(0, 0, 0, 0.45);
+    text-align: center;
+    position: relative;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 6px;
+        border-radius: 1.25rem 1.25rem 0 0;
+        background: linear-gradient(90deg, #C8A772, #C0182C);
+    }
+    &:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 36px 80px rgba(0, 0, 0, 0.5);
+    }
+    .curso-badge {
+        display: inline-block;
+        background: #0E2A47;
+        color: #fff;
+        font-size: 0.75rem;
+        font-weight: 700;
+        border-radius: 999px;
+        padding: 0.3rem 0.9rem;
+        margin-bottom: 1rem;
+        letter-spacing: 0.05rem;
+    }
+    h3 {
+        color: #0E2A47;
+        font-size: 1.4rem;
+        margin-bottom: 0.75rem;
+        font-family: 'Playfair Display', serif;
+    }
+    p {
+        color: #555;
+        font-size: 0.95rem;
+        line-height: 1.6;
+        margin-bottom: 1.5rem;
+    }
+    .curso-price {
+        font-size: 2.75rem;
+        font-weight: 700;
+        color: #C0182C;
+        line-height: 1;
+        margin-bottom: 1.5rem;
+        span {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #888;
+        }
+    }
+    @media (max-width: 900px) {
+        flex: unset;
+        width: 100%;
+        max-width: 480px;
+    }
+}
+
+.btn-cta-secondary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: transparent;
+    color: #fff;
+    border: 2px solid #fff;
+    border-radius: 999px;
+    padding: 0.65rem 1.8rem;
+    font-family: 'Boho';
+    font-weight: 600;
+    letter-spacing: 0.05rem;
+    text-decoration: none;
+    transition: 0.3s ease;
+    &:hover {
+        background: #fff;
+        color: #0E2A47;
+    }
+}
+
+.cursos-promo-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    flex: 0 0 380px;
+    @media (max-width: 900px) {
+        flex: unset;
+        width: 100%;
+        max-width: 480px;
+        margin: 0 auto;
+    }
+}
+
+.badge-en-vivo {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: #C0182C;
+    .dot-live {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: #fff;
+        animation: pulse-live 1.4s infinite;
+    }
+}
+
+@keyframes pulse-live {
+    0%,
+    100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.3;
+    }
+}
+
+.curso-fecha {
+    font-size: 0.9rem;
+    color: #0E2A47;
+    background: rgba(200, 167, 114, 0.15);
+    border: 1px solid #C8A772;
+    border-radius: 0.6rem;
+    padding: 0.5rem 0.8rem;
+    margin-bottom: 1.25rem;
+    strong {
+        color: #C0182C;
+    }
+}
+
+.badge-proximamente {
+    background: #C4C6C9;
+    color: #0E2A47;
+}
+
+.card-grabado {
+    opacity: 0.9;
+}
+
+.features {
+    .feature-card {
+        background: #fff;
+        border-radius: 1.1rem;
+        padding: 2.25rem 1.75rem;
+        height: 100%;
+        box-shadow: 0 10px 30px rgba(14, 42, 71, 0.08);
+        position: relative;
+        overflow: hidden;
+        transition: transform 0.25s ease, box-shadow 0.25s ease;
+        &::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #C8A772, #C0182C);
+        }
+        &:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 40px rgba(14, 42, 71, 0.15);
+        }
+    }
+    .feature-icon {
+        width: 3.2rem;
+        height: 3.2rem;
+        border-radius: 50%;
+        background: rgba(200, 167, 114, 0.15);
+        color: #C0182C;
+        font-size: 1.4rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 1.25rem;
+    }
+    h3 {
+        font-size: 1.15rem;
+    }
 }

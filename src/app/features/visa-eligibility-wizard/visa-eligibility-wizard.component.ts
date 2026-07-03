@@ -251,7 +251,7 @@ get scoreResult() {
 get whatsappHref(): string {
   const name = this.value.fullName || '';
   const msg = `Hola, quiero una asesoría para mi evaluación de visa. Mi nombre es ${name}`;
-  return `https://wa.me/5214448017241?text=${encodeURIComponent(msg)}`;
+  return `https://wa.me/524448017241?text=${encodeURIComponent(msg)}`;
 }
 acceptPrivacyAndShowResult(): void {
   const control = this.form.controls.privacyConsent;

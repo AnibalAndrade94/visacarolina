@@ -23,48 +23,118 @@
 
             <!-- Visa Americana -->
             <div class="col-md-4">
-                <h3 class="boho bold700 spacing subcolor">Asesoría en Visas Americanas</h3>
-                <p class="txtcolor">
-                    Desde el llenado del formulario hasta agendar tu cita. Atención personalizada y asesoría completa.
-                </p>
+                <div class="feature-card">
+                    <h3 class="boho bold700 spacing subcolor">Asesoría en Visas Americanas</h3>
+                    <p class="txtcolor">Desde el llenado del formulario hasta agendar tu cita. Atención personalizada y asesoría completa.</p>
+                </div>
             </div>
 
             <!-- Pasaporte -->
+
             <div class="col-md-4">
-                <h3 class="boho bold700 spacing subcolor">Orientación para tramitar tu pasaporte</h3>
-                <p class="txtcolor">
-                    Te ayudamos a agendar tu cita y revisar documentos para primera vez o renovación.
-                </p>
+                <div class="feature-card">
+                    <h3 class="boho bold700 spacing subcolor">Orientación para tramitar tu pasaporte</h3>
+                    <p class="txtcolor">Te ayudamos a agendar tu cita y revisar documentos para primera vez o renovación.</p>
+                </div>
             </div>
-
-            <!-- eTA -->
             <div class="col-md-4">
-                <h3 class="boho bold700 spacing subcolor">Te ayudamos con la eTA</h3>
-                <p class="txtcolor">
-                    Realizamos tu trámite de eTA para Canadá o Reino Unido con acompañamiento completo.
-                </p>
+                <div class="feature-card">
+                    <h3 class="boho bold700 spacing subcolor">Te ayudamos con la eTA</h3>
+                    <p class="txtcolor">Realizamos tu trámite de eTA para Canadá o Reino Unido con acompañamiento completo.</p>
+                </div>
             </div>
 
-            <!-- NUEVO: Visa Canadiense -->
             <div class="col-md-6">
-                <h3 class="boho bold700 spacing subcolor">Visa Canadiense</h3>
-                <p class="txtcolor">
-                    Te guiamos con todo el proceso: cuestionarios de IRCC, formas, evidencias, biométricos y carga de documentos.
-                </p>
+                <div class="feature-card">
+                    <h3 class="boho bold700 spacing subcolor">Adelanto de citas</h3>
+                    <p class="txtcolor"> Analizamos tu caso y buscamos opciones reales para adelantar tu cita de visa americana según tu ciudad.</p>
+                </div>
             </div>
-
-            <!-- NUEVO: Adelanto de citas -->
             <div class="col-md-6">
-                <h3 class="boho bold700 spacing subcolor">Adelanto de citas</h3>
-                <p class="txtcolor">
-                    Analizamos tu caso y buscamos opciones reales para adelantar tu cita de visa americana según tu ciudad.
-                </p>
+                <div class="feature-card">
+                    <h3 class="boho bold700 spacing subcolor">Visa Canadiense</h3>
+                    <p class="txtcolor">Te guiamos con todo el proceso: cuestionarios de IRCC, formas, evidencias, biométricos y carga de documentos.</p>
+                </div>
             </div>
 
         </div>
     </div>
 
 </section>
+<section class="cursos-promo" *ngFor="let curso of cursos">
+    <div class="cursos-promo-overlay"></div>
+
+    <div class="cursos-promo-inner">
+
+        <div class="cursos-promo-text">
+            <span class="cursos-eyebrow">Curso online · Hazlo tú mismo</span>
+            <h2 class="boho">Tramita tu visa americana tú mismo, sin errores</h2>
+            <p>Pensado para emprendedores y profesionales que no tienen tiempo para trámites eternos ni presupuesto para asesoría personalizada. Con 10 módulos prácticos llegas a tu entrevista consular sabiendo exactamente qué hacer, en tus propios tiempos.</p>
+
+            <ul class="cursos-pasos">
+                <li>
+                    <span class="paso-num">01</span>
+                    <div>
+                        <h4>Evalúa tu perfil</h4>
+                        <p>Descubre si tu perfil es fuerte, medio o en riesgo antes de aplicar.</p>
+                    </div>
+                </li>
+                <li>
+                    <span class="paso-num">02</span>
+                    <div>
+                        <h4>Llena tu DS-160 sin ayuda de terceros</h4>
+                        <p>Paso a paso, con ejemplos reales, sin errores que retrasen tu proceso.</p>
+                    </div>
+                </li>
+                <li>
+                    <span class="paso-num">03</span>
+                    <div>
+                        <h4>Prepárate para la cita</h4>
+                        <p>Cita CAS y entrevista consular, con simulacros reales.</p>
+                    </div>
+                </li>
+                <li>
+                    <span class="paso-num">04</span>
+                    <div>
+                        <h4>Practica con casos reales</h4>
+                        <p>Casos prácticos y plantillas listas para descargar y reutilizar.</p>
+                    </div>
+                </li>
+            </ul>
+
+            <a href="/contacto" class="btn-cta-secondary">¿Prefieres que lo hagamos por ti? Solicita asesoría</a>
+        </div>
+
+        <div class="cursos-promo-cards">
+
+            <!-- Curso EN VIVO -->
+            <div class="cursos-promo-card card-en-vivo">
+                <div class="curso-badge badge-en-vivo"><span class="dot-live"></span> En vivo</div>
+                <h3>Curso Visa Turista B1/B2 — En vivo</h3>
+                <p>Sesiones en tiempo real por videollamada, resuelve tus dudas al momento y practica tu entrevista con retroalimentación directa.</p>
+                <div class="curso-fecha">Próxima fecha: <strong>{{ proximaFechaEnVivo }}</strong></div>
+                <a [routerLink]="['/cursos/visa-en-vivo']" class="btn btn-vc-secondary btn-lg w-100 mb-3">Ver detalles del curso</a>
+                <a href="https://wa.me/524448017241" target="_blank" class="btn btn-whatsapp w-100">
+                    <i class="bi bi-whatsapp me-2"></i>Pedir información
+                </a>
+            </div>
+
+            <!-- Cursos grabados (self-paced) -->
+            <div class="cursos-promo-card card-grabado" *ngFor="let curso of cursos">
+                <div class="curso-badge badge-proximamente">Próximamente</div>
+                <h3>{{ curso.titulo }}</h3>
+                <p>{{ curso.descripcion }}</p>
+                <a [routerLink]="getCursoLink(curso.slug)" class="btn btn-vc-secondary btn-lg w-100 mb-3">Ver el curso completo</a>
+                <a href="https://wa.me/524448017241" target="_blank" class="btn btn-whatsapp w-100">
+                    <i class="bi bi-whatsapp me-2"></i>Avísame cuando esté listo
+                </a>
+            </div>
+
+        </div>
+
+    </div>
+</section>
+<br>
 <section>
     <h1 class="text-center tcolor boho bold600 fontsize2 spacing">¿Que embajada te queda más cerca?</h1>
     <app-embassy-map></app-embassy-map>
@@ -73,6 +143,7 @@
 <br>
 <section class="testimonios py-5">
     <div class="container card-blur">
+        <br>
         <h1 class="text-center tcolor boho bold600 fontsize2 spacing">Lo que dicen nuestros clientes</h1>
 
         <div id="carouselTestimonios" class="carousel slide" data-bs-ride="carousel">
@@ -117,3 +188,5 @@
         </div>
     </div>
 </section>
+<br>
+<br>
