@@ -30,7 +30,13 @@ type YesNo = boolean | null;
   styleUrls: ['./formvisa.component.scss']
 })
 export class FormvisaComponent implements OnInit, AfterViewInit {
-  visaForm!: FormGroup;
+  personas: FormGroup[] = [];
+  activeIndex = 0;
+
+  get visaForm(): FormGroup {
+    return this.personas[this.activeIndex];
+  }
+
   originalOrder = () => 0;
 /* 
   siteKey = '6LeDZuArAAAAAMQIbKtQJ8V60ePbrjz4VTlQP9Oj';
@@ -53,10 +59,14 @@ submitOk = false;
       this.captchaToken = token;
     }; */
 
-    // =========================
-    // FORM BASE
-    // =========================
-    this.visaForm = this.fb.group({
+    this.addPersonaGroup();
+  }
+
+  // =========================
+  // MULTI-PERSONA
+  // =========================
+  private newPersonaForm(): FormGroup {
+    return this.fb.group({
   // =========================
   // INFORMACIÓN PERSONAL (HTML)
   // =========================
@@ -85,6 +95,7 @@ submitOk = false;
   curp: ['', Validators.required],
   email: ['', [Validators.required, Validators.email]],
   direccionCasa: ['', Validators.required],
+  cpCasa: [''],
   telefonoCasa: ['', [Validators.required, Validators.pattern('^[0-9]{10,15}$')]],
   telefonoCelular: ['', [Validators.required, Validators.pattern('^[0-9]{10,15}$')]],
 
@@ -109,6 +120,8 @@ submitOk = false;
   ds160_lengthUnit: ['DAYS'],
 
   numeroPasaporte: [''],
+  fechaExpedicionPasaporte: [''],
+  fechaExpiracionPasaporte: [''],
   numeroVisa: [''],
   huellasTomadas: [''],
   fechaUltimoViaje: [''],
@@ -220,11 +233,38 @@ submitOk = false;
   ds160_previousSchools: this.fb.array([]), // {schoolName, city, country, from, to, course}
   ds160_languages: this.fb.array([]) // {language}
 });
+  }
 
+  private addPersonaGroup(): FormGroup {
+    const group = this.newPersonaForm();
+    this.personas.push(group);
+    this.activeIndex = this.personas.length - 1;
 
     // Mantengo tu lógica de habilitar/deshabilitar estudio/trabajo
     // + lógica DS-160 condicional
     this.setupConditionalValidators();
+
+    return group;
+  }
+
+  addPersona(): void {
+    this.addPersonaGroup();
+  }
+
+  removePersona(index: number): void {
+    if (this.personas.length <= 1) return;
+
+    this.personas.splice(index, 1);
+
+    if (this.activeIndex >= this.personas.length) {
+      this.activeIndex = this.personas.length - 1;
+    } else if (this.activeIndex > index) {
+      this.activeIndex--;
+    }
+  }
+
+  selectPersona(index: number): void {
+    this.activeIndex = index;
   }
 
   ngAfterViewInit(): void {
@@ -468,10 +508,13 @@ onSubmit() {
 
   if (this.isSubmitting) return;
 
-  this.visaForm.markAllAsTouched();
+  this.personas.forEach((p) => p.markAllAsTouched());
 
-  if (this.visaForm.invalid) {
-    this.submitMsg = 'Revisa los campos obligatorios antes de enviar.';
+  const invalidIndex = this.personas.findIndex((p) => p.invalid);
+
+  if (invalidIndex !== -1) {
+    this.activeIndex = invalidIndex;
+    this.submitMsg = `Revisa los campos obligatorios de la Persona ${invalidIndex + 1} antes de enviar.`;
     this.scrollToFirstInvalid();
     return;
   }
@@ -479,8 +522,12 @@ onSubmit() {
   this.isSubmitting = true;
 
   const payload = {
-    ...this.visaForm.getRawValue(),
-    _meta: { form: 'ds160_extended', submittedAt: new Date().toISOString() }
+    personas: this.personas.map((p) => p.getRawValue()),
+    _meta: {
+      form: 'ds160_extended',
+      submittedAt: new Date().toISOString(),
+      totalPersonas: this.personas.length
+    }
   };
 
   this.http
@@ -495,8 +542,8 @@ onSubmit() {
 
         this.analytics.logEvent('form_submit', { form: 'visa', status: 'success' });
 
-        this.visaForm.reset();
-        this.applySafeDefaultsAfterReset();
+        this.personas = [];
+        this.addPersonaGroup();
 
         setTimeout(() => this.router.navigate(['/']), 1200);
       },
@@ -537,50 +584,6 @@ private scrollToFirstInvalid() {
     if (el?.scrollIntoView) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
   }, 0);
 }
-
-  private applySafeDefaultsAfterReset(): void {
-    // Defaults que evitan que arranque inválido (YesNo -> false)
-    const safe: Record<string, any> = {
-      ds160_hasOtherNames: false,
-      ds160_hasOtherNationalities: false,
-      ds160_permResidentOtherCountry: false,
-      ds160_hasSpecificPlans: false,
-      ds160_beenToUS: false,
-      ds160_usDriversLicense: false,
-      ds160_hadUSVisa: false,
-      ds160_visaRefused: false,
-      ds160_visaRevoked: false,
-      ds160_immigrantPetition: false,
-      ds160_passportLostOrStolen: false,
-      ds160_hasImmediateRelativesInUS: false,
-      ds160_hasChildren: false,
-      ds160_mailingSameAsHome: true,
-      redesSociales: { usaRedes: false, plataforma: '', link: '' },
-      ds160_usContactType: 'PERSON',
-      ds160_lengthUnit: 'DAYS',
-      ds160_payingEntity: 'SELF',
-      ds160_birthCountry: 'Mexico',
-      ds160_nationality: 'Mexico',
-      ds160_passportIssuedCountry: 'Mexico',
-
-    };
-
-    this.visaForm.patchValue(safe, { emitEvent: false });
-
-    // Limpia arrays
-    this.dsOtherNames.clear();
-    this.dsOtherNationalities.clear();
-    this.dsPreviousTrips.clear();
-    this.dsSocialProfiles.clear();
-    this.dsOtherWebsites.clear();
-    this.dsRelativesInUS.clear();
-    this.dsChildren.clear();
-    this.dsPrevEmployers.clear();
-    this.dsPrevSchools.clear();
-    this.dsLanguages.clear();
-    this.dsCountriesVisited.clear();
-    this.dsOrganizations.clear();
-  }
 
   // =========================
   // TU LOGICA ESTUDIA/TRABAJA (IGUAL)
