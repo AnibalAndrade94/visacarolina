@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { SeoService } from '../../../services/seo.service';
+
 type TipoPasaporte = 'DS-11' | 'DS-82';
 @Component({
   selector: 'app-pasaporteamericano',
@@ -17,9 +19,12 @@ export class PasaporteamericanoComponent {
   private readonly whatsappBase = 'https://wa.me/524448017241';
   private readonly mensajeWA = 'Hola VisaCarolina, quiero asesoría para pasaporte';
 
-  constructor(private route: ActivatedRoute) {}
+  constructor(private route: ActivatedRoute,private seo: SeoService) {}
 
   ngOnInit(): void {
+       this.seo.update({ title: 'Pasaporte Americano: asesoría de trámite | VisaCarolina',
+  description: 'Orientación para el trámite de pasaporte estadounidense y la documentación necesaria.',
+  path: '/servicios/pasaporte_americano' });
     // Lee ?tipo=DS-11|DS-82 para preseleccionar
     const tipo = (this.route.snapshot.queryParamMap.get('tipo') || '').toUpperCase();
     if (tipo === 'DS-11' || tipo === 'DS-82') {

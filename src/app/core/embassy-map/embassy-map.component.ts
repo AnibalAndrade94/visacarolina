@@ -1,5 +1,6 @@
-import { AfterViewInit, Component, Inject, PLATFORM_ID } from '@angular/core';
+import { AfterViewInit, Component, Inject, PLATFORM_ID, OnInit } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
+import { SeoService } from '../../services/seo.service';
 
 type LocationPin = {
   name: string;
@@ -19,11 +20,16 @@ type LocationPin = {
   templateUrl: './embassy-map.component.html',
   styleUrls: ['./embassy-map.component.scss']
 })
-export class EmbassyMapComponent implements AfterViewInit{
+export class EmbassyMapComponent implements AfterViewInit,OnInit{
 
 
-constructor(@Inject(PLATFORM_ID) private platformId: Object) {}
+constructor(@Inject(PLATFORM_ID) private platformId: Object,private seo: SeoService) {}
+ngOnInit(): void {
+     this.seo.update({ title: 'Consulados y embajadas americanas en México | VisaCarolina',
+  description: 'Usa el buscador de embajadas y consulados americanos, donde podrás encontrar toda la información de cada uno.',
+  path: '/servicios/etabritanica' });
 
+}
   // Embajada + 9 consulados (por ciudad; coords aprox. al centro)
   private markerMap = new Map<string, any>();
   private pins: LocationPin[] = [

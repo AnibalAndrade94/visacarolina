@@ -1,8 +1,9 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component,OnInit } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
+import { SeoService } from '../../services/seo.service';
 
 type VisaStatus = 'NEVER' | 'APPROVED' | 'DENIED';
 
@@ -11,7 +12,7 @@ type VisaStatus = 'NEVER' | 'APPROVED' | 'DENIED';
   templateUrl: './visa-eligibility-wizard.component.html',
   styleUrls: ['./visa-eligibility-wizard.component.scss']
 })
-export class VisaEligibilityWizardComponent {
+export class VisaEligibilityWizardComponent implements OnInit{
  step = 0;
    private api = environment.apiBaseUrl;
    resume: boolean = false;
@@ -68,8 +69,13 @@ consentAccepted = false;
     privacyConsent: [false, Validators.requiredTrue],
   });
 
-  constructor(private fb: FormBuilder,private http: HttpClient) {}
-
+  constructor(private fb: FormBuilder,private http: HttpClient,private seo: SeoService) {}
+ngOnInit(): void {
+     this.seo.update({ title: 'Evalúa tu elegibilidad para la visa | VisaCarolina',
+  description: 'Responde unas preguntas y descubre cómo prepararte mejor para tu trámite de visa.',
+  path: '/evaluacion' });
+ 
+}
   // --- Helpers ---
   get visaStatus() {
     return this.form.controls.visaStatus.value as VisaStatus;

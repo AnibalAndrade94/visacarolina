@@ -3,6 +3,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { AnalyticsService } from 'src/app/services/analytics.service';
+import { SeoService } from '../../services/seo.service';
+
 declare var grecaptcha: any;
 
 @Component({
@@ -18,7 +20,7 @@ export class ContactoComponent implements OnInit, AfterViewInit {
 
   private api = environment.apiBaseUrl;
 
-  constructor(private fb: FormBuilder, private http: HttpClient, public analytics: AnalyticsService) {
+  constructor(private seo: SeoService,private fb: FormBuilder, private http: HttpClient, public analytics: AnalyticsService) {
     this.contactForm = this.fb.group({
       nombre: ['', Validators.required],
       correo: ['', [Validators.required, Validators.email]],
@@ -27,6 +29,12 @@ export class ContactoComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
+
+     this.seo.update({ title: 'Contacto | VisaCarolina',
+  description: 'Escríbenos y recibe asesoría personalizada para tu trámite de visa desde cualquier parte de México.',
+  path: '/contacto' });
+
+
     (window as any).captchaResolved = (token: string) => (this.captchaToken = token);
   }
 
