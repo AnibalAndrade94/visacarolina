@@ -2,7 +2,9 @@ import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, tap } from 'rxjs';
-
+import { initializeApp } from 'firebase/app';
+import { getAuth } from 'firebase/auth';
+import { environment } from '../environments/environment';
 type UserDTO = {
   id: string;
   name: string;
@@ -49,12 +51,19 @@ type LoginResponse = {
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
+private app: any = null;
+  private auth: any = null;
   private api = 'https://visaback-production-3ac4.up.railway.app/api/auth';
 
    constructor(
     private http: HttpClient,
     @Inject(PLATFORM_ID) private platformId: Object
-  ) {}
+  ) {
+    if (isPlatformBrowser(platformId)) {
+      this.app = initializeApp(environment.firebase);
+      this.auth = getAuth(this.app);
+    }
+  }
 
   register(payload: RegisterPayload, rememberMe: boolean): Observable<RegisterResponse> {
     return this.http.post<RegisterResponse>(`${this.api}/register`, payload).pipe(

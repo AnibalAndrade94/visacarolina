@@ -1,6 +1,9 @@
 [build]
-  command = "npm run build"
-  publish = "dist/mi-app-ng16"
+  command = "npm run prerender"
+  publish = "dist/mi-app-ng16/browser"
+
+[build.environment]
+  NODE_VERSION = "20"
 
 [[redirects]]
   from = "/*"
