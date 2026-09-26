@@ -1,0 +1,11 @@
+User-agent: *
+Allow: /
+
+Disallow: /admincodes
+Disallow: /uxui
+Disallow: /cursos/login
+Disallow: /cursos/registro
+Disallow: /cursos/mis-cursos
+Disallow: /cursos/confirmar-correo
+
+Sitemap: https://www.visacarolina.com/sitemap.xml
