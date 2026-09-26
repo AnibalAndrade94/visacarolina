@@ -33,7 +33,8 @@ import { FaqComponent } from './info/pages/faq/faq.component';
 import { VisaEligibilityWizardComponent } from './features/visa-eligibility-wizard/visa-eligibility-wizard.component';
 import { VisaAppointmentComponent } from './features/visa-appointment/visa-appointment.component';
 import { AuthInterceptor } from './services/auth.interceptor';
-import { GuideComponent } from './features/guide/guide.component'; // <-- ajusta ruta
+import { GuideComponent } from './features/guide/guide.component';
+import { NotFoundComponent } from './features/not-found/not-found.component'; // <-- ajusta ruta
 
 @NgModule({
   declarations: [
@@ -61,6 +62,7 @@ import { GuideComponent } from './features/guide/guide.component'; // <-- ajusta
     VisaEligibilityWizardComponent,
     VisaAppointmentComponent,
     GuideComponent,
+    NotFoundComponent,
     
   ],
   imports: [

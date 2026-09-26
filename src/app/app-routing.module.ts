@@ -10,14 +10,15 @@ import { AdminCodigosComponent } from './features/admin-codigos/admin-codigos.co
 import { VisaEligibilityWizardComponent } from './features/visa-eligibility-wizard/visa-eligibility-wizard.component';
 import { VisaAppointmentComponent } from './features/visa-appointment/visa-appointment.component';
 import { GuideComponent } from './features/guide/guide.component';
-
+import { NotFoundComponent } from './features/not-found/not-found.component';
 
 const routes: Routes = [
   // 👇 HOME como raíz absoluta
   { path: '', component: HomeComponent },
 
   // 👇 Si quieres seguir usando /home por compatibilidad, lo mantenemos
-  { path: 'home', component: HomeComponent },
+  { path: 'home', redirectTo: '', pathMatch: 'full' },
+
 
   { path: 'uxui', component: UxuiComponent },
   { path: 'referidos', component: ReferidosComponent },
@@ -47,7 +48,7 @@ const routes: Routes = [
     { path: 'guia', component:  GuideComponent},
 
   // 👇 404 fallback
-  { path: '**', redirectTo: '' }
+{ path: '**', component: NotFoundComponent }
 ];
 
 @NgModule({
