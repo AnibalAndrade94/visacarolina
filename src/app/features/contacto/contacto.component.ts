@@ -4,6 +4,8 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { AnalyticsService } from 'src/app/services/analytics.service';
 import { SeoService } from '../../services/seo.service';
+import { isPlatformBrowser } from '@angular/common';
+ import { PLATFORM_ID, Inject } from '@angular/core';
 
 declare var grecaptcha: any;
 
@@ -20,7 +22,7 @@ export class ContactoComponent implements OnInit, AfterViewInit {
 
   private api = environment.apiBaseUrl;
 
-  constructor(private seo: SeoService,private fb: FormBuilder, private http: HttpClient, public analytics: AnalyticsService) {
+  constructor(private seo: SeoService,private fb: FormBuilder, private http: HttpClient, public analytics: AnalyticsService, @Inject(PLATFORM_ID) private platformId: Object) {
     this.contactForm = this.fb.group({
       nombre: ['', Validators.required],
       correo: ['', [Validators.required, Validators.email]],
@@ -29,26 +31,29 @@ export class ContactoComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
+  this.seo.update({
+    title: 'Contacto | VisaCarolina',
+    description: 'Escríbenos y recibe asesoría personalizada para tu trámite de visa desde cualquier parte de México.',
+    path: '/contacto'
+  });
 
-     this.seo.update({ title: 'Contacto | VisaCarolina',
-  description: 'Escríbenos y recibe asesoría personalizada para tu trámite de visa desde cualquier parte de México.',
-  path: '/contacto' });
-
-
+  if (isPlatformBrowser(this.platformId)) {
     (window as any).captchaResolved = (token: string) => (this.captchaToken = token);
   }
+}
 
-  ngAfterViewInit(): void {
-    setTimeout(() => {
-      const el = document.getElementById('captcha-container');
-      if (el && typeof grecaptcha !== 'undefined') {
-        grecaptcha.render('captcha-container', {
-          sitekey: this.siteKey,
-          callback: (token: string) => (this.captchaToken = token)
-        });
-      }
-    }, 300);
-  }
+ngAfterViewInit(): void {
+  if (!isPlatformBrowser(this.platformId)) return;
+  setTimeout(() => {
+    const el = document.getElementById('captcha-container');
+    if (el && typeof grecaptcha !== 'undefined') {
+      grecaptcha.render('captcha-container', {
+        sitekey: this.siteKey,
+        callback: (token: string) => (this.captchaToken = token)
+      });
+    }
+  }, 300);
+}
 
   onSubmit(): void {
     if (!this.captchaToken) {

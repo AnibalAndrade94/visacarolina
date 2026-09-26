@@ -1,4 +1,5 @@
-import { Injectable } from '@angular/core';
+import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, tap } from 'rxjs';
 
@@ -50,7 +51,10 @@ type LoginResponse = {
 export class AuthService {
   private api = 'https://visaback-production-3ac4.up.railway.app/api/auth';
 
-  constructor(private http: HttpClient) {}
+   constructor(
+    private http: HttpClient,
+    @Inject(PLATFORM_ID) private platformId: Object
+  ) {}
 
   register(payload: RegisterPayload, rememberMe: boolean): Observable<RegisterResponse> {
     return this.http.post<RegisterResponse>(`${this.api}/register`, payload).pipe(
@@ -91,28 +95,36 @@ export class AuthService {
     );
   }
 
-  logout() {
+   logout() {
+    if (!this.isBrowser) return;
     localStorage.removeItem('token');
     localStorage.removeItem('user');
     sessionStorage.removeItem('token');
     sessionStorage.removeItem('user');
   }
 
+   private get isBrowser(): boolean {
+    return isPlatformBrowser(this.platformId);
+  }
+
   getToken(): string | null {
+    if (!this.isBrowser) return null;
     return localStorage.getItem('token') || sessionStorage.getItem('token');
   }
 
-  getUser(): UserDTO | null {
+  getUser(): any {
+    if (!this.isBrowser) return null;
     const raw = localStorage.getItem('user') || sessionStorage.getItem('user');
     return raw ? JSON.parse(raw) : null;
   }
 
+
   setUser(user: UserDTO) {
+    if (!this.isBrowser) return;
     if (localStorage.getItem('token')) {
       localStorage.setItem('user', JSON.stringify(user));
       return;
     }
-
     if (sessionStorage.getItem('token')) {
       sessionStorage.setItem('user', JSON.stringify(user));
     }
