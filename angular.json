@@ -28,7 +28,6 @@
                         "assets": [
                             "src/favicon.ico",
                             "src/assets",
-                            "src/_redirects",
                             "src/robots.txt",
     "src/sitemap.xml"
 
@@ -144,9 +143,27 @@
                   "builder": "@nguniversal/builders:prerender",
                   "options": {
                     "routes": [
-                      "/"
-                    ],
-                    "guessRoutes": false
+  "/",
+  "/servicios/visas",
+  "/servicios/etacanada",
+  "/servicios/etabritanica",
+  "/servicios/pasaporte_americano",
+  "/servicios/pasapport",
+  "/servicios/ten-tu-agencia",
+  "/info/costos",
+  "/info/consulados",
+  "/info/pasaporte",
+  "/info/mapa-pasaporte",
+  "/info/faq",
+  "/evaluacion",
+  "/recomendaciones-cita-visa",
+  "/guia",
+  "/contacto",
+  "/cursos",
+  "/cursos/landing",
+  "/cursos/lista"
+],
+"guessRoutes": false
                   },
                   "configurations": {
                     "production": {
